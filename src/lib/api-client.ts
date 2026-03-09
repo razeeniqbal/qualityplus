@@ -634,7 +634,7 @@ class ApiClient {
       for (let offset = 0; offset < totalRows; offset += PAGE) {
         const { data: pageData, error: pageError } = await supabase
           .from('dataset_rows')
-          .select('id, data')
+          .select('id, row_index, data')
           .eq('dataset_id', datasetId)
           .order('row_index', { ascending: true })
           .range(offset, offset + PAGE - 1);
@@ -646,7 +646,7 @@ class ApiClient {
           for (const col of keepSet) {
             if (col in (r.data as object)) trimmed[col] = (r.data as Record<string, string>)[col];
           }
-          return { id: r.id, data: trimmed };
+          return { id: r.id, dataset_id: datasetId, row_index: r.row_index, data: trimmed };
         });
 
         // Upsert the page in one request (matches on primary key `id`)
