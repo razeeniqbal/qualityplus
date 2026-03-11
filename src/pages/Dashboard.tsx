@@ -142,9 +142,8 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
         try {
           const publicUrl = await apiClient.uploadProjectIcon(iconFile, created.id);
           await apiClient.updateProject(created.id, { icon_url: publicUrl });
-        } catch {
-          // Icon upload failed — project still created, just without icon
-          console.error('Icon upload failed — project created without icon');
+        } catch (iconErr) {
+          console.error('Icon upload failed — project created without icon:', iconErr);
         }
       }
 
