@@ -43,11 +43,11 @@ function AppContent() {
               onClick={() => { setCurrentPage('dashboard'); setSelectedProjectId(null); }}
               className="flex items-center space-x-3 hover:opacity-80 transition"
             >
-              <div className="w-10 h-10 bg-white rounded flex items-center justify-center">
-                <span className="text-teal-700 font-bold text-xl">G</span>
+              <div className="w-10 h-10 rounded overflow-hidden flex items-center justify-center">
+                <img src="/dataqualityplus.png" alt="Data Quality Plus" className="w-full h-full object-contain" />
               </div>
               <div className="text-left">
-                <h1 className="text-xl font-bold">Governance Plus</h1>
+                <h1 className="text-xl font-bold">Data Quality Plus</h1>
                 <p className="text-xs text-teal-100">AEM ENERGY SOLUTIONS</p>
               </div>
             </button>
