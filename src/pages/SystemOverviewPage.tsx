@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import {
   Cpu, Database, Layout, Layers, Shield, Zap, CheckCircle2,
   ExternalLink, Code2, Package, Plus, Pencil, Trash2, Save, Loader2,
-  ChevronDown, ChevronUp, X,
 } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 
@@ -106,7 +105,6 @@ function CapabilityCard({
   deleting: string | null;
   onDelete: (id: string, label: string) => void;
 }) {
-  const [expanded,    setExpanded]    = useState(false);
   const [editingSelf, setEditingSelf] = useState(false);
   const [editChildId, setEditChildId] = useState<string | null>(null);
   const [addingChild, setAddingChild] = useState(false);
@@ -134,33 +132,18 @@ function CapabilityCard({
       status,
     });
     setAddingChild(false);
-    setExpanded(true);
     onRefresh();
   }
 
   return (
-    <div className={`rounded-xl overflow-hidden transition-all border-2 ${
+    <div className={`rounded-xl overflow-hidden border-2 shadow-sm ${
       isPlanned
         ? 'border-dashed border-amber-300 bg-amber-50/50'
         : 'border-slate-200 bg-white'
-    } ${expanded ? 'shadow-md' : 'hover:shadow-sm'}`}>
+    }`}>
 
       {/* Header */}
-      <div
-        className={`group flex items-start gap-3 p-4 cursor-pointer select-none transition ${
-          isPlanned ? 'hover:bg-amber-50/80' : 'hover:bg-slate-50'
-        }`}
-        onClick={() => { if (!editingSelf) setExpanded(o => !o); }}
-      >
-        {/* Expand indicator */}
-        <div className={`w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 mt-0.5 ${
-          isPlanned ? 'bg-amber-100 text-amber-500' : 'bg-slate-100 text-slate-400'
-        }`}>
-          {expanded
-            ? <ChevronUp className="w-3.5 h-3.5" />
-            : <ChevronDown className="w-3.5 h-3.5" />}
-        </div>
-
+      <div className={`group flex items-start gap-3 p-4 ${isPlanned ? 'bg-amber-50/60' : 'bg-slate-50'}`}>
         {editingSelf ? (
           <div className="flex-1">
             <NodeForm
@@ -186,29 +169,19 @@ function CapabilityCard({
               <p className={`text-[11px] mt-1 leading-snug ${isPlanned ? 'text-amber-700/70' : 'text-slate-500'}`}>
                 {node.description}
               </p>
-              {/* Child count pill */}
-              {children.length > 0 && (
-                <div className="flex items-center gap-1 mt-2">
-                  <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                    isPlanned ? 'bg-amber-100 text-amber-600' : 'bg-slate-100 text-slate-500'
-                  }`}>
-                    {children.length} feature{children.length !== 1 ? 's' : ''}
-                  </span>
-                </div>
-              )}
             </div>
 
             {/* Action buttons (hover reveal) */}
             <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
               <button
-                onClick={e => { e.stopPropagation(); setEditingSelf(true); setExpanded(false); }}
+                onClick={() => setEditingSelf(true)}
                 className="p-1.5 rounded-lg hover:bg-slate-200 transition"
                 title="Edit"
               >
                 <Pencil className="w-3.5 h-3.5 text-slate-400" />
               </button>
               <button
-                onClick={e => { e.stopPropagation(); onDelete(node.id, node.label); }}
+                onClick={() => onDelete(node.id, node.label)}
                 disabled={deleting === node.id}
                 className="p-1.5 rounded-lg hover:bg-red-50 transition"
                 title="Delete"
@@ -222,12 +195,11 @@ function CapabilityCard({
         )}
       </div>
 
-      {/* Expanded body — sub-capabilities */}
-      {expanded && !editingSelf && (
+      {/* Sub-capabilities — always visible */}
+      {!editingSelf && (
         <div className={`border-t px-4 py-3 space-y-3 ${
-          isPlanned ? 'border-amber-200 bg-amber-50/60' : 'border-slate-100 bg-slate-50/70'
+          isPlanned ? 'border-amber-200 bg-amber-50/30' : 'border-slate-100 bg-white'
         }`}>
-
           {children.length > 0 && (
             <div className="space-y-1">
               {children.map(child => {
@@ -245,7 +217,7 @@ function CapabilityCard({
                   <div
                     key={child.id}
                     className={`group flex items-start gap-2.5 px-3 py-2 rounded-lg transition ${
-                      childPlanned ? 'hover:bg-amber-50' : 'hover:bg-white'
+                      childPlanned ? 'hover:bg-amber-50' : 'hover:bg-slate-50'
                     }`}
                   >
                     <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
@@ -554,11 +526,9 @@ const SC: Record<string, { bg: string; border: string; text: string; badge: stri
 const CATEGORIES = ['All', 'Frontend', 'Backend', 'Toolchain'];
 
 function StackTab() {
-  const [filter,   setFilter]   = useState('All');
-  const [selected, setSelected] = useState<string | null>(null);
+  const [filter, setFilter] = useState('All');
 
   const visible = filter === 'All' ? stackItems : stackItems.filter(i => i.category === filter);
-  const detail  = stackItems.find(i => i.name === selected) ?? null;
 
   return (
     <div className="space-y-6">
@@ -579,99 +549,53 @@ function StackTab() {
         ))}
       </div>
 
-      {/* Cards grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {/* Cards — always fully expanded */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {visible.map(item => {
-          const c        = SC[item.color];
-          const isActive = selected === item.name;
+          const c = SC[item.color];
           return (
-            <button
-              key={item.name}
-              onClick={() => setSelected(isActive ? null : item.name)}
-              className={`text-left rounded-xl border-2 overflow-hidden transition-all hover:shadow-md ${
-                isActive ? `${c.border} shadow-md` : 'border-slate-200 hover:border-slate-300'
-              }`}
-            >
-              {/* Coloured header strip */}
-              <div className={`${c.header} px-4 py-3 flex items-center gap-3`}>
-                <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center text-white flex-shrink-0">
-                  {item.icon}
+            <div key={item.name} className={`rounded-xl border-2 ${c.border} overflow-hidden`}>
+              {/* Coloured header */}
+              <div className={`${c.header} px-4 py-3 flex items-center justify-between`}>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center text-white flex-shrink-0">
+                    {item.icon}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-white font-bold text-sm leading-tight">{item.name}</p>
+                    {item.version && <p className="text-white/70 text-[11px]">v{item.version}</p>}
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <p className="text-white font-bold text-sm leading-tight">{item.name}</p>
-                  {item.version && (
-                    <p className="text-white/70 text-[11px]">v{item.version}</p>
-                  )}
-                </div>
+                {item.docsUrl && (
+                  <a
+                    href={item.docsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-white/70 hover:text-white text-[11px] font-semibold transition flex-shrink-0"
+                  >
+                    <ExternalLink className="w-3 h-3" /> Docs
+                  </a>
+                )}
               </div>
-              {/* Card body — role badge + usage count only (why/bullets stay in detail panel) */}
-              <div className="bg-white px-4 py-3 flex items-center justify-between gap-2">
+              {/* Body */}
+              <div className={`px-4 py-4 space-y-3 ${c.bg}`}>
                 <span className={`text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full ${c.badge}`}>
                   {item.role}
                 </span>
-                <span className="text-[10px] text-slate-400 font-medium whitespace-nowrap">
-                  {item.bullets.length} usage notes
-                </span>
+                <p className="text-xs text-slate-600 leading-relaxed">{item.why}</p>
+                <ul className="space-y-1.5">
+                  {item.bullets.map(b => (
+                    <li key={b} className="flex items-start gap-2">
+                      <CheckCircle2 className={`w-3.5 h-3.5 flex-shrink-0 mt-0.5 ${c.text}`} />
+                      <span className="text-xs text-slate-600 leading-snug">{b}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </button>
+            </div>
           );
         })}
       </div>
-
-      {/* Detail panel */}
-      {detail && (
-        <div className={`rounded-2xl border-2 ${SC[detail.color].border} overflow-hidden`}>
-          <div className={`${SC[detail.color].header} px-6 py-4 flex items-center justify-between`}>
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-white">
-                {detail.icon}
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="text-white font-bold text-base">{detail.name}</h3>
-                  {detail.version && (
-                    <span className="text-white/70 text-xs bg-white/20 px-2 py-0.5 rounded-full">v{detail.version}</span>
-                  )}
-                </div>
-                <p className="text-white/80 text-xs mt-0.5">{detail.role}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              {detail.docsUrl && (
-                <a
-                  href={detail.docsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={e => e.stopPropagation()}
-                  className="flex items-center gap-1.5 text-white/80 hover:text-white text-xs font-semibold transition"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" /> Docs
-                </a>
-              )}
-              <button onClick={() => setSelected(null)} className="text-white/60 hover:text-white transition" title="Close">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-          <div className={`px-6 py-5 ${SC[detail.color].bg}`}>
-            {/* Why section — only in detail panel */}
-            <div className={`rounded-xl border ${SC[detail.color].border} bg-white/60 px-4 py-3 mb-4`}>
-              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-1">Why we chose it</p>
-              <p className="text-sm text-slate-700 leading-relaxed">{detail.why}</p>
-            </div>
-            <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-3">How it's used in this project</p>
-            <ul className="space-y-2">
-              {detail.bullets.map(b => (
-                <li key={b} className="flex items-start gap-2.5 text-sm text-slate-700">
-                  <CheckCircle2 className={`w-4 h-4 flex-shrink-0 mt-0.5 ${SC[detail.color].text}`} />
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      )}
-
     </div>
   );
 }
