@@ -907,6 +907,46 @@ class ApiClient {
     result.push(current.trim());
     return result;
   }
+
+  // ── Framework nodes (System Overview mind map) ──────────────────────────────
+
+  async getFrameworkNodes() {
+    const { data, error } = await supabase
+      .from('framework_nodes')
+      .select('*')
+      .order('sort_order', { ascending: true });
+    if (error) throw new Error(error.message);
+    return data ?? [];
+  }
+
+  async addFrameworkNode(payload: { parent_id: string | null; label: string; description: string; sort_order: number; status?: string }) {
+    const { data, error } = await supabase
+      .from('framework_nodes')
+      .insert(payload)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return data;
+  }
+
+  async updateFrameworkNode(id: string, payload: { label?: string; description?: string; status?: string }) {
+    const { data, error } = await supabase
+      .from('framework_nodes')
+      .update(payload)
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return data;
+  }
+
+  async deleteFrameworkNode(id: string) {
+    const { error } = await supabase
+      .from('framework_nodes')
+      .delete()
+      .eq('id', id);
+    if (error) throw new Error(error.message);
+  }
 }
 
 export const apiClient = new ApiClient();

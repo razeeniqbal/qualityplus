@@ -4,11 +4,12 @@ import DimensionConfig from './pages/DimensionConfig';
 import GuidePage from './pages/GuidePage';
 import ProjectView from './pages/ProjectView';
 import AdminPage from './pages/AdminPage';
+import SystemOverviewPage from './pages/SystemOverviewPage';
 import LoginPage from './pages/LoginPage';
 import { useUser } from './contexts/UserContext';
-import { LayoutGrid, Network, Layers, Settings, LogOut, Shield, ChevronDown, BookOpen } from 'lucide-react';
+import { LayoutGrid, Settings, LogOut, Shield, ChevronDown, BookOpen, Cpu } from 'lucide-react';
 
-type Page = 'dashboard' | 'config' | 'guide' | 'records' | 'osdu' | 'upcoming' | 'admin';
+type Page = 'dashboard' | 'config' | 'guide' | 'records' | 'admin' | 'system';
 
 function AppContent() {
   const { user, logout } = useUser();
@@ -84,6 +85,19 @@ function AppContent() {
                     <Shield className="w-4 h-4" />
                     <span>Admin Panel</span>
                   </button>
+                  {user.role === 'admin' && (
+                    <button
+                      onClick={() => { setCurrentPage('system'); setUserMenuOpen(false); }}
+                      className={`w-full flex items-center space-x-2 px-4 py-2.5 text-sm transition ${
+                        currentPage === 'system'
+                          ? 'bg-teal-50 text-teal-700 font-medium'
+                          : 'text-slate-600 hover:bg-slate-50'
+                      }`}
+                    >
+                      <Cpu className="w-4 h-4" />
+                      <span>System Overview</span>
+                    </button>
+                  )}
                   <div className="border-t border-slate-100">
                     <button
                       onClick={() => { setCurrentPage('dashboard'); setSelectedProjectId(null); setUserMenuOpen(false); logout(); }}
@@ -136,28 +150,6 @@ function AppContent() {
               <BookOpen className="w-5 h-5" />
               <span className="font-medium">Guide</span>
             </button>
-            <button
-              onClick={() => setCurrentPage('osdu')}
-              className={`flex items-center space-x-2 px-4 py-3 transition border-b-2 ${
-                currentPage === 'osdu'
-                  ? 'border-teal-400 text-white bg-slate-600'
-                  : 'border-transparent text-slate-300 hover:text-white hover:bg-slate-600'
-              }`}
-            >
-              <Network className="w-5 h-5" />
-              <span className="font-medium">OSDU Matching</span>
-            </button>
-            <button
-              onClick={() => setCurrentPage('upcoming')}
-              className={`flex items-center space-x-2 px-4 py-3 transition border-b-2 ${
-                currentPage === 'upcoming'
-                  ? 'border-teal-400 text-white bg-slate-600'
-                  : 'border-transparent text-slate-300 hover:text-white hover:bg-slate-600'
-              }`}
-            >
-              <Layers className="w-5 h-5" />
-              <span className="font-medium">Upcoming Module</span>
-            </button>
           </div>
         </div>
       </nav>
@@ -177,21 +169,8 @@ function AppContent() {
             onBack={() => setCurrentPage('dashboard')}
           />
         )}
-        {currentPage === 'osdu' && (
-          <div className="text-center py-20">
-            <Network className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-            <h2 className="text-2xl font-semibold text-slate-700">OSDU Matching</h2>
-            <p className="text-slate-500 mt-2">Coming soon</p>
-          </div>
-        )}
-        {currentPage === 'upcoming' && (
-          <div className="text-center py-20">
-            <Layers className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-            <h2 className="text-2xl font-semibold text-slate-700">Upcoming Module</h2>
-            <p className="text-slate-500 mt-2">Coming soon</p>
-          </div>
-        )}
         {currentPage === 'admin' && <AdminPage />}
+        {currentPage === 'system' && user.role === 'admin' && <SystemOverviewPage />}
       </main>
     </div>
   );
