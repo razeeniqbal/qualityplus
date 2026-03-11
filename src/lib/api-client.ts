@@ -624,14 +624,11 @@ class ApiClient {
     if (fetchError) throw new Error(fetchError.message);
 
     if (ds.storage_mode === 'rows') {
-      // Read rows in pages, rewrite keeping only selected columns.
-      // Each row is updated individually — Supabase JS SDK does not support
-      // bulk conditional updates, so we batch fetches but update per-row.
       const PAGE = 1000;
-      const totalRows = (ds.row_count as number) || 0;
       const keepSet = new Set(keepColumns);
+      let offset = 0;
 
-      for (let offset = 0; offset < totalRows; offset += PAGE) {
+      while (true) {
         const { data: pageData, error: pageError } = await supabase
           .from('dataset_rows')
           .select('id, row_index, data')
@@ -639,9 +636,9 @@ class ApiClient {
           .order('row_index', { ascending: true })
           .range(offset, offset + PAGE - 1);
         if (pageError) throw new Error(pageError.message);
+        if (!pageData || pageData.length === 0) break;
 
-        // Build upsert payload with trimmed data for the whole page
-        const upsertPayload = (pageData ?? []).map(r => {
+        const upsertPayload = pageData.map(r => {
           const trimmed: Record<string, string> = {};
           for (const col of keepSet) {
             if (col in (r.data as object)) trimmed[col] = (r.data as Record<string, string>)[col];
@@ -649,11 +646,13 @@ class ApiClient {
           return { id: r.id, dataset_id: datasetId, row_index: r.row_index, data: trimmed };
         });
 
-        // Upsert the page in one request (matches on primary key `id`)
         const { error: upsertError } = await supabase
           .from('dataset_rows')
           .upsert(upsertPayload, { onConflict: 'id' });
         if (upsertError) throw new Error(upsertError.message);
+
+        if (pageData.length < PAGE) break;
+        offset += PAGE;
       }
 
       const { error: updateError } = await supabase

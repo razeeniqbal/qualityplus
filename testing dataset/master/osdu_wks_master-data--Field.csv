@@ -1,0 +1,993 @@
+Data Mastering,Country,Region,Block,Field ID,Field Name,Field Code,Source,Legacy Field Name,Effective Date,Description,Existence Kind,Resource Security Classification
+Master,Malaysia,SK,,FLD11158,NAFIRI,NAFI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00286,LUKUT,LUKT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00418,SUMALAYANG,SMYA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM302,FLD0281,BUNGA KESUMBA,BKSB,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM304,FLD0597,IRAMA,IRMA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,"D35, D21 & J4",FLD11177,J4,J4,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD0654,KAYU MANIS SOUTH,KMSE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,TANGGA BARAT CLUSTER,FLD0831,MELOR,MLOR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM323,FLD10533,WEST BELUMUT,BELW,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BALINGIAN,FLD11159,NAIM,NAIM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,ABU CLUSTER,FLD0014,ABU SW UPTHROWN,ASWU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,"D35, D21 & J4",FLD11201,D21,D21,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,3K,FLD0578,HEBAT,HEBT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK316,FLD11208,KUANG NORTH,KUNO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,UBAH CLUSTER,FLD1054,REMPAH,REMH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BIGST,FLD0259,BUJANG,BUJG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM6&PM12,FLD0397,DELAH,DELH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0425,EAST BUNGA RAYA,EBAR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BIGST,FLD0586,INAS,INAS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,MERANTI CLUSTER,FLD0845,MERPAUH,MERP,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM314,FLD0884,NAGA EMAS,NAEM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK407,FLD1145,SIKAU,SIKU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD1408,SERAI,SRAI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK433,FLD0443,ENGKABANG WEST,ENWE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK324,FLD1135,SERUNAI,SNAI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM8E,FLD0741,LANGAT,LNGT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM8E,FLD0432,EAST RAYA,EARA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM6&PM12,FLD0411,DUYONG SHALLOW,DUSH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,DULANG FIELD,FLD0406,DULANG,DULG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,WL4-00,FLD0300,C24,C24,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SB409,FLD1313,ZOISIT,ZOIT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK410B,FLD0839,MERAK,MERK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BALINGIAN,FLD11202,D28,D28,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,MUTIARA CLUSTER,FLD0123,BENRINNES,BENS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD1184,SUMANDAK TENGAH,SUTE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK309,FLD1303,WEST PATRICIA CONGKAK,PATW,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00045,BEREMBANG,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD10682,TEMU,TEMU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,RAJA CLUSTER,FLD10612,JANGLAU,JANU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,PERMATA CLUSTER,FLD0778,LOKAN,LOKN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,UBAH CLUSTER,FLD0155,BIRIS,BIRS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,IRONG CLUSTER,FLD1196,TEMBIKAI,TMBK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM302,FLD0277,BUNGA KAMELIA,KMLA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00336,PEDU,PEDU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00248,KUDAT,KDAT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK309,FLD0118,BELUM,BLUM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00224,KELEDANG,KLDG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK417,FLD10631,SIKAP,SIKP,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00001,A1,A1,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK306,FLD11164,NAHARA,NAHA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,2011 BARAM DELTA EOR,FLD0475,FAIRLEY BARAM,FBAM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,2011 BARAM DELTA EOR,FLD11172,BOKOR,BOKR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK407,FLD0074,BAKAU DEEP,BADE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK301B,XFLD00256,L4,L4,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00085,CHERATING,CHNG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00404,SINSING,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00369,RUKU-RUKU,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00080,CENMUMUR,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00294,MAK YONG,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00423,TADOM,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00229,KERIAN,KRAN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK411,FLD11193,J5,J5,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00205,JUGRA,JGRA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00406,SOI,SOI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM9,FLD1249,TIONG KEPONG,TIKE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK411,FLD11232,MIRDANGA,MIRA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024). Previously known as J12.,Active,INTERNAL USE
+Master,Malaysia,PM,GAS PSC,N/A,JERNEH BARAT,JERB,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,H,FLD10811,HIKMAT,HIKT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK438,FLD10850,BANGSAWAN,BANN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM304,FLD1294,WEST DESARU,WDSR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,H,FLD1065,ROTAN,ROTN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PUTERI CLUSTER,FLD1046,PUTERI,PTRI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK316,FLD11211,KEDIDI,KEDI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD0653,KAWANG,KAWG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM304,FLD0318,CENDOR GRABEN,CEGR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM323,FLD10532,EAST BELUMUT,BELE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM302,FLD0296,BUNGA ZETUNG,BZTG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM509,FLD0108,BELANGA,BELA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,KORBU CLUSTER,FLD0768,LEREK,LERK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PKNB CLUSTER,FLD0669,KENARONG,KENG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,H,FLD0404,DOLFIN,DOLN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SB409,FLD1205,TAMPAN,TAMN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BIGST,FLD0566,GULING,GULG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,H,FLD0120,BEMBAN,BEMN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD0315,CEKUR MANIS,CEMA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BETA CLUSTER,FLD0440,ENAU,ENAU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM8E,FLD0951,NORTH RAYA,NRAY,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK407,FLD11180,ASAM PAYA,ASMP,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,FERI CLUSTER,FLD0479,FERI,FERI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK313,FLD0664,KELI,KELI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK306,FLD11233,SERULING,SERU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,MUTIARA CLUSTER,FLD0861,MUTIARA HITAM,MUHI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD11167,SHALLOW CLASTIC,SC,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,LIMBAYONG,FLD0777,LIMBAYONG SUB-THRUST,LISU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD0655,KAYU MANIS SOUTH EAST,KMSS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK417,FLD10560,NANGKA,NANA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00072,BUNGA TANJUNG,BTJG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00385,SEMANTAN,SMTN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00018,BADAK,BADK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00222,KECUPU,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00383,SELUANG,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD10670,INAI,INAI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM428,FLD0309,CAHAYA,CAHA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BIGST,FLD1261,TUJOH,TUJH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,IRONG CLUSTER,FLD0133,BERANTAI WEST,BEWE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,TANGGA BARAT CLUSTER,FLD1206,TANGGA,TANA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK408,FLD0624,JEREMIN,JERN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024). Previously known as Jerimin.,Active,INTERNAL USE
+Master,Malaysia,SK,SK438,FLD10840,BABADON,BABN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK306,FLD11200,BENDAI,BENI,Data Mastering Service,,,Newly Discovery,Active,INTERNAL USE
+Master,Malaysia,SB,KERISI CLUSTER,FLD0689,KIKEH DEEP,KIDE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0290,BUNGA SEROJA,BSRJ,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK10,FLD0140,BERYL,BRYL,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KETAPU CLUSTER,FLD1395,C3,C3,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BETA CLUSTER,FLD10330,BUNGA TASBIH,BGTA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM8E,FLD1312,YONG,YONG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SB409,FLD1202,TAMBUKU,TAMU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK308,FLD0466,F28,F28,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SB409,FLD0652,KAURAN,KAUN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PUTERI CLUSTER,FLD0989,PADANG,PDNG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK316,FLD11242,ROZEL,ROZL,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK307,FLD11151,BARONIA BARAT,BRNB,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0289,BUNGA SAFFRON,BGSA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KETAPU CLUSTER,FLD1393,C13,C13,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,G,FLD1037,PISAGAN,PISN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM302,FLD0537,GAJAH,GAJH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,TEA LANGKASUKA,FLD1099,SELENDANG,SELG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK309,FLD1009,PATRICIA,PATR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM524,FLD0728,LABA,LABA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,2011 BARAM DELTA EOR,FLD11235,SIWA,SIWA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK10,FLD0753,LAYANG,LYNG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,NBE CLUSTER,FLD10031,EPIDOT,EPIT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,FERI CLUSTER,FLD1411,ANDING BASEMENT,ANBA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK312,FLD0790,M3 SOUTH,M3S,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11175,F12,F12,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,3K,FLD0673,KENTAL,KENL,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,"D35, D21 & J4",FLD11184,D35,D35,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,PERMATA CLUSTER,FLD10033,AXINIT,AXIT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK438,FLD0348,D16,D16,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD11212,M1,M1,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD0452,F08N,F08N,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM323,FLD0323,CHERMINGAT,CRMG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,CHENANG CLUSTER,FLD0682,KETUMBAR,KETR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0287,BUNGA PAKMA,BPMA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,IRONG CLUSTER,FLD0130,BERANTAI EAST,BEST,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,,XFLD00056,BOKOR TENGGARA,BOTR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00186,HIJAU,HJAU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00253,KUNYIT,KNYT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD10972,BUNGA ASTER,BGST,Data Mastering Service,,,Newly added 2024,Active,INTERNAL USE
+Master,Malaysia,SK,SK306,FLD10530,SARATOK,SRTK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Inactive,INTERNAL USE
+Master,Malaysia,SB,SB403,FLD10100,TARAP,TARP,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK302A,FLD0823,MAWAR,MAWR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,IRONG CLUSTER,FLD0630,JITANG,JITG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,"D35, D21 & J4",FLD0362,D35 DEEP,D3DE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,4E,FLD0147,BIDARA,BIDA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11220,KUMANG WEST,KUWE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD1182,SUMANDAK SELATAN,SUSE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,KEBABANGAN CLUSTER,FLD0643,KAMUNSU EAST,KAEA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK316,FLD11213,NC5,NC5,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM9,FLD1044,PULAI,PULI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BAKAWALI,FLD0274,BUNGA BAKAWALI,BGBA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BARAM JR CLUSTER,FLD0478,FATIMAH,FATH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM6&PM12,FLD0545,GANSAR,GANR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,G,FLD0812,MALIKAI,MKAI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK408,FLD0560,GOREK,GORK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD1152,SLIVER,SLIR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD0449,ERB WEST,ERBW,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,2012 KINABALU OIL,FLD1499,KINABALU FAR EAST,KFRE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11194,KUMANG EAST,KUEA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,MUTIARA CLUSTER,FLD0714,KUDA TERBANG,KUTE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD0050,ASAM KANDIS,ASKA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,NORTH SABAH,FLD1071,SF30,SF30,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD0558,GLAYZER,GLAR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD1293,WEST BUNGA RAYA,WBAR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK407,FLD11179,KELAPA BALI,KEBI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,2012 KINABALU OIL,FLD0693,KINABALU DEEP,KIEP,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BIGST,FLD0261,BUJANG EASTERN,BUJN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK314A,FLD1154,SOMPOTAN,SOMN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BARAM JR CLUSTER,FLD0087,BARIO,BARO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11186,F9 NORTH,F9,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM428,FLD0999,PALUH,PALH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,KERISI CLUSTER,FLD0681,KERISI,KERI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,NORTH SABAH,FLD1176,SAINT JOSEPH,STJO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,IRONG CLUSTER,FLD0128,BERANTAI,BRWA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,BAMBAZON CLUSTER,FLD0080,BAMBAZON,BAMN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD1181,SUMANDAK,SMDK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,FERI CLUSTER,FLD1155,SOTONG,SOTG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11196,NC4,NC4,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11160,ANJUNG SOUTH,ANSO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK314A,FLD0363,D39,D39,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK417,FLD0766,LEMBUK,LEMK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,WL4-00,FLD1082,SALAM,SALM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,2012 KINABALU OIL,FLD0691,KINABALU (WEST UPPER) ULTRA DEEP,KWTU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK309,FLD0430,EAST PATRICIA,EAPA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,SEPAT OIL,FLD1116,SEPAT,SPAT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SB409,FLD1285,WAKID,WAKD,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11240,NC10,NC10,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD0417,E4,E4,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM428,FLD0620,JEBAT,JEBT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK320,FLD0381,DAUN KARI,DAKA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,J,FLD0555,GEMILANG,GEMG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK407,FLD11214,REBAB,REBB,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK314A,FLD1415,SERDAM MERAH,SEME,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD1185,SUMANDAK TEPI,SUPI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM314,FLD0885,NAGA KECIL,NAKE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BETA CLUSTER,FLD0256,BUBU,BUBU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,NBE CLUSTER,FLD0244,BONGAWAN NORTH,BONO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,2008 PSC,FLD1212,TAPIS,TAIS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,NORTH SABAH,FLD1164,SOUTH FURIOUS,FRSS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD1315,ZUHAL EAST,ZUHE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK309,FLD1128,SERENDAH,SRDH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11210,KANOWIT,KNWT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,2008 PSC,FLD0603,IRONG BARAT,IRNB,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,GAS PSC,FLD0625,JERNEH,JERH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM428,FLD1026,PERMATANG,PERG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,2011 BARAM DELTA EOR,FLD11080,BARONIA,BRNA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD0722,KURMA MANIS,KUIS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK410B,FLD0740,LANG LEBAH,LALE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD10791,LAILA,LAIL,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BALINGIAN,FLD11152,BAYAN,BYAN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK310,FLD0060,B15,B15,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,FERI CLUSTER,FLD0813,MALONG,MLON,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11187,F9 SOUTH,F9SO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM325,FLD0271,BUNGA ANDONG,BGAN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,FERI CLUSTER,FLD0031,ANDING,ANDG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM304,FLD0317,CENDOR,CDOR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK316,FLD11205,F38,F38,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BAKAWALI,FLD1502,BAKAWALI DEEP,BAEP,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK507,FLD0239,BOKOR SOUTH,BOSO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK407,FLD11224,TUKAU,TUKA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK311,FLD1127,SERAMPANG,SRPG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM335,FLD10023,LARUT,LART,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,2008 PSC,FLD0994,PALAS,PLAS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,H,FLD0282,BUNGA LILI,BGLI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM340,FLD0291,BUNGA TANJUNG MERAH,BGGM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,RAJA CLUSTER,FLD1058,RHU,RHU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK308,FLD0415,E11W,E11W,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD1291,WEST BUNGA KEKWA,WBAK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK438,FLD0367,D5,D5,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM304,FLD0426,EAST CENDOR,ECDR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,WL4-00,FLD1507,BENUM,BENM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK314A,FLD0306,C8,C8,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD10030,F22,F22,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BALINGIAN,FLD11153,BAYAN EAST,BAST,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,ND1,FLD11170,ARAPAIMA,ARAA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BAKAWALI,FLD1193,SURIYA SELATAN,SUAN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PKNB CLUSTER,FLD0100,BEDONG,BEDG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PUTERI CLUSTER,FLD0947,NORTH LUKUT,LUKN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM302,FLD0293,BUNGA TERATAI,BTRT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD0463,F23,F23,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,2008 PSC,FLD1199,TABU,TABU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK320,FLD0732,LADA HITAM,LAHI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD11204,F29,F29,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD0464,F23SW,F23W,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,CHENANG CLUSTER,FLD0322,CHENANG,CHEG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK407,FLD11182,BARONIA NORTH,BANO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,KEBABANGAN CLUSTER,FLD0646,KAMUNSU EAST UPTHROWN CANYON,KETU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK405B,FLD10494,SIRUNG,SIRG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0943,NORTH BUNGA ORKID,NBAO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,PERMATA CLUSTER,FLD10032,MANIKAM,MANM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK320,FLD1013,PEGAGA,PGGA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM8E,FLD1133,SERUDON,SRDN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD10010,SELASIH,SELH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11223,PC4,PC4,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,TEMARIS CLUSTER,FLD10441,TEMBAKAU,TEMB,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK318,FLD0820,MARJORAM,MARM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00306,MERSING,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00172,GEDOMBAK,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00324,NORTH WEST SELIGI,SENW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,R,FLD10094,KACAK,KACK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK308,FLD0418,E6,E6,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BARAM JR CLUSTER,FLD1083,SALBIAH,SALH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,IRONG CLUSTER,FLD0598,IRONG,IRNG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD10021,F27,F27,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM509,FLD1020,PENDERA,PEND,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM314,FLD0883,NAGA DALAM,NADA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,TANGGA BARAT CLUSTER,FLD1207,TANGGA BARAT,TNGB,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,MUTIARA CLUSTER,FLD0963,NYMPHE NORTH,NYNO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,UBAH CLUSTER,FLD0096,BATAI,BATI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD0039,ANJUNG KECIL,ANJK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM302,FLD0134,BERGADING DEEP,BGDD,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0944,NORTH BUNGA PAKMA,NBAP,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK311,FLD1286,WANGSA,WANA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK316,FLD11197,NC8,NC8,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,GAS PSC,FLD1221,TELOK,TELO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD0006,A3,A3,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM302,FLD0135,BERGADING SHALLOW,BGDG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,KINABALU DEEP & EAST GAS FIELD,FLD10092,BELUD EAST,BEEA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM325/PM302,FLD0278,BUNGA KANGSAR,BKGS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,TANGGA BARAT CLUSTER,FLD0733,LAHO,LAHO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM8E,FLD1412,SELIGI,SEGI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SB409,FLD1238,TIMBALAI DEEP WEST,TDPW,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK408,FLD0076,BAKONG,BAKG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM301,FLD0270,BUMI SOUTH,BUSO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,KORBU CLUSTER,FLD0709,KORBU,KORU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK320,FLD0150,BIJI SAWI,BISA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK314A,FLD1414,SERDAM,SERM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD1292,WEST BUNGA ORKID,WBAO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK311,FLD1025,PERMAS,PRMS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD1086,SAMARANG KECHIL,SMRK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BALINGIAN,FLD11198,RIDHWAN,RIDN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM9,FLD0103,BEKOK,BEKK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK417,FLD10495,DOKONG,DOKG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,,XFLD00444,TIONG BARAT,TINB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0423,EAST BUNGA KEKWA,EBAK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00204,JINTAN DEEP,JIND,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,2008 PSC,FLD1104,SEMANGKOK,SMKK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,MUTIARA CLUSTER,FLD0863,MUTIARA HITAM NORTH EAST,MHMN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,BAMBAZON CLUSTER,FLD1237,TIGA PAPAN,TIPA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BIGST,FLD1119,SEPAT BARAT DEEP,SPBD,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,2V,FLD10821,LAYANG-LAYANG,LALA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,WL4-00,FLD10681,GAGAU,GAGU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BIGST,FLD1120,SEPAT DEEP,SPAD,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD10740,BUNGA LAVATERA,BGLA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD0458,F13E,F13E,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM306/PM307,FLD0137,BERTAM,BTAM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK318,FLD1240,TIMI,TIMI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD11185,E11,E11,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD1173,SRI AMAN,SRAM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD0414,F13W,F13W,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK320,FLD0792,M5,M5,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,NORTH SABAH,FLD0093,BARTON,BATN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK316,FLD11163,GAHARU,GAHU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK313,FLD11209,KUMANG MANIS,KUMA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,BANANG FIELD,FLD0082,BANANG,BANG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM6&PM12,FLD0409,DUYONG,DYNG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK311,FLD1157,SOUTH ACIS,ACIS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK417,FLD0092,BARONIA TIMUR LAUT,BTRL,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM8E,FLD1002,PANTAI,PANI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD1188,SUMANDAK UJONG,SUUJ,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK316,FLD11165,NC3,NC3,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK308,FLD0459,F14,F14,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD0288,BUNGA PELAGA,BGPE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK316,FLD11178,KASAWARI,KASI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM509,FLD10323,TINGGI M,TIM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BALINGIAN,FLD11110,TEMANA,TMNA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK408,FLD1220,TEJA,TEJA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,KINABALU DEEP & EAST GAS FIELD,FLD10093,BELUD SOUTH,BESO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM340,FLD1277,ULAR,ULAR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK408,FLD0618,JARAK,JARK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD0703,KINARUT,KNRT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SB403,FLD10084,BERANGAN,BERN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM8E,FLD1032,PETA KIRI,PEKI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,GAS PSC,FLD0151,BINDU,BINU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,GAS PSC,FLD0752,LAWIT,LAWT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK320,FLD1147,SINTOK,SINK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK411,FLD11189,HADRAH,HADH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM302,FLD0272,BUNGA ANGGERIK,BAGK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM515,FLD0442,ENGGOR,ENTI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM6&PM12,FLD0126,BERANANG,BERG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK407,FLD11154,BETTY,BETY,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK311,FLD1091,SAPIH,SAPH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,GAS PSC,FLD0141,BESAR,BESR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK309,FLD0559,GOLOK,GLOK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM305,FLD0858,MURAI,MURI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM302,FLD0276,BUNGA DAHLIA,BDHL,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,KORBU CLUSTER,FLD0401,DIWANGSA,DIWA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,PERMATA CLUSTER,FLD10022,REALGAR,REAR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,R,FLD0142,BESTARI,BESI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD11181,B12,B12,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,H,FLD1023,PERMAI,PERI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM8E,FLD0751,LAWANG,LWNG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,2012 KINABALU OIL,FLD0695,KINABALU EAST,KIEA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM305,FLD0721,KUNING,KUNG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,FERI CLUSTER,FLD0019,AJI-AJI,AJI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM8E,FLD1169,SOUTH RAYA,SRAY,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,K,FLD0687,KIKEH,KIKH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0295,BUNGA TULIP,BTLP,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK324,FLD0801,MAHKOTA,MAHA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD0828,MELINAU,MELU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11215,SELAR MARINE,SEMA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,N,FLD1231,TEPAT,TEPT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM8E,FLD1030,PETA,PETA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,FERI CLUSTER,FLD1007,PARANG,PARG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD1014,PELAJO,PELO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD0021,ALAB,ALAB,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK309,FLD0842,MERAPUH,MRPH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD0419,E8,E8,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK311,FLD1253,TIRAM,TIRM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BALINGIAN,FLD11101,D18,D18,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SB403,FLD10077,CEMPULUT,CEMT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,BAMBAZON CLUSTER,FLD0836,MENGKIRA,MENA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK408,FLD1022,PEPULUT,PEPT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK408,FLD0763,LEGUNDI,LEGI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,H,FLD0022,ALUM,ALUM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM302,FLD0285,BUNGA MELATI,BGME,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD11225,D12,D12,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,UBAH CLUSTER,FLD0069,BAGANG,BAGG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0284,BUNGA MATAHARI,BGMA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK8,FLD11206,JINTAN,JINT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,3K,FLD0616,JANGAS,JANS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD0077,BALAI,BALI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BARAM JR CLUSTER,FLD0576,HASNAH,HASH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,2011 BARAM DELTA EOR,FLD11244,TUKAU TIMUR,TUKT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,WL4-00,FLD1008,PATAWALI,PATI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KETAPU CLUSTER,FLD1396,C6,C6,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG,FLD0469,F6,F6,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0953,NORTH WEST BUNGA RAYA,NWTB,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM304,FLD0427,EAST DESARU,EADE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK307,FLD11245,WEST LUTONG DEEP,DLGW,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD1061,ROMPIN,ROMN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0424,EAST BUNGA ORKID,EBAO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK507,FLD1146,SIKAU NORTH,SITH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK8,FLD11183,BIJAN,BIJN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,2012 KINABALU OIL,FLD0700,KINABALU MAIN,KIMA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,GAS PSC,FLD0037,ANGSI,ANGI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM6&PM12,FLD1056,RESAK,RESK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,ERB SOUTH,FLD10040,ERB SOUTH,ERSO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK310,FLD0058,B14,B14,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK437,FLD0609,J2,J2,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BALINGIAN,FLD11174,D34,D34,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK438,FLD10550,KULINTANG,KULG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD0441,ENDAU,ENDU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD0719,KUMANG SOUTH,KUSO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK320,FLD0254,BUAH KERAS,BUKE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK314A,FLD1416,MONG,MONG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,H,FLD0267,BULUH,BLUH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0945,NORTH BUNGA RAYA,NBAR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK324,FLD0416,E2,E2,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,K / G,FLD1144,SIAKAP NORTH-PETAI,SKNP,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM6&PM12,FLD0410,DUYONG BARAT,DUBA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK407,FLD11161,BARAM,BARM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK411,FLD0610,J32,J32,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD11222,M4,M4,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK309,FLD1017,PEMANIS,PMNS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,BARAM JR CLUSTER,FLD0146,BETTY TIMUR,BETI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM304,FLD0667,KEMASIK,KEMK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,2008 PSC,FLD0571,GUNTONG,GUNG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK408,FLD0743,LARAK,LARK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,KEBABANGAN CLUSTER,FLD0656,KEBABANGAN,KBBN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SB409,FLD1165,SOUTH LOKAN,SOLO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,GAS PSC,FLD0152,BINTANG,BITG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK408,FLD0627,JERUN,JERU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD11162,G7,G07,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,TEMARIS CLUSTER,FLD10440,MENGKUANG,MENG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,FLD0286,BUNGA ORKID,BOKD,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,NBE CLUSTER,FLD0959,NOSONG,NOSG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK407,FLD11218,WEST LUTONG,LTGW,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD1407,SADERI,SDRI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,MERANTI CLUSTER,FLD0648,KAPAL,KAPL,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11203,F2 ATTIC,F2AT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM340,FLD0712,KUDA,KUDA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK315,FLD0125,BENTARA,BNTR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD11221,M3,M3,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK316,FLD11176,GINSENG,GING,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK10,FLD0581,HELANG,HLNG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,FERI CLUSTER,FLD1114,SENTANG,SENG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,TEA LANGKASUKA,FLD0658,KEBAYA,KEBA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,FLD11150,ANJUNG,ANJG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM329,FLD0431,EAST PIATU,PIAE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,MUTIARA CLUSTER,FLD0962,NYMPHE,NYME,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM515,FLD1050,RAJAH SHALLOW,RASH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,KERISI CLUSTER,FLD1109,SENANGIN,SENN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,CHENANG CLUSTER,FLD0826,MELAWATI,MELI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,FLD11171,B11,B11,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK316,FLD11207,KENARI,KENI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00271,LEBIR,LBIR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00326,NURI,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM329,FLD1035,PIATU,PIAU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00264,LANGGUN TIMUR,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00010,ARING,ARNG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00361,RELAU,RLAU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,KERISI CLUSTER,FLD1142,SIAKAP,SIAP,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,UBAH CLUSTER,FLD1275,UBAH,UBAH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK318,FLD1063,ROSMARI,ROSI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PKNB CLUSTER,FLD0670,KENARONG NORTH,KENO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,2011 BARAM DELTA EOR,FLD11190,BAKAU,BAKU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00343,PENYU,PNYU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00303,MEMALI,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,J / K,FLD0569,GUMUSUT-KAKAP,GUKA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,H,FLD10820,DERMAWAN,DERN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK320,FLD10680,CENGKIH,CENH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK306,FLD10830,KALUNG EMAS,KAEM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,MERANTI CLUSTER,FLD0840,MERANTI,MERI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,KETAPU CLUSTER,FLD1394,C2,C2,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK8,FLD11199,CILI PADI,CPDI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK306,FLD11157,MAYONG,MAYG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM9,FLD1243,TINGGI,TGGI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,3B,FLD10119,PAUS,PAUS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PKNB CLUSTER,FLD1028,PERTANG,PERT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,GAS PSC,FLD0373,DAMAR,DAMR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PUTERI CLUSTER,FLD1019,PENARA,PNAR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM524,FLD0729,LABA BARAT,LABT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PKNB CLUSTER,FLD0940,NORING,NORG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK320,FLD1150,SIRIH,SIRH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,FLD1085,SAMARANG,SMRG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK314A,FLD1417,MONG MERAH,MOME,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,2012 KINABALU OIL,FLD0692,KINABALU (WEST) DEEP,KWTD,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,LIMBAYONG,FLD0772,LIMBAYONG,LIMG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK410B,FLD10710,PAPRIKA,PAPA,Data Mastering Service,,,New Discovery,Active,INTERNAL USE
+Master,Malaysia,SK,SK306,FLD0635,K4,K4,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,MERANTI CLUSTER,FLD0596,IPOH,IPOH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,SK407,FLD0091,BARONIA EAST,BAEA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,PM309,FLD0755,LEDANG,LEDG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,,FLD1158,SOUTH ANGSI,ANSS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,,FLD0055,AZURIT,AZUT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD0385,DAYUNG,DAYG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,PM,,FLD0744,LARIS,LARS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,PM,,FLD0042,API-API,API,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD0378,DANUM,DANM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD0561,GRAFIT,GRAT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD0456,F11,F11,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD0626,JERONG MARINE,JEMA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD10651,J1,J1,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD0676,KENYALANG,KENY,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD1406,KT1,KT1,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD0679,KERAMBIT,KERT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD0636,K5,K5,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD1004,PAPAR,PAPR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD0817,MADALON,MADN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD0960,NUANG,NUAG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,PM,,FLD0846,MESAH,MESH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,PM,,FLD0760,LEDANG BARAT DEEP,LBTD,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD0990,PADAS,PADS,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD0815,MALUTUT,MALT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,PM,,FLD0762,LEDANG TENGAH DEEP,LTHD,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,PM,,FLD1095,SAUJANA,SAUA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD1149,SIPADAN,SIPN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,PM,,FLD1107,SEMANGKOK TIMUR,SETI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD1067,RUSA TIMUR,RUTI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD1505,SOUTH WEST EMERALD,SWTE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,PM,,FLD1129,SEROK,SROK,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,PM,,FLD1048,RABUNG,RABG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD10083,TITIK TERANG,TITE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,2005 TEMBUNGO / OPEN FIELD,FLD1506,TEMBUNGO,TMBG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD1201,TAHAN,TAHN,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD1178,SUGUT,SUGT,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD1230,TENGGIRI MARINE,TEME,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SB,,FLD1258,TRUSMADI,TRUI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD10301,TUKAU TIMUR DEEP,TTRD,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,SK,,FLD10078,TANJUNG BARAM,TBRM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,CONFIDENTIAL
+Master,Malaysia,PM,,FLD10099,OPHIR,OPHR,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,,FLD10521,TANJUNG PULAI,TGPU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,,FLD10096,NORTH WEST PINANG,NWTP,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,,FLD10082,KACA,KACA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,,FLD10098,PAYUNG,PAYG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,,FLD0758,LEDANG BARAT,LEBA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,,FLD10097,KECUBUNG,KECG,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,,FLD10473,SOUTH EAST COLLINS,SETC,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD1288,WEST ACIS,WEAC,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,KINABALU DEEP & EAST GAS FIELD,FLD10076,MENGGATAL,MENL,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SB,KINABALU DEEP & EAST GAS FIELD,FLD10091,LAKUM,LAKM,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD1402,DANAU,DANU,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD1399,D41W,D41W,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD1403,DARMA,DARA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD1401,DANA,DANA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD0364,D41,D41,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD1404,DAYA,DAYA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD1405,DAYA NORTH,DANO,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD1397,D30,D30,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD1172,SPAOH,SPAH,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD1398,D30W,D30W,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,SK,DEWA COMPLEX CLUSTER,FLD1400,DAFNAH WEST,DAWE,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,,,XFLD00322,NORTH WEST BAYAN,BYNW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK440,XFLD00315,NAGASARI,NGSA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK316,XFLD00288,LYDIA,LYDI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM9,XFLD00443,TIONG,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00398,SHRUMBU,SHMB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,3B,XFLD00335,PAUS NORTH-1,PAUN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00051,BINTANGOR,BTGR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00316,NATUNA,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK306,XFLD00113,E15,E15,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM306/PM307,XFLD00047,BERTAM SELATAN,BTAS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00066,BUNBURY,BUNB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,2A,XFLD00453,TUNTONG,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK407,XFLD00031,BARIO WEST,BRIW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM422,XFLD00350,PORT KELANG,PKLN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00145,F3,F3,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00086,CILI HIJAU,CILH,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00462,WINCHESTER WEST,WNCW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK320,XFLD00142,F21,F21,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK418,XFLD00157,G1,G1,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK411,XFLD00193,J36,J36,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK301B,XFLD00270,LAYA,LAYA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK313,XFLD00290,M9,M9,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00084,CHENGAL,CEGL,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,BAKAWALI,XFLD00068,BUNGA BAKAWALI DEEP,BKWI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00137,F19,F19,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00349,PONDU,PNDO,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00198,JATI,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00342,PENIPAH,PNPH,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK303A,XFLD00421,T3,T3,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00183,HANKIN,HANK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK324,XFLD00291,MACHAP,MACP,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,XFLD00419,SUMANDAK UTARA,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,XFLD00438,TENOM,TENM,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,4E,XFLD00258,LABU,LABU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00049,BIJAN SOUTH,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK510,XFLD00014,B16,B16,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00363,REMIS,RMIS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00412,SOUTH LAUT,STLT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00452,TULAK,TLAK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,XFLD00156,FURY SOUTH,FRYS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,XFLD00375,SAMARANG KECIL,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00053,BINTURONG,BITR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK405B,XFLD00094,D3,D3,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00178,GUMUSUT,GSUT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00232,KETAM,KTAM,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00241,KLIAS,KLAS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,XFLD00468,ZUHAL NORTH,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK313,XFLD00243,KOMA KOMA,KOMA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK314A,XFLD00076,C5,C5,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,XFLD00454,TURMALIN,TRML,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00034,BAWAL MARINE,BWMR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,3B,XFLD00158,G10,G10,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB405,XFLD00382,SEGAMA,SGMA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB405,XFLD00042,BENRINNES NORTH EAST,BENE,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,XFLD00071,BUNGA RAYA,BRAY,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK314A,XFLD00037,BEDUK,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00164,GAJAH HITAM,GAJH,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00377,SAMBILINGAN,SBGN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00355,RAFFLES ANCHORAGE,RFCR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK332,XFLD00384,SELUNGUN,SLGN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK328,XFLD00357,RAJANG,RJNG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00279,LIMAU MANIS,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK306,XFLD00209,K6,K6,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,MERANTI CLUSTER,XFLD00465,ZAITUN,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK309,XFLD00100,D9,D9,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00221,KAYU SUGI,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00238,KINDU,KNDU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00133,F10NE,F10N,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK330,XFLD00202,JEMUDUK,JMDK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB304,XFLD00259,LABUK BAY,LBKB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK314A,XFLD00301,MARAKAS,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK332,XFLD00415,SUAI,SUAI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK309,XFLD00403,SINGA LAUT,SNGL,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK325,XFLD00098,D6,D6,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK309,XFLD00391,SEPANG,SPNG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK306,XFLD00210,K8,K8,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK316,XFLD00268,LAVENDER,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM342,XFLD00300,MANGGIS,MGIS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00390,SENYUM,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00278,LIKU,LIKU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM443,XFLD00370,RUMBIA,RUMB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00126,E9,E9,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,2011 BARAM DELTA EOR,XFLD00016,B2,B2,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00121,E4N,E4N,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK324,XFLD00165,GAMBANG,GAMB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK411,XFLD00189,J11,J11,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK407,XFLD00029,BARAM SOUTH,BARS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00368,ROHU,ROHU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00275,LENGKUAS,LGKS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00026,BANGGOL,BAGL,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,3B,XFLD00261,LALAWAK,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00432,TEKUYONG,TKYG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK431,XFLD00328,OYA,OYA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK417,XFLD00466,ZARINA,ZARI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK10,XFLD00017,B4,B4,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00318,NORTH ACIS,ACIN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00148,F4,F4,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00435,TELUS,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK411,XFLD00188,J10,J10,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00213,KALUNG,KLUN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00345,PERTANG KENARONG,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB405,XFLD00332,PAHU,PAHU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00124,E7W,E7W,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00111,E10,E10,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM9,XFLD00227,KEPONG,KEPG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00003,AMAN,AMAN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00061,BRUNEI BAY,BRUB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00410,SOUTH BUNDI,BUDS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00246,KUCAI,KCAI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK431,XFLD00312,MUKAH,MUKH,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,ND4,XFLD00358,RAJAWALI,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00058,BONANZA,BONZ,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00379,SARACEN,SRCN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00119,E3,E3,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00442,TINUTUDAN,TITD,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,XFLD00153,F9,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK314A,XFLD00077,C9,C9,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,XFLD00070,BUNGA LANTANA,BLTN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,K,XFLD00012,AYA,AYA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK411,XFLD00190,J12,J12,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00226,KEMANGI,KMNG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00065,BULAK SETAP,BLST,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,3B,XFLD00247,KUDA LAUT,KDLT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,XFLD00002,ALAB NORTH,ALAN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00236,KIMANIS BAY,KMNB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK418,XFLD00057,BOLAI,prospect,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK316,XFLD00395,SERINDIT,SRDT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00338,PENAGA,PNGA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00417,SUKAU GAYA,SKGY,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00276,LEPU,LEPU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK316,XFLD00147,F39,F39,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00039,BELUD NORTH,BELN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00347,PINITUKADAN,PTKN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00310,MIRI EAST,MIRE,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM309,XFLD00008,ANOA,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00287,LUMUTAN,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00093,D26,D26,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00146,F35,F35,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM428,XFLD00200,JELEBU,JLBU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00088,COLLINS,COLL,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,,XFLD00048,BESAR-A,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK306,XFLD00118,E22,E22,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00114,E18,E18,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00019,BAIDURI,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,,XFLD00399,SIAKAP NORTH,SIKN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM428,XFLD00401,SIMPUR,SMPR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,4E,XFLD00108,DURIAN,DRAN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00174,GELAMA,GLMA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB405,XFLD00297,MANALUNAN,MNLN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00387,SEMUAN,SMUN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00117,E1SW,E1SW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK303A,XFLD00180,H2,H2,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00292,MACHINCANG,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK407,XFLD00320,NORTH EAST COCHRANE,CONE,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00230,KERIS,KRIS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK325,XFLD00426,TANJAK,TNJK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00437,TENGGULIAN,TNGG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK304,XFLD00329,P1,P1,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK407,XFLD00004,AMRA,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00372,SABADAN,SBDN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00135,F15,F15,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00217,KANTAN,KANT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK313,XFLD00255,L3,L3,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00240,KIULU,KIUL,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK320,XFLD00284,LOKIO,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,N,XFLD00081,CERAH,CRAH,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00218,KARUKAN,KRUK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00249,KUKURU,KUKU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK314A,XFLD00388,SENAI,SNAI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB306,XFLD00380,SEBAHAT,SBHT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM327,XFLD00203,JENERA,JNRA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00434,TELOK TIMUR,TELT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00150,F45,F45,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00407,SOLISIP,SLSI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK411,XFLD00194,J6,J6,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK330,XFLD00409,SOOK,SOOK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00299,MANGAYAU,MGYU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00060,BONGKOBO,BGKB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM3CAA,XFLD00069,BUNGA KEKWA,BKWA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SE COLLINS CLUSTER,XFLD00283,LOKAN CENTRAL,LOKC,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00242,KOKOHITAN,KOHT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK302A,XFLD00457,V1,V1,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB405,XFLD00330,PAD,PAD,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,R,XFLD00269,LAWA,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00030,BARILIT,BRLT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK313,XFLD00225,KELESA MARINE,KLSM,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00374,SAMARANG ASAM PAYA,GLYZ,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00123,E7,E7,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK441,XFLD00428,TATAU,TATU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00422,TABU SHALLOW,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00381,SEBATIK,SBTK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK324,XFLD00173,GEDUK,GDUK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,2A,XFLD00448,TOMAN,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM314,XFLD00314,NAGA BESAR,NAGB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK418,XFLD00160,G2,G2,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,,XFLD00043,BERANANG CENTRAL,BCTL,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK320,XFLD00182,HALIA,HLIA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00038,BELANGKAS,BLKS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,3B,XFLD00022,BAKO,BAKO,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,WL4-00,XFLD00138,F19 SHALLOW,F19H,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK316,XFLD00346,PIMENTO,PMNT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00451,TUDAN,TUDN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG DUA,XFLD00393,SERAWA,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,KUMANG CLUSTER,XFLD00251,KUMANG,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00110,E1,E1,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK314A,XFLD00464,YU,YU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM327,XFLD00083,CHEMPAKA,CPKA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00365,RIAM,RIAM,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK324,XFLD00099,D8,D8,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00184,HASELFOOT,HSFT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00359,RAMIN,RAMI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM321,XFLD00408,SONGKET,SGKT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK438,XFLD00102,DARJAT,DRJT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00129,ENGKABANG,ENKG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00103,DELUAR,DLUR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,2A,XFLD00199,JELAWAT,JWAT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00130,ENSALAI,ENSI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM302,XFLD00046,BERGADING,BGDG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK438,XFLD00095,D4,D4,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00170,GAYA,GAYA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK407,XFLD00155,FARIDAH,FRDH,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,,XFLD00052,BINTULU,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00207,K1,K1,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM415,XFLD00041,BELURU,BLRU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,2012 KINABALU OIL,XFLD00237,KINABALU,KNBL,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM304,XFLD00277,LIANG,LIAN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK330,XFLD00463,X1,X1,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00331,PADADA,PADD,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK325,XFLD00445,TIONG MAS,TIMS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK309,XFLD00168,GASING,GASG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM8E,XFLD00296,MALURI,MLRI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00456,UNGGUL,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00063,BUAH PALA,BPLA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00141,F2,F2,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM415,XFLD00323,NORTH WEST BESAR,BENW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00364,REMUJUNG,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00305,MENOMBOK,MNBK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,,XFLD00352,PULAI BARAT,PULB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00348,PINTASAN,PTSN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK407,XFLD00082,CERI,CERI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00263,LANDOK,LDOK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00424,TAMPARULI,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK301B,XFLD00185,HIBISKUS,HIBK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK313,XFLD00373,SADOK,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM407,XFLD00006,ANDING BARAT,ANDB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK405B,XFLD00092,D24,D24,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00433,TELOK BARAT,TELB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK330,XFLD00128,EMPURAU,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00059,BONGAWAN,BOGA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00116,E19NE,E19N,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00362,REMAYONG,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK320,XFLD00011,ASAM JAWA,ASMJ,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB403,XFLD00023,BALAMBANGAN,BLMB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM340,XFLD00447,TOK BIDAN,TKBD,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00208,K11,K11,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK418,XFLD00163,G8,G8,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,3B,XFLD00266,LANJAK,LNJK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK438,XFLD00097,D52,D52,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00459,WEST EMERALD,EMRW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK417,XFLD00308,MIDIN,MDIN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00285,LORO,LORO,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM327,XFLD00344,PERGAU,PRGA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00295,MALIGAN,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK411,XFLD00195,J7,J7,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00166,GAMBIR,GMBR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00441,TINDAK,TNDK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00090,D10,D10,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,ND2,XFLD00064,BUKOH,BKOH,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00216,KANDI,KAND,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM428,XFLD00078,CAMAH,CMAH,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM407,XFLD00201,JELUTONG,JLTG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM309,XFLD00273,LEDANG TENGAH,LEDT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM323,XFLD00040,BELUMUT,BELM,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK427,XFLD00075,C1,C1,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00239,KITABU,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00309,MIRI,MIRI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK431,XFLD00024,BALINGIAN,BLGN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00122,E5,E5,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00233,KIKEH EAST,KIKE,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00169,GAVA,GAVA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00366,RIDAN,RDAN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM341,XFLD00109,DUYONG TIMUR,DYNT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00055,BOHUNG,BHNG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00458,WD,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00321,NORTH LUTONG,LTGN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00252,KUNAU,KNAU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00033,BATUMANDI,BTMD,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK418,XFLD00159,G15,G15,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM407,XFLD00394,SERAYA,SERA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,,XFLD00411,SOUTH FURIOUS CS,FSCS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00351,PUDINA,PDNA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,XFLD00469,ZUHAL SOUTH,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,XFLD00420,SUMAZAU,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB306,XFLD00386,SEMPORNA,SMPO,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK407,XFLD00282,LOAK BAY,LOKB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00244,KUALA BARAM,KBRM,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK335,XFLD00416,SUBIS,SBIS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00104,DENGKIS,DKIS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,ND4,XFLD00154,FALKON,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,XFLD00467,ZUHAL,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM342,XFLD00460,WEST KETUMBAR,KETW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00131,F1,F1,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00302,MEDANG,MEDG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,4E,XFLD00265,LANGSAT,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00020,BAKAM,BKAM,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM304,XFLD00105,DESARU,DESA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB306,XFLD00430,TAWAU,TWAU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00149,F43,F43,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM409,XFLD00171,GAYONG,GAYG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00187,IMBOK,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00397,SG. GANGGARAK,SGGK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00436,TEMBURONG,TBRG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK316,XFLD00215,KAMOMIL,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,AAKBNLP,XFLD00339,PENARA NW,PRNW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SAMARANG,XFLD00376,SAMARANG OIL FIELD,SMDS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00005,ANDALUSIT,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00143,F23E,F23E,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,BALINGIAN,XFLD00319,NORTH BAYAN,BYNN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,3K,XFLD00073,BUNTAL,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00152,F8 (17-B-1),F8,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,K,XFLD00234,KIKEH KECIL,KIKK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,2011 BARAM DELTA EOR,XFLD00429,TAWAK,TWAK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB405,XFLD00175,GEM REEF,GEMR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00132,F10,F10,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM428,XFLD00402,SIMYUM,SMYM,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00140,F1WNW,F1WN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00449,TOMANI,TOMN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK411,XFLD00192,J20,J20,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK324,XFLD00032,BATU KAPUR,BTKP,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,3K,XFLD00054,BLIAIS,BLIA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00371,RUSA BARAT,RUSB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK306,XFLD00455,UNDANG,UNDG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00101,DAMPIER,DAMP,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB306,XFLD00340,PENDEKAR,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00400,SIGAPON,SGPN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK431,XFLD00341,PENIAN CONRAD,PNIC,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00036,BEBOLI,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00112,E14,E14,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK303A,XFLD00181,H3,H3,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM321,XFLD00307,MG,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK411,XFLD00196,J9,J9,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM327,XFLD00107,DURI,DURI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00427,TAPIR,TPIR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM524,XFLD00389,SENJUANG,SNJG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,N,XFLD00431,TEGUH,TGUH,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK325,XFLD00413,SOUTH LUCONIA,LUCS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM6&PM12,XFLD00044,BERANANG NORTH WEST,BNNW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,5E,XFLD00062,BUAH NAGA,BNGA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00262,LAMBIDAN,LMBD,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB405,XFLD00327,NYMPHE SOUTH,NYMS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM309,XFLD00274,LEDANG TIMUR,LDTM,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM8E,XFLD00360,RAYA,RAYA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,N,XFLD00446,TODAK,TDAK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00235,KIMANIS,KMNS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK309,XFLD00089,CONGKAK,COGK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00254,KURAU MARINE,KRMR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM407,XFLD00317,NIPAH,NIPH,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB405,XFLD00293,MAGPIE WEST,MGPW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00139,F1N,F1N,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00440,TIMBALAI,TBLI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK309,XFLD00461,WEST PATRICIA,PATW,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK438,XFLD00414,SOUTH PARSONS,PARS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK315,XFLD00079,CEKOR MANIS,CKRM,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK418,XFLD00162,G5,G5,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00220,KAYU MANIS,KYMS,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00127,EHSAN,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,3B,XFLD00223,KEKEK,KEKK,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00125,E8E,E8E,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00250,KUKUSAN,KKSN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00151,F5E,F5E,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00167,GANSAR BASEMENT,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK510,XFLD00013,B1,B1,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB403,XFLD00214,KALUTAN,KLUT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK431,XFLD00035,BAWAN,BWAN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,R,XFLD00304,MENAWAN,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00136,F18W,F18W,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM419,XFLD00280,LINANG,LING,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK510,XFLD00015,B17,B17,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00176,GHARRAF,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00396,SFBT SLOPE CHANNEL,SFSC,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00009,ANOA STRADDLE,ANOA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00228,KERAMAN,KRMN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00115,E19,E19,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,3B,XFLD00334,PAUS KELASA,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM318,XFLD00354,PUTERA,PTRA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM415,XFLD00356,RAJAH,RJAH,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00272,LEDANG ANOA,LEDA,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00281,LIWAGU,LWGU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00378,SAPULUT,SAPT,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM320,XFLD00311,MSS,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00025,BANGAU,BNGU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,N,XFLD00206,JUJUR,JJUR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00091,D11,D11,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00425,TANAH MERAH,TNMR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK306,XFLD00191,J16,J16,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00050,BILIT,BILI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,WL4-00,XFLD00257,L5,L5,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB405,XFLD00231,KERUPANG,KRPG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00177,GORDON,GRDN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00144,F24,F24,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK407,XFLD00405,SIWA NORTH,SIWN,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,,XFLD00007,ANDING UTARA,ANDU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,,XFLD00027,BARAM DEEP,BARD,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00074,BURI,BURI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK320,XFLD00161,G3,G3,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,BALINGIAN,XFLD00096,D51,D51,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK313,XFLD00289,M8,M8,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK418,XFLD00353,PUTAT,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00219,KASTURI,KSTR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00067,BUNDI,BUDI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM335,XFLD00267,LARUT LIKU,LARL,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK324,XFLD00087,COCHRANE,COCR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00325,NOSONG DEEP,NSND,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,2A,XFLD00313,MULU,MULU,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK316,XFLD00245,KUANG,KUAG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00120,E4E,E4E,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,,XFLD00450,TRUS MADI,TMAD,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB409,XFLD00367,RIZAL,RZAL,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00106,DUDAR,DUDR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,MLNG,XFLD00134,F13,,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,4E,XFLD00337,PELANGI,PLGI,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,SB412,XFLD00298,MANGALUM,MNGM,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00333,PASIR,PSIR,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SB,,XFLD00212,KAKAP,KKAP,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,,,XFLD00021,BAKARANG,BKRG,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK431,XFLD00439,TERES,TRES,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,SEPAT OIL,XFLD00392,SEPAT BARAT,SPAB,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,SK,SK433,XFLD00028,BARAM LAND,BARL,Data Mastering Service,,,,Inactive,INTERNAL USE
+Master,Malaysia,PM,PM515,FLD10350,JELAWAI,JELI,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+Master,Malaysia,PM,RAJA CLUSTER,FLD0045,ARA,ARA,Data Mastering Service,,,Fields economic above cut off (Reporting in ARPR 1.1.2024),Active,INTERNAL USE
+,,,,,PISANG,,,,,,,
+,,,,,CIKU,,,,,,,
+,,,,,DURIAN,,,,,,,
+,,,,,MAGGIS,,,,,,,
+,,,,,ANGGUR,,,,,,,
+,,,,,DELIMA,,,,,,,
+,,,,,JAMBU,,,,,,,
+,,,,,LIMAU,,,,,,,
+,,,,,JAGUNG,,,,,,,
+,,,,,KURMA,,,,,,,

@@ -133,17 +133,6 @@ export default function Score({ projectId, onDatasetCreated, isViewer = false, i
         const headers = Object.keys(rows[0]);
         setUploadedData({ headers, rows });
         setDatasetId(dsId);
-
-        try {
-          const existingResults = await apiClient.getQualityResults(dsId) as QualityCheckResult[];
-          if (existingResults && existingResults.length > 0) {
-            setCurrentStep('results');
-            return;
-          }
-        } catch {
-          // fall through to configure
-        }
-
         setCurrentStep('configure');
       } else {
         setCurrentStep('upload');
