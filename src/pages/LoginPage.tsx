@@ -31,9 +31,9 @@ export default function LoginPage() {
           {/* Header banner */}
           <div className="bg-gradient-to-r from-teal-700 via-teal-600 to-emerald-500 px-8 py-8 text-center">
             <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center mx-auto mb-4 shadow-md overflow-hidden">
-              <img src="/dataqualityplus.png" alt="Data Quality Plus" className="w-full h-full object-contain" />
+              <img src="/dataqualityplus.png" alt="Quality Plus" className="w-full h-full object-contain" />
             </div>
-            <h1 className="text-xl font-bold text-white">Data Quality Plus</h1>
+            <h1 className="text-xl font-bold text-white">Quality Plus</h1>
             <p className="text-teal-100 text-sm mt-1">AEM Energy Solutions</p>
           </div>
 

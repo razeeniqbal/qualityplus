@@ -1,13 +1,12 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import UploadInterface from '../components/UploadInterface';
 import DataPreview from '../components/DataPreview';
 import QualityConfiguration from '../components/QualityConfiguration';
 import ResultsView from '../components/ResultsView';
 import { apiClient } from '../lib/api-client';
 import type { QualityCheckResult } from '../components/QualityConfiguration';
-import type { QualityScore } from '../types/database';
 import { useUser } from '../contexts/UserContext';
-import { FileText, ChevronDown, BookMarked, Trash2, BarChart2, Eye } from 'lucide-react';
+import { FileText, ChevronDown } from 'lucide-react';
 
 type ScoreStep = 'upload' | 'configure' | 'results';
 
@@ -30,9 +29,11 @@ interface ScoreProps {
   isViewer?: boolean;
   /** pre-select this dataset when the tab loads (e.g. synced from Records tab) */
   initialDatasetId?: string | null;
+  /** called after a quality score is saved successfully */
+  onPublished?: () => void;
 }
 
-export default function Score({ projectId, onDatasetCreated, isViewer = false, initialDatasetId }: ScoreProps) {
+export default function Score({ projectId, onDatasetCreated, isViewer = false, initialDatasetId, onPublished }: ScoreProps) {
   const { user } = useUser();
   const [currentStep, setCurrentStep] = useState<ScoreStep>('upload');
   const [uploadedData, setUploadedData] = useState<UploadedData | null>(null);
@@ -45,13 +46,6 @@ export default function Score({ projectId, onDatasetCreated, isViewer = false, i
   const [datasets, setDatasets] = useState<Dataset[]>([]);
   const [selectedDatasetId, setSelectedDatasetId] = useState<string | null>(null);
 
-  // Quality Result Scores
-  const [qualityScores, setQualityScores] = useState<QualityScore[]>([]);
-  const [qualityScoresLoading, setQualityScoresLoading] = useState(false);
-  const [deletingScoreId, setDeletingScoreId] = useState<string | null>(null);
-  // Result Score being viewed (read-only results mode)
-  const [viewingScore, setViewingScore] = useState<QualityScore | null>(null);
-  const [scoreLoading, setScoreLoading] = useState(false);
 
   useEffect(() => {
     if (projectId) {
@@ -79,25 +73,7 @@ export default function Score({ projectId, onDatasetCreated, isViewer = false, i
     }
   }, [selectedDatasetId, isViewer]);
 
-  // Load result scores whenever the active dataset changes
-  const loadQualityScores = useCallback(async (dsId: string) => {
-    setQualityScoresLoading(true);
-    try {
-      const data = await apiClient.getQualityScores(dsId) as QualityScore[];
-      setQualityScores(data || []);
-    } catch (err) {
-      console.error('Error loading quality result scores:', err);
-    } finally {
-      setQualityScoresLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (datasetId) loadQualityScores(datasetId);
-    else setQualityScores([]);
-  }, [datasetId, loadQualityScores]);
-
-  async function loadDatasets(projId: string) {
+async function loadDatasets(projId: string) {
     setLoading(true);
     try {
       const ds = await apiClient.getProjectDatasets(projId) as Dataset[];
@@ -123,7 +99,6 @@ export default function Score({ projectId, onDatasetCreated, isViewer = false, i
     setUploadedData(null);
     setDatasetId(null);
     setExecutionResults(null);
-    setViewingScore(null);
     try {
       const rows = await apiClient.previewDataset(dsId, 10000) as Record<string, string>[];
 
@@ -149,7 +124,6 @@ export default function Score({ projectId, onDatasetCreated, isViewer = false, i
 
   async function handleDatasetChange(dsId: string) {
     setSelectedDatasetId(dsId);
-    setViewingScore(null);
     if (!isViewer) {
       setCurrentStep('configure');
       setExecutionResults(null);
@@ -169,33 +143,6 @@ export default function Score({ projectId, onDatasetCreated, isViewer = false, i
     setCurrentStep('results');
   }
 
-  async function handleDeleteScore(scoreId: string) {
-    if (!window.confirm('Delete this result score? This cannot be undone.')) return;
-    setDeletingScoreId(scoreId);
-    try {
-      await apiClient.deleteQualityScore(scoreId);
-      setQualityScores(prev => prev.filter(s => s.id !== scoreId));
-      if (viewingScore?.id === scoreId) setViewingScore(null);
-    } catch (err) {
-      console.error('Failed to delete result score:', err);
-      alert('Failed to delete result score. Please try again.');
-    } finally {
-      setDeletingScoreId(null);
-    }
-  }
-
-  async function handleViewScore(score: QualityScore) {
-    setScoreLoading(true);
-    try {
-      const full = await apiClient.getQualityScore(score.id) as QualityScore;
-      setViewingScore(full);
-    } catch (err) {
-      console.error('Failed to load result score:', err);
-      alert('Failed to load result score details.');
-    } finally {
-      setScoreLoading(false);
-    }
-  }
 
   const selectedDataset = datasets.find(d => d.id === selectedDatasetId);
 
@@ -209,11 +156,10 @@ export default function Score({ projectId, onDatasetCreated, isViewer = false, i
 
   return (
     <div className="space-y-4">
-      {/* Dataset selector + quality result scores list */}
+      {/* Dataset selector */}
       {projectId && datasets.length > 0 && (
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          {/* Dropdown row */}
-          <div className="px-6 py-4 border-b border-slate-100">
+          <div className="px-6 py-4">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-sm font-medium text-slate-700 flex-shrink-0">
                 <FileText className="w-4 h-4 text-teal-600" />
@@ -240,99 +186,11 @@ export default function Score({ projectId, onDatasetCreated, isViewer = false, i
               )}
             </div>
           </div>
-
-          {/* Quality Result Scores — inside the same card, below dropdown */}
-          <div>
-            <div className="px-6 py-3 flex items-center gap-2 border-b border-slate-100 bg-slate-50">
-              <BookMarked className="w-4 h-4 text-teal-600" />
-              <span className="text-sm font-semibold text-slate-700">Quality Result Scores</span>
-              {qualityScores.length > 0 && (
-                <span className="text-xs bg-teal-100 text-teal-700 font-semibold px-2 py-0.5 rounded-full">
-                  {qualityScores.length}
-                </span>
-              )}
-            </div>
-
-            {qualityScoresLoading ? (
-              <div className="px-6 py-6 text-center text-slate-400 text-sm">
-                <div className="animate-spin w-5 h-5 border-2 border-teal-500 border-t-transparent rounded-full mx-auto mb-2" />
-                Loading result scores...
-              </div>
-            ) : qualityScores.length === 0 ? (
-              <div className="px-6 py-6 text-center text-slate-400">
-                <p className="text-sm font-medium">No result scores saved yet</p>
-                {!isViewer && (
-                  <p className="text-xs mt-1">Run a quality check and click Save to record a result score.</p>
-                )}
-              </div>
-            ) : (
-              <ul className="divide-y divide-slate-100">
-                {qualityScores.map((score) => {
-                  const date = new Date(score.published_at).toLocaleString('en-GB', {
-                    day: '2-digit', month: 'short', year: 'numeric',
-                    hour: '2-digit', minute: '2-digit',
-                  });
-                  const isViewing = viewingScore?.id === score.id;
-                  return (
-                    <li
-                      key={score.id}
-                      className={`flex items-center gap-3 px-6 py-3.5 transition group cursor-pointer ${isViewing ? 'bg-teal-50' : 'hover:bg-slate-50'}`}
-                      onClick={() => handleViewScore(score)}
-                    >
-                      <BarChart2 className={`w-4 h-4 flex-shrink-0 ${isViewing ? 'text-teal-600' : 'text-teal-400'}`} />
-                      <div className="flex-1 min-w-0">
-                        <p className={`text-sm font-semibold truncate ${isViewing ? 'text-teal-700' : 'text-slate-800'}`}>{score.label}</p>
-                        <p className="text-xs text-slate-400 mt-0.5">
-                          {date}{score.published_by ? ` · by ${score.published_by}` : ''}
-                        </p>
-                      </div>
-                      <span className={`text-sm font-bold flex-shrink-0 ${scoreColor(score.overall_score)}`}>
-                        {score.overall_score.toFixed(1)}%
-                      </span>
-                      <Eye className={`w-4 h-4 flex-shrink-0 transition ${isViewing ? 'text-teal-600' : 'text-slate-300 group-hover:text-teal-500'}`} />
-                      {!isViewer && (
-                        <button
-                          onClick={(e) => { e.stopPropagation(); handleDeleteScore(score.id); }}
-                          disabled={deletingScoreId === score.id}
-                          className="flex-shrink-0 p-1 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded transition opacity-0 group-hover:opacity-100 disabled:opacity-50"
-                          title="Delete result score"
-                        >
-                          {deletingScoreId === score.id
-                            ? <div className="w-3.5 h-3.5 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
-                            : <Trash2 className="w-3.5 h-3.5" />
-                          }
-                        </button>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </div>
         </div>
       )}
 
-      {/* Result Score viewer — read-only ResultsView */}
-      {viewingScore && (
-        <ResultsView
-          datasetId={viewingScore.dataset_id}
-          datasetName={selectedDataset?.name}
-          initialResults={viewingScore.results as unknown as QualityCheckResult[]}
-          onBack={() => setViewingScore(null)}
-          readOnly
-        />
-      )}
-
-      {/* Result Score loading spinner */}
-      {scoreLoading && (
-        <div className="text-center py-10 bg-white rounded-lg shadow-md">
-          <div className="animate-spin w-8 h-8 border-4 border-teal-600 border-t-transparent rounded-full mx-auto mb-3" />
-          <p className="text-slate-500 text-sm">Loading result score...</p>
-        </div>
-      )}
-
-      {/* Step content — hidden for viewers and when viewing a result score */}
-      {!isViewer && !viewingScore && (
+      {/* Step content */}
+      {!isViewer && (
         <>
           {loading && (
             <div className="text-center py-20 bg-white rounded-lg shadow-md">
@@ -342,7 +200,19 @@ export default function Score({ projectId, onDatasetCreated, isViewer = false, i
           )}
 
           {!loading && currentStep === 'upload' && (
-            <UploadInterface onDataUploaded={handleDataUploaded} />
+            projectId && datasets.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-20 bg-white rounded-lg shadow-md text-center px-6">
+                <div className="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center mb-4">
+                  <FileText className="w-7 h-7 text-slate-400" />
+                </div>
+                <h3 className="text-base font-semibold text-slate-700 mb-1">No dataset uploaded yet</h3>
+                <p className="text-sm text-slate-400 max-w-xs">
+                  Go to the <span className="font-semibold text-teal-600">Data Records</span> tab to upload a dataset first, then come back here to run a quality check.
+                </p>
+              </div>
+            ) : (
+              <UploadInterface onDataUploaded={handleDataUploaded} />
+            )
           )}
 
           {!loading && currentStep === 'configure' && uploadedData && datasetId && (
@@ -376,7 +246,7 @@ export default function Score({ projectId, onDatasetCreated, isViewer = false, i
                   })()
                 : undefined}
               onBack={() => setCurrentStep('configure')}
-              onPublished={() => loadQualityScores(datasetId)}
+              onPublished={onPublished}
             />
           )}
         </>

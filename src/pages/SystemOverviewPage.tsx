@@ -423,6 +423,7 @@ interface StackItem {
 }
 
 const stackItems: StackItem[] = [
+  // ── Frontend (blue) ──────────────────────────────────────────────────────
   {
     name: 'React', version: '18.3', category: 'Frontend', role: 'UI Framework', color: 'blue',
     icon: <Layout className="w-5 h-5" />,
@@ -436,59 +437,31 @@ const stackItems: StackItem[] = [
     docsUrl: 'https://react.dev',
   },
   {
-    name: 'TypeScript', version: '5.5', category: 'Frontend', role: 'Type-safe JavaScript', color: 'indigo',
+    name: 'TypeScript', version: '5.5', category: 'Frontend', role: 'Frontend · Type-safe JavaScript', color: 'blue',
     icon: <Code2 className="w-5 h-5" />,
-    why: 'Catches bugs at compile time rather than runtime, and makes refactoring across a large codebase safe.',
+    why: 'Used on the frontend only — catches bugs at compile time and makes refactoring safe. The backend is handled entirely by Supabase (PostgreSQL), not Node/TypeScript.',
     bullets: [
-      'Strict mode — no implicit any, strictNullChecks enabled',
+      'Frontend only — Supabase replaces any backend TypeScript/Node server',
+      'Strict mode: no implicit any, strictNullChecks enabled throughout',
       'All Supabase response shapes typed via interfaces in src/types/database.ts',
       'Component props fully typed so misuse is caught immediately in the IDE',
-      'API client methods return typed data, eliminating guesswork on the frontend',
     ],
     docsUrl: 'https://www.typescriptlang.org',
   },
   {
-    name: 'Vite', version: '5.4', category: 'Toolchain', role: 'Build Tool & Dev Server', color: 'purple',
-    icon: <Zap className="w-5 h-5" />,
-    why: 'Near-instant dev server startup and hot module replacement — no waiting for full rebuilds.',
-    bullets: [
-      'ESM-based dev server starts in milliseconds regardless of project size',
-      'Hot Module Replacement (HMR) updates only the changed module in-browser',
-      'Production build is code-split and tree-shaken via Rollup under the hood',
-      'Environment variables prefixed with VITE_ are injected at build time (Supabase keys)',
-      'Static assets in /public/ are served at the root URL unchanged',
-    ],
-    docsUrl: 'https://vitejs.dev',
-  },
-  {
-    name: 'Tailwind CSS', version: '3.4', category: 'Frontend', role: 'Styling', color: 'teal',
+    name: 'Tailwind CSS', version: '3.4', category: 'Frontend', role: 'Styling', color: 'blue',
     icon: <Layers className="w-5 h-5" />,
     why: 'Utility-first approach eliminates context-switching between CSS files and JSX, and enforces a consistent design system.',
     bullets: [
       'No custom stylesheet files — all styles are inline utility classes',
       'Teal → emerald brand palette applied consistently across headers, buttons, and accents',
       'Responsive layout with container, grid, and flex utilities',
-      'Dark variants and hover/focus states handled declaratively in JSX',
       'PurgeCSS in production removes unused classes — final bundle is tiny',
     ],
     docsUrl: 'https://tailwindcss.com',
   },
   {
-    name: 'Supabase', category: 'Backend', role: 'Backend-as-a-Service', color: 'emerald',
-    icon: <Database className="w-5 h-5" />,
-    why: 'Replaces a custom REST server entirely — PostgREST auto-generates a full REST API from the database schema.',
-    bullets: [
-      'PostgreSQL 15 — relational DB with JSONB support for dataset row storage',
-      'PostgREST: every table gets auto-generated REST endpoints (select, insert, update, delete)',
-      'Row Level Security (RLS) policies enforce access control at the DB layer',
-      'Supabase Storage bucket (project-icons) stores uploaded project icon images',
-      'Edge Functions (Deno runtime) power the MSSQL proxy — credentials never stored server-side',
-      'supabase-js v2 SDK handles auth token injection on every request automatically',
-    ],
-    docsUrl: 'https://supabase.com',
-  },
-  {
-    name: 'Lucide React', version: '0.344', category: 'Frontend', role: 'Icon Library', color: 'orange',
+    name: 'Lucide React', version: '0.344', category: 'Frontend', role: 'Icon Library', color: 'blue',
     icon: <Package className="w-5 h-5" />,
     why: 'Consistent, clean SVG icon set that is tree-shakeable — only imported icons end up in the bundle.',
     bullets: [
@@ -498,8 +471,46 @@ const stackItems: StackItem[] = [
     ],
     docsUrl: 'https://lucide.dev',
   },
+  // ── Backend (emerald) ────────────────────────────────────────────────────
   {
-    name: 'Vitest', version: '1.0', category: 'Toolchain', role: 'Testing Framework', color: 'yellow',
+    name: 'Supabase', category: 'Backend', role: 'Backend-as-a-Service', color: 'emerald',
+    icon: <Database className="w-5 h-5" />,
+    why: 'Acts as the entire backend — PostgreSQL database + auto-generated REST API + auth + storage, with no custom server needed.',
+    bullets: [
+      'PostgreSQL 15 — relational DB with JSONB support for dataset row storage',
+      'PostgREST: every table gets auto-generated REST endpoints (select, insert, update, delete)',
+      'Row Level Security (RLS) policies enforce access control at the DB layer',
+      'Supabase Storage bucket stores uploaded project icon images',
+      'supabase-js v2 SDK handles auth token injection on every request automatically',
+    ],
+    docsUrl: 'https://supabase.com',
+  },
+  {
+    name: 'Direct DB Connector', category: 'Backend', role: 'Planned · Database Integration', color: 'emerald',
+    icon: <Database className="w-5 h-5" />,
+    why: 'Allows users to connect live databases directly instead of uploading CSV files — eliminating manual export/import workflows.',
+    bullets: [
+      'Support for PostgreSQL, MySQL, MSSQL, and other common engines',
+      'Supabase Edge Functions will proxy connections — credentials never stored in the app',
+      'Schema introspection to auto-map columns to quality dimensions',
+      'Scheduled quality checks against live database tables',
+    ],
+  },
+  // ── Toolchain (purple) ───────────────────────────────────────────────────
+  {
+    name: 'Vite', version: '5.4', category: 'Toolchain', role: 'Build Tool & Dev Server', color: 'purple',
+    icon: <Zap className="w-5 h-5" />,
+    why: 'Near-instant dev server startup and hot module replacement — no waiting for full rebuilds.',
+    bullets: [
+      'ESM-based dev server starts in milliseconds regardless of project size',
+      'Hot Module Replacement (HMR) updates only the changed module in-browser',
+      'Production build is code-split and tree-shaken via Rollup under the hood',
+      'Environment variables prefixed with VITE_ are injected at build time (Supabase keys)',
+    ],
+    docsUrl: 'https://vitejs.dev',
+  },
+  {
+    name: 'Vitest', version: '1.0', category: 'Toolchain', role: 'Testing Framework', color: 'purple',
     icon: <CheckCircle2 className="w-5 h-5" />,
     why: 'Jest-compatible API that runs natively inside Vite — no separate test bundler configuration needed.',
     bullets: [
@@ -507,7 +518,6 @@ const stackItems: StackItem[] = [
       'Jest-compatible API: describe, it, expect, vi.mock work as expected',
       'jsdom environment for DOM testing of React components',
       'Coverage reporting via @vitest/coverage-v8 (built on Node\'s V8 coverage)',
-      'Watch mode re-runs only affected tests on file change',
     ],
     docsUrl: 'https://vitest.dev',
   },
@@ -515,12 +525,8 @@ const stackItems: StackItem[] = [
 
 const SC: Record<string, { bg: string; border: string; text: string; badge: string; header: string }> = {
   blue:    { bg: 'bg-blue-50',    border: 'border-blue-200',    text: 'text-blue-700',    badge: 'bg-blue-100 text-blue-700',    header: 'bg-blue-600'    },
-  indigo:  { bg: 'bg-indigo-50',  border: 'border-indigo-200',  text: 'text-indigo-700',  badge: 'bg-indigo-100 text-indigo-700',  header: 'bg-indigo-600'  },
-  purple:  { bg: 'bg-purple-50',  border: 'border-purple-200',  text: 'text-purple-700',  badge: 'bg-purple-100 text-purple-700',  header: 'bg-purple-600'  },
-  teal:    { bg: 'bg-teal-50',    border: 'border-teal-200',    text: 'text-teal-700',    badge: 'bg-teal-100 text-teal-700',    header: 'bg-teal-600'    },
   emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700', badge: 'bg-emerald-100 text-emerald-700', header: 'bg-emerald-600' },
-  orange:  { bg: 'bg-orange-50',  border: 'border-orange-200',  text: 'text-orange-700',  badge: 'bg-orange-100 text-orange-700',  header: 'bg-orange-500'  },
-  yellow:  { bg: 'bg-yellow-50',  border: 'border-yellow-200',  text: 'text-yellow-700',  badge: 'bg-yellow-100 text-yellow-700',  header: 'bg-yellow-500'  },
+  purple:  { bg: 'bg-purple-50',  border: 'border-purple-200',  text: 'text-purple-700',  badge: 'bg-purple-100 text-purple-700',  header: 'bg-purple-600'  },
 };
 
 const CATEGORIES = ['All', 'Frontend', 'Backend', 'Toolchain'];
@@ -631,12 +637,32 @@ export default function SystemOverviewPage() {
         </div>
         <div>
           <h1 className="text-2xl font-bold text-slate-800">System Overview</h1>
-          <p className="text-sm text-slate-500">Framework capabilities · Technology stack</p>
+          <p className="text-sm text-slate-500">Framework capabilities · Technology stack · Planned features</p>
         </div>
         <span className="ml-auto flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-600 text-xs font-semibold rounded-full border border-slate-200">
           <Shield className="w-3.5 h-3.5" />
           Admin Only
         </span>
+      </div>
+
+      {/* Recent changes banner */}
+      <div className="bg-teal-50 border border-teal-200 rounded-xl px-5 py-4 space-y-2">
+        <p className="text-xs font-bold uppercase tracking-widest text-teal-600">Recent Updates</p>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1.5">
+          {[
+            { label: 'Nav renamed', detail: '"Configuration" → "Rules Settings"' },
+            { label: 'Project tab renamed', detail: '"Quality Score" → "Configuration"' },
+            { label: 'New tab', detail: '"Result Scores" — view all saved quality scores' },
+            { label: 'Result Scores', detail: 'Dataset filter + full detail view with row drill-down' },
+            { label: 'Add Dataset', detail: '"Connect to Database" option added (Coming Soon)' },
+            { label: 'Branding', detail: '"Data Quality Plus" → "Quality Plus"' },
+          ].map(item => (
+            <li key={item.label} className="flex items-start gap-2 text-xs">
+              <CheckCircle2 className="w-3.5 h-3.5 text-teal-500 flex-shrink-0 mt-0.5" />
+              <span><span className="font-semibold text-slate-700">{item.label}:</span> <span className="text-slate-500">{item.detail}</span></span>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* Tabs */}

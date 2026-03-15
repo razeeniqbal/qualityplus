@@ -45,10 +45,10 @@ function AppContent() {
               className="flex items-center space-x-3 hover:opacity-80 transition"
             >
               <div className="w-10 h-10 rounded overflow-hidden flex items-center justify-center">
-                <img src="/dataqualityplus.png" alt="Data Quality Plus" className="w-full h-full object-contain" />
+                <img src="/dataqualityplus.png" alt="Quality Plus" className="w-full h-full object-contain" />
               </div>
               <div className="text-left">
-                <h1 className="text-xl font-bold">Data Quality Plus</h1>
+                <h1 className="text-xl font-bold">Quality Plus</h1>
                 <p className="text-xs text-teal-100">AEM ENERGY SOLUTIONS</p>
               </div>
             </button>
@@ -137,7 +137,7 @@ function AppContent() {
               }`}
             >
               <Settings className="w-5 h-5" />
-              <span className="font-medium">Configuration</span>
+              <span className="font-medium">Rules Settings</span>
             </button>
             <button
               onClick={() => setCurrentPage('guide')}

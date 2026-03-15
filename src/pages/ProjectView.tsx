@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Table2, Target, FileText, Plus, Upload, X, Search, ChevronDown, ChevronRight, FilterX, Info, Pencil, Trash2, Settings, BookMarked, BarChart2 } from 'lucide-react';
+import { ArrowLeft, Table2, Target, FileText, Plus, Upload, X, Search, ChevronDown, ChevronRight, FilterX, Info, Pencil, Trash2, Settings, BookMarked, BarChart2, Eye, Loader2 } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import { useUser } from '../contexts/UserContext';
 import Records from './Records';
 import Score from './Score';
+import ResultsView from '../components/ResultsView';
 import ProjectSettingsPanel from '../components/ProjectSettingsPanel';
 import type { ProjectUserRole, QualityScore } from '../types/database';
+import type { QualityCheckResult } from '../components/QualityConfiguration';
 
-type ProjectTab = 'records' | 'score';
+type ProjectTab = 'records' | 'score' | 'results';
 
 interface Dataset {
   id: string;
@@ -53,6 +55,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
 
   // Add dataset modal
   const [showAddDataset, setShowAddDataset] = useState(false);
+  const [addDatasetSource, setAddDatasetSource] = useState<'upload' | 'database'>('upload');
   const [addFile, setAddFile] = useState<File | null>(null);
   const [addDatasetName, setAddDatasetName] = useState('');
   const [addDatasetDescription, setAddDatasetDescription] = useState('');
@@ -69,6 +72,13 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
   const [detailScores, setDetailScores] = useState<QualityScore[]>([]);
   const [detailScoresLoading, setDetailScoresLoading] = useState(false);
   const [deletingDetailScoreId, setDeletingDetailScoreId] = useState<string | null>(null);
+
+  // Results tab — all scores across all datasets
+  const [allScores, setAllScores] = useState<(QualityScore & { datasetName: string })[]>([]);
+  const [allScoresLoading, setAllScoresLoading] = useState(false);
+  const [viewingScore, setViewingScore] = useState<(QualityScore & { datasetName: string }) | null>(null);
+  const [viewingScoreLoading, setViewingScoreLoading] = useState(false);
+  const [resultsDatasetFilter, setResultsDatasetFilter] = useState<string>('all');
 
   // (inline rename removed — now handled via detail modal)
 
@@ -117,10 +127,27 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
       const ds = await apiClient.getProjectDatasets(projectId) as Dataset[];
       setDatasets(ds || []);
       if (ds && ds.length > 0) setSelectedDatasetId(ds[0].id);
+      loadAllScores(ds || []);
     } catch (error) {
       console.error('Error loading project:', error);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function loadAllScores(ds: Dataset[]) {
+    setAllScoresLoading(true);
+    try {
+      const all = await Promise.all(
+        ds.map(d => apiClient.getQualityScores(d.id).then(scores =>
+          (scores as QualityScore[]).map(s => ({ ...s, datasetName: d.name }))
+        ))
+      );
+      setAllScores(all.flat().sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime()));
+    } catch (err) {
+      console.error('Error loading all scores:', err);
+    } finally {
+      setAllScoresLoading(false);
     }
   }
 
@@ -380,7 +407,15 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
               activeTab === 'score' ? 'border-teal-600 text-teal-700' : 'border-transparent text-slate-600 hover:text-slate-800'
             }`}
           >
-            <Target className="w-4 h-4" /><span>Quality Score</span>
+            <Target className="w-4 h-4" /><span>Configuration</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('results')}
+            className={`flex items-center space-x-2 px-6 py-4 font-medium transition border-b-2 ${
+              activeTab === 'results' ? 'border-teal-600 text-teal-700' : 'border-transparent text-slate-600 hover:text-slate-800'
+            }`}
+          >
+            <BookMarked className="w-4 h-4" /><span>Result Scores</span>
           </button>
         </div>
       </div>
@@ -643,7 +678,97 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
           projectId={projectId}
           isViewer={currentUserRole === 'viewer'}
           initialDatasetId={selectedDatasetId}
+          onPublished={() => loadAllScores(datasets)}
         />
+      )}
+
+      {activeTab === 'results' && (
+        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          {viewingScoreLoading ? (
+            <div className="flex items-center justify-center py-16 gap-3 text-slate-400">
+              <Loader2 className="w-5 h-5 animate-spin" />
+              <span className="text-sm">Loading result details...</span>
+            </div>
+          ) : viewingScore ? (
+            /* ── Viewing a saved score — full ResultsView in read-only mode ── */
+            <ResultsView
+              datasetId={viewingScore.dataset_id}
+              datasetName={viewingScore.datasetName}
+              publishedBy={viewingScore.published_by ?? undefined}
+              initialResults={viewingScore.results as unknown as QualityCheckResult[]}
+              onBack={() => setViewingScore(null)}
+              readOnly
+            />
+          ) : allScoresLoading ? (
+            <div className="flex items-center justify-center py-16 gap-3 text-slate-400">
+              <Loader2 className="w-5 h-5 animate-spin" />
+              <span className="text-sm">Loading result scores...</span>
+            </div>
+          ) : allScores.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-20 text-center px-6">
+              <div className="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center mb-4">
+                <BookMarked className="w-7 h-7 text-slate-400" />
+              </div>
+              <h3 className="text-base font-semibold text-slate-700 mb-1">No result scores yet</h3>
+              <p className="text-sm text-slate-400 max-w-xs">Go to the <span className="font-semibold text-teal-600">Configuration</span> tab, run a check, and save it to record a result score.</p>
+            </div>
+          ) : (
+            <div>
+              <div className="px-6 py-4 border-b border-slate-100 bg-slate-50 flex items-center gap-3">
+                <BookMarked className="w-4 h-4 text-teal-600" />
+                <span className="text-sm font-semibold text-slate-700">All Result Scores</span>
+                <span className="text-xs bg-teal-100 text-teal-700 font-semibold px-2 py-0.5 rounded-full">
+                  {resultsDatasetFilter === 'all' ? allScores.length : allScores.filter(s => s.dataset_id === resultsDatasetFilter).length}
+                </span>
+                <div className="ml-auto relative">
+                  <select
+                    value={resultsDatasetFilter}
+                    onChange={e => setResultsDatasetFilter(e.target.value)}
+                    className="text-xs border border-slate-200 rounded-lg px-3 py-1.5 pr-7 bg-white text-slate-600 appearance-none focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  >
+                    <option value="all">All Datasets</option>
+                    {datasets.map(d => (
+                      <option key={d.id} value={d.id}>{d.name}</option>
+                    ))}
+                  </select>
+                  <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-400 pointer-events-none" />
+                </div>
+              </div>
+              <ul className="divide-y divide-slate-100">
+                {allScores
+                  .filter(s => resultsDatasetFilter === 'all' || s.dataset_id === resultsDatasetFilter)
+                  .map(score => {
+                    const date = new Date(score.published_at).toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                    const color = score.overall_score === 100 ? 'text-green-600' : score.overall_score >= 75 ? 'text-yellow-600' : score.overall_score >= 50 ? 'text-orange-600' : 'text-red-600';
+                    return (
+                      <li
+                        key={score.id}
+                        className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition cursor-pointer group"
+                        onClick={async () => {
+                          setViewingScoreLoading(true);
+                          try {
+                            const full = await apiClient.getQualityScore(score.id);
+                            setViewingScore({ ...full, datasetName: score.datasetName } as QualityScore & { datasetName: string });
+                          } finally {
+                            setViewingScoreLoading(false);
+                          }
+                        }}
+                      >
+                        <BarChart2 className="w-4 h-4 text-teal-400 flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-slate-800 truncate">{score.label}</p>
+                          <p className="text-xs text-slate-400 mt-0.5">{date}{score.published_by ? ` · by ${score.published_by}` : ''}</p>
+                        </div>
+                        <span className="text-[11px] text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full flex-shrink-0">{score.datasetName}</span>
+                        <span className={`text-base font-bold flex-shrink-0 ${color}`}>{score.overall_score.toFixed(1)}%</span>
+                        <Eye className="w-4 h-4 text-slate-300 group-hover:text-teal-500 transition flex-shrink-0" />
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          )}
+        </div>
       )}
 
       {/* ── Dataset Detail Modal ── */}
@@ -866,79 +991,119 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
               </button>
             </div>
             <div className="p-6 space-y-4">
-              {/* Dataset name — required */}
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Dataset Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter a name for this dataset"
-                  value={addDatasetName}
-                  onChange={e => setAddDatasetName(e.target.value)}
-                  className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm ${
-                    addDatasetName.trim() === '' && addFile ? 'border-red-300 bg-red-50' : 'border-slate-300'
+              {/* Source toggle */}
+              <div className="flex gap-2 p-1 bg-slate-100 rounded-lg">
+                <button
+                  onClick={() => setAddDatasetSource('upload')}
+                  className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition ${
+                    addDatasetSource === 'upload' ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'
                   }`}
-                  autoFocus
-                />
-                {addDatasetName.trim() === '' && addFile && (
-                  <p className="text-xs text-red-500 mt-1">Dataset name is required</p>
-                )}
+                >
+                  <Upload className="w-4 h-4" /> Upload CSV
+                </button>
+                <button
+                  onClick={() => setAddDatasetSource('database')}
+                  className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition ${
+                    addDatasetSource === 'database' ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+                  }`}
+                >
+                  <Settings className="w-4 h-4" /> Connect to Database
+                </button>
               </div>
-              {/* Description — optional */}
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Description <span className="text-slate-400 font-normal">(optional)</span>
-                </label>
-                <textarea
-                  placeholder="Brief description of this dataset"
-                  value={addDatasetDescription}
-                  onChange={e => setAddDatasetDescription(e.target.value)}
-                  rows={2}
-                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm resize-none"
-                />
-              </div>
-              {/* Drop zone */}
-              <div
-                onDragEnter={handleDragEnter}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-                onClick={() => document.getElementById('add-dataset-file')?.click()}
-                className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition ${
-                  isDragging ? 'border-teal-500 bg-teal-50'
-                  : addFile ? 'border-teal-400 bg-teal-50'
-                  : 'border-slate-300 hover:border-slate-400'
-                }`}
-              >
-                {addFile ? (
-                  <div className="flex flex-col items-center space-y-1">
-                    <FileText className="w-8 h-8 text-teal-600" />
-                    <p className="font-medium text-slate-800 text-sm truncate max-w-full px-2" title={addFile.name}>{addFile.name}</p>
-                    <p className="text-xs text-slate-500">{(addFile.size / 1024).toFixed(1)} KB — click to change</p>
+
+              {addDatasetSource === 'upload' ? (
+                <>
+                  {/* Dataset name — required */}
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                      Dataset Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Enter a name for this dataset"
+                      value={addDatasetName}
+                      onChange={e => setAddDatasetName(e.target.value)}
+                      className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm ${
+                        addDatasetName.trim() === '' && addFile ? 'border-red-300 bg-red-50' : 'border-slate-300'
+                      }`}
+                      autoFocus
+                    />
+                    {addDatasetName.trim() === '' && addFile && (
+                      <p className="text-xs text-red-500 mt-1">Dataset name is required</p>
+                    )}
                   </div>
-                ) : (
-                  <div className="flex flex-col items-center space-y-1">
-                    <Upload className="w-8 h-8 text-slate-400" />
-                    <p className="text-sm text-slate-600"><span className="text-teal-600 font-semibold">Browse</span> or drag & drop</p>
-                    <p className="text-xs text-slate-400">CSV files only</p>
+                  {/* Description — optional */}
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                      Description <span className="text-slate-400 font-normal">(optional)</span>
+                    </label>
+                    <textarea
+                      placeholder="Brief description of this dataset"
+                      value={addDatasetDescription}
+                      onChange={e => setAddDatasetDescription(e.target.value)}
+                      rows={2}
+                      className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm resize-none"
+                    />
                   </div>
-                )}
-                <input id="add-dataset-file" type="file" accept=".csv" className="hidden"
-                  onChange={(e) => { const f = e.target.files?.[0]; if (f) setAddFile(f); }} />
-              </div>
+                  {/* Drop zone */}
+                  <div
+                    onDragEnter={handleDragEnter}
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                    onClick={() => document.getElementById('add-dataset-file')?.click()}
+                    className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition ${
+                      isDragging ? 'border-teal-500 bg-teal-50'
+                      : addFile ? 'border-teal-400 bg-teal-50'
+                      : 'border-slate-300 hover:border-slate-400'
+                    }`}
+                  >
+                    {addFile ? (
+                      <div className="flex flex-col items-center space-y-1">
+                        <FileText className="w-8 h-8 text-teal-600" />
+                        <p className="font-medium text-slate-800 text-sm truncate max-w-full px-2" title={addFile.name}>{addFile.name}</p>
+                        <p className="text-xs text-slate-500">{(addFile.size / 1024).toFixed(1)} KB — click to change</p>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center space-y-1">
+                        <Upload className="w-8 h-8 text-slate-400" />
+                        <p className="text-sm text-slate-600"><span className="text-teal-600 font-semibold">Browse</span> or drag & drop</p>
+                        <p className="text-xs text-slate-400">CSV files only</p>
+                      </div>
+                    )}
+                    <input id="add-dataset-file" type="file" accept=".csv" className="hidden"
+                      onChange={(e) => { const f = e.target.files?.[0]; if (f) setAddFile(f); }} />
+                  </div>
+                </>
+              ) : (
+                /* Coming Soon panel */
+                <div className="flex flex-col items-center justify-center py-10 text-center space-y-3">
+                  <div className="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center">
+                    <Settings className="w-7 h-7 text-amber-400" />
+                  </div>
+                  <div>
+                    <p className="text-base font-bold text-slate-800">Coming Soon</p>
+                    <p className="text-sm text-slate-400 mt-1 max-w-xs">
+                      Direct database connection support is under development. You'll be able to connect PostgreSQL, MySQL, and more.
+                    </p>
+                  </div>
+                  <span className="text-xs bg-amber-100 text-amber-700 font-semibold px-3 py-1 rounded-full">In Development</span>
+                </div>
+              )}
             </div>
             <div className="flex items-center justify-end space-x-3 px-6 py-4 border-t border-slate-200">
-              <button onClick={() => { setShowAddDataset(false); setAddFile(null); setAddDatasetName(''); setAddDatasetDescription(''); }}
+              <button onClick={() => { setShowAddDataset(false); setAddFile(null); setAddDatasetName(''); setAddDatasetDescription(''); setAddDatasetSource('upload'); }}
                 className="px-4 py-2 text-slate-700 border border-slate-300 rounded-lg hover:bg-slate-50 transition text-sm font-medium">
                 Cancel
               </button>
-              <button onClick={handleAddDataset} disabled={!addFile || !addDatasetName.trim() || isAdding}
-                className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
-                {isAdding
-                  ? <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /><span>Uploading...</span></>
-                  : <><Upload className="w-4 h-4" /><span>Upload Dataset</span></>}
-              </button>
+              {addDatasetSource === 'upload' && (
+                <button onClick={handleAddDataset} disabled={!addFile || !addDatasetName.trim() || isAdding}
+                  className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+                  {isAdding
+                    ? <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /><span>Uploading...</span></>
+                    : <><Upload className="w-4 h-4" /><span>Upload Dataset</span></>}
+                </button>
+              )}
             </div>
           </div>
         </div>

@@ -32,6 +32,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
   const [saveLabel, setSaveLabel] = useState('');
   const [trimDataset, setTrimDataset] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [savedToast, setSavedToast] = useState(false);
   const [expandedResult, setExpandedResult] = useState<string | null>(null);
   const [detailFilter, setDetailFilter] = useState<'all' | 'pass' | 'fail'>('all');
@@ -107,6 +108,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
   async function handleSave() {
     const label = saveLabel.trim() || `Run ${new Date().toLocaleString('en-GB')}`;
     setIsSaving(true);
+    setSaveError(null);
     try {
       // Optionally trim dataset to selected columns
       if (trimDataset && selectedColumns && selectedColumns.length > 0) {
@@ -138,7 +140,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
       onPublished?.();
     } catch (err) {
       console.error('Save result score failed:', err);
-      alert('Failed to save result score. Please try again.');
+      setSaveError(err instanceof Error ? err.message : 'Failed to save result score. Please try again.');
     } finally {
       setIsSaving(false);
     }
@@ -259,6 +261,11 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
                 </label>
               )}
             </div>
+            {saveError && (
+              <div className="mx-5 mb-4 px-3 py-2 bg-red-50 border border-red-200 rounded-lg text-xs text-red-600">
+                {saveError}
+              </div>
+            )}
             <div className="flex items-center justify-end gap-3 px-5 py-4 border-t border-slate-200">
               <button
                 onClick={() => setShowSaveModal(false)}

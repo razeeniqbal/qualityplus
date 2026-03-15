@@ -738,7 +738,7 @@ class ApiClient {
   async getQualityScores(datasetId: string) {
     const { data, error } = await supabase
       .from('quality_result_scores')
-      .select('id, dataset_id, label, published_by, overall_score, published_at')
+      .select('id, dataset_id, label, published_by, overall_score, published_at, results')
       .eq('dataset_id', datasetId)
       .order('published_at', { ascending: false });
     if (error) throw new Error(error.message);

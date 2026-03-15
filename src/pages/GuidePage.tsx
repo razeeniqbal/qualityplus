@@ -607,7 +607,7 @@ export default function GuidePage() {
           <h1 className="text-xl font-bold text-slate-800">Quality Dimensions Guide</h1>
           <p className="text-sm text-slate-500 mt-0.5 max-w-2xl">
             Learn how each of the 4 quality dimensions works in{' '}
-            <span className="font-semibold text-teal-700">Data Quality Plus</span>.
+            <span className="font-semibold text-teal-700">Quality Plus</span>.
             Click a rule card to expand its configuration steps and sample table.
             Hover table rows to reveal the exact fail reason. Sample data is fictional — it mirrors the OSDU wellbore schema.
           </p>
