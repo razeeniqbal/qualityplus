@@ -677,6 +677,82 @@ class ApiClient {
   }
 
   // Quality Result Scores
+
+  /** Inserts a lightweight draft score row (no row details) to get a score_id for n8n immediately */
+  async saveDraftScore(
+    datasetId: string,
+    publishedBy: string,
+    overallScore: number,
+    results: Array<Record<string, unknown>>,
+  ): Promise<string> {
+    const summaryResults = results.map(r => ({
+      id:           r.id,
+      column_name:  r.column_name,
+      dimension:    r.dimension,
+      passed_count: r.passed_count,
+      failed_count: r.failed_count,
+      total_count:  r.total_count,
+      score:        r.score,
+      executed_at:  r.executed_at,
+    }));
+
+    const { data, error } = await supabase
+      .from('quality_result_scores')
+      .insert({
+        dataset_id:    datasetId,
+        label:         'draft',
+        published_by:  publishedBy,
+        overall_score: overallScore,
+        results:       summaryResults,
+        published_at:  new Date().toISOString(),
+      })
+      .select('id')
+      .single();
+    if (error) throw new Error(error.message);
+    return data.id as string;
+  }
+
+  /** Promotes a draft score: updates label + inserts row details */
+  async publishDraftScore(
+    scoreId: string,
+    label: string,
+    results: Array<Record<string, unknown>>,
+  ) {
+    const { error: updateError } = await supabase
+      .from('quality_result_scores')
+      .update({ label })
+      .eq('id', scoreId);
+    if (updateError) throw new Error(updateError.message);
+
+    // Insert per-row details
+    const BATCH = 500;
+    for (const r of results) {
+      const rowDetails = (r.rowDetails as Array<{ rowIndex: number; value: unknown; passed: boolean; reason?: string }>) ?? [];
+      if (rowDetails.length === 0) continue;
+      const resultKey = `${r.column_name}:${r.dimension}`;
+      for (let i = 0; i < rowDetails.length; i += BATCH) {
+        const batch = rowDetails.slice(i, i + BATCH).map(d => ({
+          score_id:   scoreId,
+          result_key: resultKey,
+          row_index:  d.rowIndex,
+          value:      d.value !== null && d.value !== undefined ? String(d.value) : null,
+          passed:     d.passed,
+          reason:     d.reason ?? null,
+        }));
+        const { error: rowErr } = await supabase.from('result_score_rows').insert(batch);
+        if (rowErr) throw new Error(rowErr.message);
+      }
+    }
+
+    const { data, error } = await supabase
+      .from('quality_result_scores')
+      .select('id, dataset_id, label, published_by, overall_score, published_at')
+      .eq('id', scoreId)
+      .single();
+    if (error) throw new Error(error.message);
+    return data;
+  }
+
   async saveQualityScore(
     datasetId: string,
     label: string,
@@ -788,6 +864,24 @@ class ApiClient {
     const { error } = await supabase
       .from('quality_result_scores')
       .delete()
+      .eq('id', scoreId);
+    if (error) throw new Error(error.message);
+  }
+
+  async getAiSummary(scoreId: string): Promise<string | null> {
+    const { data, error } = await supabase
+      .from('quality_result_scores')
+      .select('ai_summary')
+      .eq('id', scoreId)
+      .single();
+    if (error) return null;
+    return (data?.ai_summary as string) ?? null;
+  }
+
+  async saveAiSummary(scoreId: string, summary: string): Promise<void> {
+    const { error } = await supabase
+      .from('quality_result_scores')
+      .update({ ai_summary: summary })
       .eq('id', scoreId);
     if (error) throw new Error(error.message);
   }

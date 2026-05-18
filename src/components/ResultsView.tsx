@@ -3,6 +3,8 @@ import { Download, ArrowLeft, ChevronUp, CheckCircle, XCircle, Eye, Search, Book
 import { apiClient } from '../lib/api-client';
 import type { QualityResult } from '../types/database';
 import type { QualityCheckResult, RowDetail } from './QualityConfiguration';
+import AiSummaryPanel from './AiSummaryPanel';
+import FailedRowsModal from './FailedRowsModal';
 
 interface ResultWithDetails extends QualityResult {
   rowDetails?: RowDetail[];
@@ -19,9 +21,11 @@ interface ResultsViewProps {
   onPublished?: () => void;
   /** When true, hides the Save button (used when viewing a saved result score) */
   readOnly?: boolean;
+  /** Pre-supply the score ID when viewing an already-saved score (Results tab) */
+  savedScoreId?: string;
 }
 
-export default function ResultsView({ datasetId, datasetName, publishedBy, initialResults, selectedColumns, onBack, onPublished, readOnly = false }: ResultsViewProps) {
+export default function ResultsView({ datasetId, datasetName, publishedBy, initialResults, selectedColumns, onBack, onPublished, readOnly = false, savedScoreId: savedScoreIdProp }: ResultsViewProps) {
   const [results, setResults] = useState<ResultWithDetails[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState<'all' | 'pass' | 'fail'>('all');
@@ -34,6 +38,11 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [savedToast, setSavedToast] = useState(false);
+  const [savedScoreId, setSavedScoreId] = useState<string | null>(savedScoreIdProp ?? null);
+
+  // Failed rows modal
+  const [failedRowsModal, setFailedRowsModal] = useState<{ columnName: string; dimension: string } | null>(null);
+
   const [expandedResult, setExpandedResult] = useState<string | null>(null);
   const [detailFilter, setDetailFilter] = useState<'all' | 'pass' | 'fail'>('all');
   const [detailSearch, setDetailSearch] = useState('');
@@ -42,6 +51,24 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { loadResults(); }, [datasetId]);
+
+  // Auto-save a draft score as soon as results are loaded (only when not readOnly and no score yet)
+  useEffect(() => {
+    if (readOnly || savedScoreId || results.length === 0) return;
+    const n8nConfigured = !!import.meta.env.VITE_N8N_WEBHOOK_URL;
+    if (!n8nConfigured) return;
+    apiClient.saveDraftScore(
+      datasetId,
+      publishedBy ?? 'Unknown',
+      results.reduce((sum, r) => sum + r.score, 0) / results.length,
+      results.map(r => ({
+        id: r.id, column_name: r.column_name, dimension: r.dimension,
+        passed_count: r.passed_count, failed_count: r.failed_count,
+        total_count: r.total_count, score: r.score, executed_at: r.executed_at,
+      })),
+    ).then(id => setSavedScoreId(id)).catch(() => {/* silent — AI panel just won't show */});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [results]);
 
   async function loadResults() {
     try {
@@ -115,23 +142,41 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
         await apiClient.trimDatasetColumns(datasetId, selectedColumns);
       }
 
-      await apiClient.saveQualityScore(
-        datasetId,
-        label,
-        publishedBy ?? 'Unknown',
-        overallScore,
-        results.map(r => ({
-          id: r.id,
-          column_name: r.column_name,
-          dimension: r.dimension,
-          passed_count: r.passed_count,
-          failed_count: r.failed_count,
-          total_count: r.total_count,
-          score: r.score,
-          executed_at: r.executed_at,
-          rowDetails: r.rowDetails ?? [],
-        })),
-      );
+      // If a draft was already auto-saved (for AI summary), promote it instead of inserting a duplicate
+      const saved = savedScoreId
+        ? await apiClient.publishDraftScore(
+            savedScoreId,
+            label,
+            results.map(r => ({
+              id: r.id,
+              column_name: r.column_name,
+              dimension: r.dimension,
+              passed_count: r.passed_count,
+              failed_count: r.failed_count,
+              total_count: r.total_count,
+              score: r.score,
+              executed_at: r.executed_at,
+              rowDetails: r.rowDetails ?? [],
+            })),
+          )
+        : await apiClient.saveQualityScore(
+            datasetId,
+            label,
+            publishedBy ?? 'Unknown',
+            overallScore,
+            results.map(r => ({
+              id: r.id,
+              column_name: r.column_name,
+              dimension: r.dimension,
+              passed_count: r.passed_count,
+              failed_count: r.failed_count,
+              total_count: r.total_count,
+              score: r.score,
+              executed_at: r.executed_at,
+              rowDetails: r.rowDetails ?? [],
+            })),
+          );
+      setSavedScoreId((saved as { id: string }).id);
       setShowSaveModal(false);
       setSaveLabel('');
       setTrimDataset(false);
@@ -379,6 +424,32 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
           </div>
         </div>
       </div>
+
+      {/* AI Summary Panel */}
+      <AiSummaryPanel
+        scoreId={savedScoreId ?? undefined}
+        results={results}
+        overallScore={overallScore}
+        totalPassed={totalPassed}
+        totalFailed={totalFailed}
+        onViewFailedRows={(columnName, dimension) => setFailedRowsModal({ columnName, dimension })}
+      />
+
+      {/* Failed Rows Modal */}
+      {failedRowsModal && (() => {
+        const matchedResult = results.find(
+          r => r.column_name === failedRowsModal.columnName && r.dimension === failedRowsModal.dimension
+        );
+        return matchedResult ? (
+          <FailedRowsModal
+            datasetId={datasetId}
+            columnName={failedRowsModal.columnName}
+            dimension={failedRowsModal.dimension}
+            failedRowDetails={matchedResult.rowDetails ?? []}
+            onClose={() => setFailedRowsModal(null)}
+          />
+        ) : null;
+      })()}
 
       {/* Dimension Score Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">

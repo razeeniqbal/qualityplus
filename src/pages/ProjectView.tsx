@@ -697,6 +697,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
               publishedBy={viewingScore.published_by ?? undefined}
               initialResults={viewingScore.results as unknown as QualityCheckResult[]}
               onBack={() => setViewingScore(null)}
+              savedScoreId={viewingScore.id}
               readOnly
             />
           ) : allScoresLoading ? (

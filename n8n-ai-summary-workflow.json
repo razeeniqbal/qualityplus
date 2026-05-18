@@ -1,0 +1,162 @@
+{
+  "name": "Data Quality AI Summary",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "data-quality-summary",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "b9b924fe-0f44-4298-84d3-0aeff94d6f60",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [608, -176],
+      "webhookId": "data-quality-summary"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body ?? $input.first().json;\n\nconst scoreId = body.score_id;\nconst overallScore = body.overall_score ?? 0;\nconst totalPassed = body.total_passed ?? 0;\nconst totalFailed = body.total_failed ?? 0;\nconst results = body.results ?? [];\n\nconst dimLines = results.map(r => {\n  const pct = Math.round(r.score);\n  const failInfo = r.failed_count > 0\n    ? ` - ${r.failed_count} failed rows`\n    : ' - all passed';\n  const reasons = (r.sample_reasons ?? []).filter(Boolean).slice(0, 3);\n  const reasonStr = reasons.length > 0 ? ` (reasons: ${reasons.join('; ')})` : '';\n  return `  - ${r.column_name} [${r.dimension}]: ${pct}%${failInfo}${reasonStr}`;\n}).join('\\n');\n\nconst chatInput = `You are a data quality analyst. Analyze the following quality check results and write a brief, professional summary.\n\nOverall Score: ${Math.round(overallScore)}%\nTotal Checks: ${totalPassed + totalFailed} (${totalPassed} passed, ${totalFailed} failed)\n\nPer-column results:\n${dimLines}\n\nWrite your response in exactly this format - no extra text, no markdown:\n\n[OVERVIEW]\n2-3 sentences summarising the overall quality, which dimensions performed well, and which are concerning.\n\n[KEY ISSUES]\nList only columns with failed rows, one per line. Format each as: column_name - dimension - N failed rows - brief reason\n\n[RECOMMENDATIONS]\nList 2-3 numbered actionable recommendations based on the results.`;\n\nreturn [{ json: { score_id: scoreId, chatInput } }];"
+      },
+      "id": "b5fc1054-3252-44fd-80a9-dac74e27a57d",
+      "name": "Build Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [832, -176]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [1056, -176],
+      "id": "9e80bec9-0346-4eb2-9bc5-2bc49e2a04d7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "mistral:7b-instruct",
+        "options": {
+          "temperature": 0.3,
+          "numPredict": 512
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [976, 96],
+      "id": "bf72d4c3-96bb-415d-ad63-230494f5f4e9",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "ksX6j3OcqoGfCxlp",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// AI Agent node outputs { output: \"...\" }\nconst agentOutput = $input.first().json.output ?? $input.first().json.text ?? '';\nconst prevData = $('Build Prompt').first().json;\n\n// Strip any markdown code fences Ollama sometimes adds\nconst summary = agentOutput\n  .replace(/^```[\\w]*\\n?/gm, '')\n  .replace(/```$/gm, '')\n  .trim();\n\nreturn [{ json: { score_id: prevData.score_id, summary } }];"
+      },
+      "id": "893e1830-af3b-41eb-b57d-53cc010c63d3",
+      "name": "Extract Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1280, -176]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://xbwvlkttqvxmskzeopvp.supabase.co/rest/v1/quality_result_scores?id=eq.{{ $json.score_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "YOUR_SUPABASE_SERVICE_ROLE_KEY"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_SUPABASE_SERVICE_ROLE_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={ \"ai_summary\": {{ JSON.stringify($json.summary) }} }",
+        "options": {}
+      },
+      "id": "8a6dd496-54e2-4da9-a06d-60a4457acf6f",
+      "name": "Save to Supabase",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1504, -176]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"ok\": true, \"score_id\": \"{{ $('Extract Summary').first().json.score_id }}\" }",
+        "options": {}
+      },
+      "id": "9267a335-c761-45c0-84dd-7f7ca96358ed",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1728, -176]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [{ "node": "Build Prompt", "type": "main", "index": 0 }]
+      ]
+    },
+    "Build Prompt": {
+      "main": [
+        [{ "node": "AI Agent", "type": "main", "index": 0 }]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [{ "node": "AI Agent", "type": "ai_languageModel", "index": 0 }]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [{ "node": "Extract Summary", "type": "main", "index": 0 }]
+      ]
+    },
+    "Extract Summary": {
+      "main": [
+        [{ "node": "Save to Supabase", "type": "main", "index": 0 }]
+      ]
+    },
+    "Save to Supabase": {
+      "main": [
+        [{ "node": "Respond OK", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "4d1b63ae-fe1b-450e-9be5-4484ba516bf9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "17ed7a34eba0e0e00fa618874c77457b0c5077afe23512aeb16da560d29177a8"
+  },
+  "id": "iX8C5Yl5H6MZCQOK",
+  "tags": []
+}
