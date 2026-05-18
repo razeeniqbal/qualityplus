@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Download, ArrowLeft, ChevronUp, CheckCircle, XCircle, Eye, Search, BookMarked, X } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import type { QualityResult } from '../types/database';
@@ -52,21 +52,38 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { loadResults(); }, [datasetId]);
 
-  // Auto-save a draft score as soon as results are loaded (only when not readOnly and no score yet)
+  // Tracks whether the user has published so cleanup doesn't delete a real score
+  const isPublishedRef = useRef(false);
+
+  // Auto-save a single draft score when results load so n8n can start immediately.
+  // Deletes any previous draft for this dataset first (prevents accumulation).
+  // Cleans up the draft on unmount if the user never clicked Save Result Score.
   useEffect(() => {
-    if (readOnly || savedScoreId || results.length === 0) return;
-    const n8nConfigured = !!import.meta.env.VITE_N8N_WEBHOOK_URL;
-    if (!n8nConfigured) return;
-    apiClient.saveDraftScore(
-      datasetId,
-      publishedBy ?? 'Unknown',
-      results.reduce((sum, r) => sum + r.score, 0) / results.length,
-      results.map(r => ({
-        id: r.id, column_name: r.column_name, dimension: r.dimension,
-        passed_count: r.passed_count, failed_count: r.failed_count,
-        total_count: r.total_count, score: r.score, executed_at: r.executed_at,
-      })),
-    ).then(id => setSavedScoreId(id)).catch(() => {/* silent — AI panel just won't show */});
+    if (readOnly || results.length === 0) return;
+    if (!import.meta.env.VITE_N8N_WEBHOOK_URL) return;
+
+    let draftId: string | null = null;
+
+    apiClient.deleteDraftScores(datasetId)
+      .then(() => apiClient.saveDraftScore(
+        datasetId,
+        publishedBy ?? 'Unknown',
+        results.reduce((sum, r) => sum + r.score, 0) / results.length,
+        results.map(r => ({
+          id: r.id, column_name: r.column_name, dimension: r.dimension,
+          passed_count: r.passed_count, failed_count: r.failed_count,
+          total_count: r.total_count, score: r.score, executed_at: r.executed_at,
+        })),
+      ))
+      .then(id => { draftId = id; setSavedScoreId(id); })
+      .catch(() => { /* silent — AI panel just won't show */ });
+
+    return () => {
+      // Delete the draft if user navigates away without publishing
+      if (draftId && !isPublishedRef.current) {
+        apiClient.deleteDraftScores(datasetId).catch(() => {});
+      }
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [results]);
 
@@ -177,6 +194,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
             })),
           );
       setSavedScoreId((saved as { id: string }).id);
+      isPublishedRef.current = true;
       setShowSaveModal(false);
       setSaveLabel('');
       setTrimDataset(false);

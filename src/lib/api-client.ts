@@ -678,6 +678,15 @@ class ApiClient {
 
   // Quality Result Scores
 
+  /** Deletes any unsaved draft scores for a dataset (label = 'draft') */
+  async deleteDraftScores(datasetId: string): Promise<void> {
+    await supabase
+      .from('quality_result_scores')
+      .delete()
+      .eq('dataset_id', datasetId)
+      .eq('label', 'draft');
+  }
+
   /** Inserts a lightweight draft score row (no row details) to get a score_id for n8n immediately */
   async saveDraftScore(
     datasetId: string,

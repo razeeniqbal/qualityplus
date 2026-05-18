@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Sparkles, ChevronDown, ChevronUp, ExternalLink, Loader2, AlertCircle, RefreshCw } from 'lucide-react';
+import { Sparkles, ChevronDown, ChevronUp, ExternalLink, Loader2, AlertCircle } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import type { RowDetail } from './QualityConfiguration';
 import type { QualityResult } from '../types/database';
@@ -195,13 +195,6 @@ export default function AiSummaryPanel({ scoreId, results, overallScore, totalPa
     }, 4000);
   }
 
-  async function handleRetry() {
-    if (pollRef.current) clearTimeout(pollRef.current);
-    setPollCount(0);
-    await apiClient.saveAiSummary(scoreId!, '');
-    await loadOrTrigger(scoreId!);
-  }
-
   const failedIssues = summary?.issues ?? [];
 
   return (
@@ -242,15 +235,6 @@ export default function AiSummaryPanel({ scoreId, results, overallScore, totalPa
         </div>
 
         <div className="flex items-center gap-2">
-          {(state === 'ready' || state === 'error' || state === 'timeout') && (
-            <button
-              onClick={e => { e.stopPropagation(); handleRetry(); }}
-              className="p-1 hover:bg-slate-200 rounded transition text-slate-400 hover:text-slate-600"
-              title="Regenerate summary"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-            </button>
-          )}
           {collapsed
             ? <ChevronDown className="w-4 h-4 text-slate-400" />
             : <ChevronUp className="w-4 h-4 text-slate-400" />
@@ -269,10 +253,7 @@ export default function AiSummaryPanel({ scoreId, results, overallScore, totalPa
             <div className="px-6 py-5">
               <div className="flex items-center gap-3 p-4 bg-red-50 rounded-lg border border-red-200 text-sm text-red-700">
                 <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                <span>
-                  Could not reach n8n. Check that your workflow is active and the webhook URL is correct.{' '}
-                  <button onClick={handleRetry} className="underline font-medium">Try again</button>
-                </span>
+                <span>Could not reach n8n. Check that your workflow is active and the webhook URL is correct.</span>
               </div>
             </div>
           )}
@@ -282,10 +263,7 @@ export default function AiSummaryPanel({ scoreId, results, overallScore, totalPa
             <div className="px-6 py-5">
               <div className="flex items-center gap-3 p-4 bg-orange-50 rounded-lg border border-orange-200 text-sm text-orange-700">
                 <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                <span>
-                  Ollama is taking longer than expected.{' '}
-                  <button onClick={handleRetry} className="underline font-medium">Retry</button>
-                </span>
+                <span>Ollama is taking longer than expected. The summary may still arrive — try re-opening this result.</span>
               </div>
             </div>
           )}
