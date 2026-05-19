@@ -31,9 +31,11 @@ interface ScoreProps {
   initialDatasetId?: string | null;
   /** called after a quality score is saved successfully */
   onPublished?: () => void;
+  projectName?: string;
+  projectDescription?: string;
 }
 
-export default function Score({ projectId, onDatasetCreated, isViewer = false, initialDatasetId, onPublished }: ScoreProps) {
+export default function Score({ projectId, onDatasetCreated, isViewer = false, initialDatasetId, onPublished, projectName = '', projectDescription = '' }: ScoreProps) {
   const { user } = useUser();
   const [currentStep, setCurrentStep] = useState<ScoreStep>('upload');
   const [uploadedData, setUploadedData] = useState<UploadedData | null>(null);
@@ -222,6 +224,8 @@ async function loadDatasets(projId: string) {
                 data={uploadedData}
                 datasetId={datasetId}
                 onExecute={handleExecuteRules}
+                projectName={projectName}
+                projectDescription={projectDescription}
               />
             </div>
           )}

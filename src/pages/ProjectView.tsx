@@ -668,6 +668,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
               datasetId={selectedDatasetId}
               columnValueFilters={columnValueFilters}
               onDataLoaded={handleDataLoaded}
+              onQualityCheck={() => setActiveTab('score')}
             />
           </div>
         </div>
@@ -679,6 +680,8 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
           isViewer={currentUserRole === 'viewer'}
           initialDatasetId={selectedDatasetId}
           onPublished={() => loadAllScores(datasets)}
+          projectName={projectName}
+          projectDescription={projectDescription}
         />
       )}
 

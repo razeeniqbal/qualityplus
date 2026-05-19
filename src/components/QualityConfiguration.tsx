@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
-import { AlertCircle, Save, Play } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { AlertCircle, Save, Play, Sparkles } from 'lucide-react';
 import type { QualityDimension, QualityDimensionConfig, Template } from '../types/database';
 import QualityDimensionCard from './QualityDimensionCard';
 import DimensionConfigModal from './DimensionConfigModal';
+import AiValidityRecommender, { type AiValidityRecommenderHandle } from './AiValidityRecommender';
 import { apiClient } from '../lib/api-client';
 import {
   checkCompleteness,
@@ -22,6 +23,8 @@ interface QualityConfigurationProps {
   };
   datasetId: string;
   onExecute: (results: QualityCheckResult[]) => void;
+  projectName?: string;
+  projectDescription?: string;
 }
 
 export interface RowDetail {
@@ -50,6 +53,8 @@ export default function QualityConfiguration({
   data,
   datasetId,
   onExecute,
+  projectName = '',
+  projectDescription = '',
 }: QualityConfigurationProps) {
   const [dimensions, setDimensions] = useState<QualityDimensionConfig[]>([]);
   const [dimensionRules, setDimensionRules] = useState<DimensionRules>({});
@@ -65,6 +70,8 @@ export default function QualityConfiguration({
   const [isUpdatingTemplate, setIsUpdatingTemplate] = useState(false);
   const [configuredColumns, setConfiguredColumns] = useState<Map<string, Set<string>>>(new Map());
   const [columnConfigs, setColumnConfigs] = useState<Map<string, Record<string, unknown>>>(new Map());
+  const [isAiLoading, setIsAiLoading] = useState(false);
+  const aiRecommenderRef = useRef<AiValidityRecommenderHandle>(null);
   const [configModal, setConfigModal] = useState<{
     isOpen: boolean;
     dimension: QualityDimension | null;
@@ -651,6 +658,20 @@ export default function QualityConfiguration({
             <Save className="w-4 h-4" />
             <span>Save Template</span>
           </button>
+          {!!import.meta.env.VITE_N8N_VALIDITY_WEBHOOK_URL && (
+            <button
+              onClick={() => aiRecommenderRef.current?.trigger()}
+              disabled={isAiLoading || data.headers.length === 0}
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-lg hover:from-violet-600 hover:to-purple-700 transition font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+              title={data.headers.length === 0 ? 'No dataset loaded' : 'Get AI validity rule recommendations'}
+            >
+              {isAiLoading
+                ? <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                : <Sparkles className="w-4 h-4" />
+              }
+              <span>AI Configuration</span>
+            </button>
+          )}
           {selectedTemplate && isTemplateDirty && (
             <button
               onClick={handleUpdateTemplate}
@@ -702,7 +723,62 @@ export default function QualityConfiguration({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+      <AiValidityRecommender
+        ref={aiRecommenderRef}
+        projectName={projectName}
+        projectDescription={projectDescription}
+        validityColumns={dimensionRules['validity'] ?? []}
+        data={data}
+        onLoadingChange={setIsAiLoading}
+        onApply={allRecommendations => {
+          // Separate by dimension
+          const validityRecs = allRecommendations.filter(r => r.dimension === 'validity' && r.validationType);
+          const consistencyRecs = allRecommendations.filter(r => r.dimension === 'consistency');
+
+          setDimensionRules(prev => {
+            const next = { ...prev };
+            // Add validity columns
+            if (validityRecs.length > 0) {
+              const existing = new Set(prev['validity'] ?? []);
+              const toAdd = validityRecs.map(r => r.column).filter(c => !existing.has(c) && data.headers.includes(c));
+              if (toAdd.length > 0) next['validity'] = [...(prev['validity'] ?? []), ...toAdd];
+            }
+            // Add consistency-flagged columns to consistency dimension
+            if (consistencyRecs.length > 0) {
+              const existing = new Set(prev['consistency'] ?? []);
+              const toAdd = consistencyRecs.map(r => r.column).filter(c => !existing.has(c) && data.headers.includes(c));
+              if (toAdd.length > 0) next['consistency'] = [...(prev['consistency'] ?? []), ...toAdd];
+            }
+            return next;
+          });
+
+          // Pre-fill validity configs only (consistency needs manual reference setup)
+          setColumnConfigs(prev => {
+            const next = new Map(prev);
+            for (const rec of validityRecs) {
+              next.set(`validity:${rec.column}`, {
+                validationType: rec.validationType,
+                ...rec.config,
+              });
+            }
+            return next;
+          });
+
+          // Mark validity columns as configured (consistency stays as "needs config")
+          setConfiguredColumns(prev => {
+            const next = new Map(prev);
+            const validityCols = new Set(prev.get('validity') ?? []);
+            for (const rec of validityRecs) validityCols.add(rec.column);
+            next.set('validity', validityCols);
+            return next;
+          });
+
+          setIsTemplateDirty(true);
+          setHasTemplateAction(true);
+        }}
+      />
+
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-2">
         {dimensions.map((dimension) => (
           <QualityDimensionCard
             key={dimension.id}

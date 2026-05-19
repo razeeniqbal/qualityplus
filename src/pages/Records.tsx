@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { apiClient } from '../lib/api-client';
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Download, Search, Table2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Download, Search, Table2, ClipboardCheck } from 'lucide-react';
 import type { ColumnValueFilters } from './ProjectView';
 
 interface RecordsProps {
   datasetId: string | null;
   columnValueFilters?: ColumnValueFilters;
   onDataLoaded?: (rows: Record<string, string>[], columns: string[]) => void;
+  onQualityCheck?: () => void;
 }
 
-export default function Records({ datasetId, columnValueFilters, onDataLoaded }: RecordsProps) {
+export default function Records({ datasetId, columnValueFilters, onDataLoaded, onQualityCheck }: RecordsProps) {
   const [records, setRecords] = useState<Record<string, string>[]>([]);
   const [columns, setColumns] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
@@ -134,13 +135,26 @@ export default function Records({ datasetId, columnValueFilters, onDataLoaded }:
             <span className="ml-2 text-teal-600 font-medium">· {activeFilterCount} filter{activeFilterCount !== 1 ? 's' : ''} active</span>
           )}
         </span>
-        <button
-          onClick={exportToCSV}
-          className="flex items-center space-x-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition"
-        >
-          <Download className="w-4 h-4" />
-          <span>Export CSV</span>
-        </button>
+        <div className="flex items-center gap-2">
+          {onQualityCheck && (
+            <button
+              onClick={onQualityCheck}
+              disabled={!datasetId}
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition disabled:opacity-40 disabled:cursor-not-allowed font-medium"
+              title="Run quality checks on this dataset"
+            >
+              <ClipboardCheck className="w-4 h-4" />
+              <span>Quality Check</span>
+            </button>
+          )}
+          <button
+            onClick={exportToCSV}
+            className="flex items-center space-x-2 px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition"
+          >
+            <Download className="w-4 h-4" />
+            <span>Export CSV</span>
+          </button>
+        </div>
       </div>
 
       {/* Search */}
