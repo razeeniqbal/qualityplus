@@ -202,7 +202,7 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center flex-shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
-            <span className="text-sm font-semibold text-violet-800">AI Configuration Recommendations</span>
+            <span className="text-sm font-semibold text-violet-800">AI Quality Check Recommendations</span>
             <span className="flex items-center gap-1.5 text-xs text-violet-500 bg-violet-100 px-2 py-0.5 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
               Analysing {data.headers.length} columns…
@@ -243,7 +243,7 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center flex-shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
-            <span className="text-sm font-semibold text-violet-800">AI Configuration Recommendations</span>
+            <span className="text-sm font-semibold text-violet-800">AI Quality Check Recommendations</span>
             {validityRecs.length > 0 && (
               <span className="text-xs text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                 {validityRecs.length} validity applied

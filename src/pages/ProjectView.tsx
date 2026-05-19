@@ -399,7 +399,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
               activeTab === 'records' ? 'border-teal-600 text-teal-700' : 'border-transparent text-slate-600 hover:text-slate-800'
             }`}
           >
-            <Table2 className="w-4 h-4" /><span>Data Records</span>
+            <Table2 className="w-4 h-4" /><span>Records</span>
           </button>
           <button
             onClick={() => setActiveTab('score')}
@@ -407,7 +407,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
               activeTab === 'score' ? 'border-teal-600 text-teal-700' : 'border-transparent text-slate-600 hover:text-slate-800'
             }`}
           >
-            <Target className="w-4 h-4" /><span>Configuration</span>
+            <Target className="w-4 h-4" /><span>Quality Check</span>
           </button>
           <button
             onClick={() => setActiveTab('results')}
@@ -529,7 +529,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                 <div>
                   {allColumns.length === 0 ? (
                     <p className="text-xs text-slate-400 text-center py-6 px-4">
-                      {selectedDatasetId ? 'Loading attributes...' : 'Select a dataset to filter'}
+                      {selectedDatasetId ? 'Loading columns...' : 'Select a dataset to filter'}
                     </p>
                   ) : (
                     <>
@@ -539,7 +539,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                           <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
                           <input
                             type="text"
-                            placeholder="Search attributes..."
+                            placeholder="Search columns..."
                             value={columnSearch}
                             onChange={(e) => setColumnSearch(e.target.value)}
                             className="w-full pl-7 pr-3 py-1.5 text-xs border border-slate-200 rounded focus:ring-1 focus:ring-teal-400 focus:border-transparent outline-none"
@@ -562,7 +562,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                       {/* Column accordion list */}
                       <div>
                         {filteredColumnList.length === 0 ? (
-                          <p className="text-xs text-slate-400 text-center py-4">No attributes match</p>
+                          <p className="text-xs text-slate-400 text-center py-4">No columns match</p>
                         ) : (
                           filteredColumnList.map((col) => {
                             const isExpanded = expandedColumns.has(col);
@@ -686,7 +686,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
       )}
 
       {activeTab === 'results' && (
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="bg-white rounded-lg shadow-md">
           {viewingScoreLoading ? (
             <div className="flex items-center justify-center py-16 gap-3 text-slate-400">
               <Loader2 className="w-5 h-5 animate-spin" />
@@ -714,7 +714,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                 <BookMarked className="w-7 h-7 text-slate-400" />
               </div>
               <h3 className="text-base font-semibold text-slate-700 mb-1">No result scores yet</h3>
-              <p className="text-sm text-slate-400 max-w-xs">Go to the <span className="font-semibold text-teal-600">Configuration</span> tab, run a check, and save it to record a result score.</p>
+              <p className="text-sm text-slate-400 max-w-xs">Go to the <span className="font-semibold text-teal-600">Quality Check</span> tab, run a check, and save it to record a result score.</p>
             </div>
           ) : (
             <div>

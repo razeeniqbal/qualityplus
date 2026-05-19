@@ -137,7 +137,7 @@ function AppContent() {
               }`}
             >
               <Settings className="w-5 h-5" />
-              <span className="font-medium">Rules Settings</span>
+              <span className="font-medium">Quality Rules</span>
             </button>
             <button
               onClick={() => setCurrentPage('guide')}

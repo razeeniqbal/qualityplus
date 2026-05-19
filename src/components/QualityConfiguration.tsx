@@ -218,7 +218,7 @@ export default function QualityConfiguration({
 
   async function handleSaveTemplate() {
     if (totalConfigured === 0) {
-      alert('Please add attributes to dimensions before saving a template');
+      alert('Please add columns to dimensions before saving a template');
       return;
     }
     setShowSaveTemplateModal(true);
@@ -603,8 +603,8 @@ export default function QualityConfiguration({
 
   function getLogicDescriptionForDimension(dimensionKey: string): string {
     const logicMap: Record<string, string> = {
-      completeness: 'Checks if all values in the selected attributes are present and not null or empty.',
-      uniqueness: 'Verifies that all values in the selected attributes are unique with no duplicates.',
+      completeness: 'Checks if all values in the selected columns are present and not null or empty.',
+      uniqueness: 'Verifies that all values in the selected columns are unique with no duplicates.',
       consistency: 'Checks values against reference data from an uploaded CSV or an existing database dataset.',
       validity: 'Ensures data meets specific validation rules.',
     };
@@ -669,7 +669,7 @@ export default function QualityConfiguration({
                 ? <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 : <Sparkles className="w-4 h-4" />
               }
-              <span>AI Configuration</span>
+              <span>AI Quality Check</span>
             </button>
           )}
           {selectedTemplate && isTemplateDirty && (

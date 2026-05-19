@@ -140,7 +140,7 @@ export default function QualityDimensionCard({
             )}
             {showDropdown && availableColumns.length === 0 && (
               <div className="absolute left-0 right-0 mt-2 bg-white border-2 border-slate-300 rounded-lg shadow-xl z-10 p-4">
-                <p className="text-xs text-slate-500 text-center">No more attributes available</p>
+                <p className="text-xs text-slate-500 text-center">No more columns available</p>
               </div>
             )}
           </div>
@@ -291,7 +291,7 @@ export default function QualityDimensionCard({
               <div className="w-16 h-16 border-2 border-dashed border-slate-300 rounded-lg mx-auto mb-3 flex items-center justify-center">
                 <Plus className="w-8 h-8 text-slate-300" />
               </div>
-              <p>No attributes added yet</p>
+              <p>No columns added yet</p>
             </div>
           )}
         </div>

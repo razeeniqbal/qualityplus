@@ -357,7 +357,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
           className="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition"
         >
           <ArrowLeft className="w-5 h-5" />
-          <span>{readOnly ? 'Back to Result Scores' : 'Back to Configuration'}</span>
+          <span>{readOnly ? 'Back to Result Scores' : 'Back to Quality Check'}</span>
         </button>
         <div className="flex items-center space-x-4">
           <button
@@ -446,6 +446,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
       {/* AI Summary Panel */}
       <AiSummaryPanel
         scoreId={savedScoreId ?? undefined}
+        datasetId={datasetId}
         results={results}
         overallScore={overallScore}
         totalPassed={totalPassed}

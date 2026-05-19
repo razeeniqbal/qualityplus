@@ -650,12 +650,16 @@ export default function SystemOverviewPage() {
         <p className="text-xs font-bold uppercase tracking-widest text-teal-600">Recent Updates</p>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1.5">
           {[
-            { label: 'Nav renamed', detail: '"Configuration" → "Rules Settings"' },
-            { label: 'Project tab renamed', detail: '"Quality Score" → "Configuration"' },
-            { label: 'New tab', detail: '"Result Scores" — view all saved quality scores' },
-            { label: 'Result Scores', detail: 'Dataset filter + full detail view with row drill-down' },
-            { label: 'Add Dataset', detail: '"Connect to Database" option added (Coming Soon)' },
-            { label: 'Branding', detail: '"Data Quality Plus" → "Quality Plus"' },
+            { label: 'AI Summary', detail: 'Auto-generated quality summary via n8n + Ollama after saving a result score' },
+            { label: 'AI Quality Check', detail: 'AI recommends validity rules and flags consistency columns from dataset context' },
+            { label: 'Failed Rows View', detail: 'Per-check and combined cross-check failed row inspection with filter, search, export' },
+            { label: 'Knowledge Base', detail: 'Supabase tables ai_validity_rules and ai_domain_knowledge drive AI recommendations' },
+            { label: 'Tab renamed', detail: '"Configuration" → "Quality Check" — clearer purpose' },
+            { label: 'Nav renamed', detail: '"Rules Settings" → "Quality Rules"' },
+            { label: 'Naming standardised', detail: '"attributes" → "columns" across all dimensions UI' },
+            { label: 'Quality Check button', detail: 'Records tab shortcut navigates directly to Quality Check tab' },
+            { label: 'Draft auto-save', detail: 'Draft score saved on execute so n8n AI summary triggers immediately' },
+            { label: 'Result Scores', detail: 'Dataset filter + full detail view with row drill-down and AI summary' },
           ].map(item => (
             <li key={item.label} className="flex items-start gap-2 text-xs">
               <CheckCircle2 className="w-3.5 h-3.5 text-teal-500 flex-shrink-0 mt-0.5" />

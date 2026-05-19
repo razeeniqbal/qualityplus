@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { Sparkles, ChevronDown, ChevronUp, ExternalLink, Loader2, AlertCircle } from 'lucide-react';
+import { Sparkles, ChevronDown, ChevronUp, ExternalLink, Loader2, AlertCircle, TableProperties } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import type { RowDetail } from './QualityConfiguration';
 import type { QualityResult } from '../types/database';
+import CombinedFailedRowsModal from './CombinedFailedRowsModal';
 
 interface ResultWithDetails extends QualityResult {
   rowDetails?: RowDetail[];
@@ -10,6 +11,7 @@ interface ResultWithDetails extends QualityResult {
 
 interface AiSummaryPanelProps {
   scoreId?: string;
+  datasetId: string;
   results: ResultWithDetails[];
   overallScore: number;
   totalPassed: number;
@@ -111,12 +113,13 @@ function Skeleton() {
   );
 }
 
-export default function AiSummaryPanel({ scoreId, results, overallScore, totalPassed, totalFailed, onViewFailedRows }: AiSummaryPanelProps) {
+export default function AiSummaryPanel({ scoreId, datasetId, results, overallScore, totalPassed, totalFailed, onViewFailedRows }: AiSummaryPanelProps) {
   const [state, setState] = useState<SummaryState>('loading');
   const [summary, setSummary] = useState<ParsedSummary | null>(null);
   const [collapsed, setCollapsed] = useState(false);
   const [pollCount, setPollCount] = useState(0);
   const pollRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [showCombinedModal, setShowCombinedModal] = useState(false);
 
   const n8nWebhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL as string | undefined;
 
@@ -335,6 +338,34 @@ export default function AiSummaryPanel({ scoreId, results, overallScore, totalPa
                     ))}
                   </ol>
                 </div>
+              )}
+
+              {/* Combined failed rows button */}
+              {failedIssues.length > 0 && (
+                <button
+                  onClick={() => setShowCombinedModal(true)}
+                  className="w-full flex items-center justify-between px-4 py-3 bg-slate-50 hover:bg-red-50 border border-slate-200 hover:border-red-200 rounded-lg transition text-left group"
+                >
+                  <div className="flex items-center gap-2">
+                    <TableProperties className="w-4 h-4 text-red-500" />
+                    <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      View All Failed Rows
+                    </span>
+                    <span className="text-xs text-red-600 bg-red-50 border border-red-200 px-1.5 py-0.5 rounded-full font-medium">
+                      {totalFailed.toLocaleString()} checks failed
+                    </span>
+                  </div>
+                  <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-red-500 transition" />
+                </button>
+              )}
+
+              {/* Combined failed rows modal */}
+              {showCombinedModal && (
+                <CombinedFailedRowsModal
+                  datasetId={datasetId}
+                  results={results}
+                  onClose={() => setShowCombinedModal(false)}
+                />
               )}
             </div>
           )}

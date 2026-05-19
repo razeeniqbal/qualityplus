@@ -4,8 +4,8 @@ import { apiClient } from '../lib/api-client';
 import type { QualityDimensionConfig } from '../types/database';
 
 const DIMENSION_LOGIC: Record<string, string> = {
-  completeness: 'Checks if all values in the selected attributes are present and not null or empty. Each row is examined to ensure data exists.',
-  uniqueness: 'Verifies that all values in the selected attributes are unique with no duplicates. Each value must appear only once across all rows.',
+  completeness: 'Checks if all values in the selected columns are present and not null or empty. Each row is examined to ensure data exists.',
+  uniqueness: 'Verifies that all values in the selected columns are unique with no duplicates. Each value must appear only once across all rows.',
   consistency: 'Validates data against defined patterns or reference datasets. Can check format consistency, cross-field validation, or match against master data files.',
   validity: 'Ensures data meets specific validation rules such as regex patterns, value ranges, allowed lists, or data type requirements.',
   accuracy: 'Compares data against reference sources or expected values to measure correctness. Can verify calculations or match against master datasets.',
