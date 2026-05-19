@@ -663,13 +663,13 @@ export default function QualityConfiguration({
               onClick={() => aiRecommenderRef.current?.trigger()}
               disabled={isAiLoading || data.headers.length === 0}
               className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-lg hover:from-violet-600 hover:to-purple-700 transition font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed"
-              title={data.headers.length === 0 ? 'No dataset loaded' : 'Get AI validity rule recommendations'}
+              title={data.headers.length === 0 ? 'No dataset loaded' : 'Get AI rule recommendations'}
             >
               {isAiLoading
                 ? <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 : <Sparkles className="w-4 h-4" />
               }
-              <span>AI Quality Check</span>
+              <span>AI Rule Check</span>
             </button>
           )}
           {selectedTemplate && isTemplateDirty && (

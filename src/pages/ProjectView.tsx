@@ -228,7 +228,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
 
   // Add dataset modal handlers
   async function handleAddDataset() {
-    if (!addFile || !addDatasetName.trim()) return;
+    if (!addFile || !addDatasetName.trim() || !addDatasetDescription.trim()) return;
     setIsAdding(true);
     try {
       const ds = await apiClient.uploadDataset(projectId, addFile, addDatasetName.trim(), addDatasetDescription.trim() || undefined) as Dataset;
@@ -1036,18 +1036,23 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                       <p className="text-xs text-red-500 mt-1">Dataset name is required</p>
                     )}
                   </div>
-                  {/* Description — optional */}
+                  {/* Description — required */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                      Description <span className="text-slate-400 font-normal">(optional)</span>
+                      Description <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       placeholder="Brief description of this dataset"
                       value={addDatasetDescription}
                       onChange={e => setAddDatasetDescription(e.target.value)}
                       rows={2}
-                      className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm resize-none"
+                      className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm resize-none ${
+                        addDatasetDescription.trim() === '' && addFile ? 'border-red-300 bg-red-50' : 'border-slate-300'
+                      }`}
                     />
+                    {addDatasetDescription.trim() === '' && addFile && (
+                      <p className="text-xs text-red-500 mt-1">Dataset description is required</p>
+                    )}
                   </div>
                   {/* Drop zone */}
                   <div
@@ -1101,7 +1106,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                 Cancel
               </button>
               {addDatasetSource === 'upload' && (
-                <button onClick={handleAddDataset} disabled={!addFile || !addDatasetName.trim() || isAdding}
+                <button onClick={handleAddDataset} disabled={!addFile || !addDatasetName.trim() || !addDatasetDescription.trim() || isAdding}
                   className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
                   {isAdding
                     ? <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /><span>Uploading...</span></>

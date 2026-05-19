@@ -60,6 +60,22 @@ export default function CombinedFailedRowsModal({ datasetId, results, onClose }:
     [results]
   );
 
+  // Total number of checks run = number of result entries
+  const totalChecks = results.length;
+
+  // Per-row score: (checks passed on that row) / totalChecks * 100
+  // A check passes on a row if that row is NOT in its failed set
+  const rowScoreMap = useMemo(() => {
+    const map = new Map<number, number>();
+    for (const idx of failedIndexSet) {
+      const failedCheckCount = (failMap.get(idx) ?? []).length;
+      const passedCheckCount = totalChecks - failedCheckCount;
+      const score = totalChecks > 0 ? (passedCheckCount / totalChecks) * 100 : 0;
+      map.set(idx, score);
+    }
+    return map;
+  }, [failedIndexSet, failMap, totalChecks]);
+
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
@@ -267,6 +283,9 @@ export default function CombinedFailedRowsModal({ datasetId, results, onClose }:
                       {col}
                     </th>
                   ))}
+                  <th className="px-4 py-3 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider whitespace-nowrap border-l border-slate-300 w-24">
+                    Pass Score
+                  </th>
                   <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider whitespace-nowrap border-l border-slate-300 min-w-[220px]">
                     Fail Reason
                   </th>
@@ -290,6 +309,18 @@ export default function CombinedFailedRowsModal({ datasetId, results, onClose }:
                             : String(row[col])}
                         </td>
                       ))}
+                      <td className="px-4 py-2.5 text-center border-l border-slate-200 w-24">
+                        {(() => {
+                          const score = rowScoreMap.get(idx) ?? 0;
+                          const color = score === 100 ? 'text-green-600' : score >= 75 ? 'text-yellow-600' : score >= 50 ? 'text-orange-600' : 'text-red-600';
+                          const ring = score === 100 ? 'border-green-500' : score >= 75 ? 'border-yellow-500' : score >= 50 ? 'border-orange-500' : 'border-red-500';
+                          return (
+                            <div className={`inline-flex items-center justify-center w-10 h-10 rounded-full border-4 ${ring}`}>
+                              <span className={`text-[10px] font-bold ${color}`}>{score.toFixed(0)}%</span>
+                            </div>
+                          );
+                        })()}
+                      </td>
                       <td className="px-4 py-2.5 border-l border-slate-200">
                         <div className="space-y-1">
                           {infos.map((info, j) => (

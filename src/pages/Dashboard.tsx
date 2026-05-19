@@ -126,6 +126,10 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
       alert('Please enter a project name.');
       return;
     }
+    if (!projectDescription.trim()) {
+      alert('Please enter a project description.');
+      return;
+    }
     setIsCreating(true);
     try {
       // Create the project first (without icon) to get the ID
@@ -244,7 +248,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
               {/* Description */}
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Description <span className="text-slate-400 font-normal">(optional)</span>
+                  Description <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   placeholder="Brief description of this project"
