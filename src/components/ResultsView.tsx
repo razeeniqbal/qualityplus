@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
-import { Download, ArrowLeft, ChevronUp, CheckCircle, XCircle, Eye, Search, BookMarked, X } from 'lucide-react';
+import { FileText, ArrowLeft, ChevronUp, CheckCircle, XCircle, Eye, Search, BookMarked, X } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import type { QualityResult } from '../types/database';
 import type { QualityCheckResult, RowDetail } from './QualityConfiguration';
 import AiSummaryPanel from './AiSummaryPanel';
 import FailedRowsModal from './FailedRowsModal';
+import PdfExportModal from './PdfExportModal';
 
 interface ResultWithDetails extends QualityResult {
   rowDetails?: RowDetail[];
@@ -42,6 +43,16 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
 
   // Failed rows modal
   const [failedRowsModal, setFailedRowsModal] = useState<{ columnName: string; dimension: string } | null>(null);
+
+  // PDF export modal
+  const [showPdfModal, setShowPdfModal] = useState(false);
+  const [aiSummaryText, setAiSummaryText] = useState<string | undefined>(undefined);
+
+  // Fetch AI summary text when score is available (for PDF export)
+  useEffect(() => {
+    if (!savedScoreId) return;
+    apiClient.getAiSummary(savedScoreId).then(s => { if (s) setAiSummaryText(s); }).catch(() => {});
+  }, [savedScoreId]);
 
   const [expandedResult, setExpandedResult] = useState<string | null>(null);
   const [detailFilter, setDetailFilter] = useState<'all' | 'pass' | 'fail'>('all');
@@ -123,30 +134,6 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
     if (score >= 75) return 'border-yellow-500';
     if (score >= 50) return 'border-orange-500';
     return 'border-red-500';
-  }
-
-  function handleExport() {
-    const csvContent = [
-      ['Column', 'Dimension', 'Passed', 'Failed', 'Total', 'Score'],
-      ...results.map((result) => [
-        result.column_name,
-        result.dimension,
-        result.passed_count,
-        result.failed_count,
-        result.total_count,
-        `${result.score.toFixed(2)}%`,
-      ]),
-    ]
-      .map((row) => row.join(','))
-      .join('\n');
-
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'quality-results.csv';
-    a.click();
-    URL.revokeObjectURL(url);
   }
 
   async function handleSave() {
@@ -361,11 +348,11 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
         </button>
         <div className="flex items-center space-x-4">
           <button
-            onClick={handleExport}
+            onClick={() => setShowPdfModal(true)}
             className="flex items-center space-x-2 bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700 transition"
           >
-            <Download className="w-4 h-4" />
-            <span>Export</span>
+            <FileText className="w-4 h-4" />
+            <span>Export PDF</span>
           </button>
           {!readOnly && (
             <button
@@ -443,6 +430,20 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
         </div>
       </div>
 
+      {/* PDF Export Modal */}
+      {showPdfModal && (
+        <PdfExportModal
+          datasetName={datasetName ?? 'Dataset'}
+          publishedBy={publishedBy}
+          overallScore={overallScore}
+          totalPassed={totalPassed}
+          totalFailed={totalFailed}
+          results={results}
+          aiSummary={aiSummaryText}
+          onClose={() => setShowPdfModal(false)}
+        />
+      )}
+
       {/* AI Summary Panel */}
       <AiSummaryPanel
         scoreId={savedScoreId ?? undefined}
@@ -504,12 +505,12 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
         })}
       </div>
 
-      {/* Detailed Results Table */}
+      {/* Detailed Results — grouped by column */}
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between gap-4 flex-wrap">
           <div>
             <h3 className="text-lg font-bold text-slate-800">Detailed Results</h3>
-            <p className="text-sm text-slate-500 mt-0.5">Click on any row to view per-record details</p>
+            <p className="text-sm text-slate-500 mt-0.5">Grouped by column — click a dimension row to view per-record details</p>
           </div>
           <div className="relative w-60">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -523,54 +524,70 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="bg-slate-50 border-b border-slate-200">
-                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Column</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Dimension</th>
-                <th className="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Score</th>
-                <th className="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Passed</th>
-                <th className="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Failed</th>
-                <th className="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Total</th>
-                <th className="text-center px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Details</th>
-              </tr>
-            </thead>
-            {filteredResults.map((result) => {
-                const isExpanded = expandedResult === result.id;
-                const hasDetails = result.rowDetails && result.rowDetails.length > 0;
+        <div className="divide-y divide-slate-100">
+          {/* Group filteredResults by column_name */}
+          {Array.from(
+            filteredResults.reduce((map, r) => {
+              if (!map.has(r.column_name)) map.set(r.column_name, []);
+              map.get(r.column_name)!.push(r);
+              return map;
+            }, new Map<string, typeof filteredResults>())
+          ).map(([columnName, colResults]) => {
+            const colOverall = colResults.reduce((s, r) => s + r.score, 0) / colResults.length;
+            const colPassed  = colResults.reduce((s, r) => s + r.passed_count, 0);
+            const colFailed  = colResults.reduce((s, r) => s + r.failed_count, 0);
 
-                const filteredDetails = (result.rowDetails || []).filter(d => {
-                  if (detailFilter === 'pass') return d.passed;
-                  if (detailFilter === 'fail') return !d.passed;
-                  if (detailSearch.trim()) {
-                    const q = detailSearch.toLowerCase();
-                    const valMatch = d.value !== null && d.value !== undefined && String(d.value).toLowerCase().includes(q);
-                    const reasonMatch = d.reason ? d.reason.toLowerCase().includes(q) : false;
-                    const rowMatch = String(d.rowIndex + 1).includes(q);
-                    if (!valMatch && !reasonMatch && !rowMatch) return false;
-                  }
-                  return true;
-                });
+            return (
+              <div key={columnName}>
+                {/* Column group header */}
+                <div className="flex items-center justify-between px-6 py-3 bg-slate-50 border-b border-slate-200">
+                  <div className="flex items-center gap-3">
+                    <span className="font-semibold text-slate-800 text-sm">{columnName}</span>
+                    <span className="text-xs text-slate-400">{colResults.length} check{colResults.length !== 1 ? 's' : ''}</span>
+                  </div>
+                  <div className="flex items-center gap-4 text-xs">
+                    <span className="text-green-600 font-medium">{colPassed.toLocaleString()} passed</span>
+                    <span className={`font-medium ${colFailed > 0 ? 'text-red-600' : 'text-slate-400'}`}>{colFailed.toLocaleString()} failed</span>
+                    <div className={`w-9 h-9 rounded-full border-4 ${getScoreRingColor(colOverall)} flex items-center justify-center`}>
+                      <span className={`text-[10px] font-bold ${getScoreColor(colOverall)}`}>{colOverall.toFixed(0)}%</span>
+                    </div>
+                  </div>
+                </div>
 
-                const totalPages = Math.ceil(filteredDetails.length / ROWS_PER_PAGE);
-                const paginatedDetails = filteredDetails.slice(
-                  detailPage * ROWS_PER_PAGE,
-                  (detailPage + 1) * ROWS_PER_PAGE
-                );
+                {/* Dimension rows for this column */}
+                <table className="w-full">
+                  {colResults.map((result) => {
+                    const isExpanded = expandedResult === result.id;
+                    const hasDetails = result.rowDetails && result.rowDetails.length > 0;
 
-                return (
-                  <tbody key={result.id}>
+                    const filteredDetails = (result.rowDetails || []).filter(d => {
+                      if (detailFilter === 'pass') return d.passed;
+                      if (detailFilter === 'fail') return !d.passed;
+                      if (detailSearch.trim()) {
+                        const q = detailSearch.toLowerCase();
+                        const valMatch = d.value !== null && d.value !== undefined && String(d.value).toLowerCase().includes(q);
+                        const reasonMatch = d.reason ? d.reason.toLowerCase().includes(q) : false;
+                        const rowMatch = String(d.rowIndex + 1).includes(q);
+                        if (!valMatch && !reasonMatch && !rowMatch) return false;
+                      }
+                      return true;
+                    });
+
+                    const totalPages = Math.ceil(filteredDetails.length / ROWS_PER_PAGE);
+                    const paginatedDetails = filteredDetails.slice(
+                      detailPage * ROWS_PER_PAGE,
+                      (detailPage + 1) * ROWS_PER_PAGE
+                    );
+
+                    return (
+                      <tbody key={result.id}>
                     <tr
                       className={`border-b border-slate-100 transition cursor-pointer ${
                         isExpanded ? 'bg-teal-50' : 'hover:bg-slate-50'
                       }`}
                       onClick={() => hasDetails && toggleExpand(result.id)}
                     >
-                      <td className="px-6 py-4">
-                        <span className="font-medium text-slate-800">{result.column_name}</span>
-                      </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-3.5">
                         <span className="capitalize text-sm text-slate-600 bg-slate-100 px-2 py-1 rounded">
                           {result.dimension}
                         </span>
@@ -613,7 +630,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
                     {/* Expanded Row Details */}
                     {isExpanded && hasDetails && (
                       <tr>
-                        <td colSpan={7} className="px-0 py-0">
+                        <td colSpan={6} className="px-0 py-0">
                           <div className="bg-slate-50 border-t-2 border-b-2 border-teal-200">
                             {/* Detail Header */}
                             <div className="px-6 py-3 flex items-center justify-between gap-3 bg-teal-50 border-b border-teal-100 flex-wrap">
@@ -728,10 +745,13 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
                         </td>
                       </tr>
                     )}
-                  </tbody>
-                );
-              })}
-          </table>
+                      </tbody>
+                    );
+                  })}
+                </table>
+              </div>
+            );
+          })}
         </div>
 
         {filteredResults.length === 0 && (
