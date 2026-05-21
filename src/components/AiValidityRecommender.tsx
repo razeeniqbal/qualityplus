@@ -128,7 +128,7 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
     const [state, setState] = useState<State>('idle');
     const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
     const [dismissed, setDismissed] = useState(false);
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(true);
     const [errorMsg, setErrorMsg] = useState('');
 
     const webhookUrl = import.meta.env.VITE_N8N_VALIDITY_WEBHOOK_URL as string | undefined;
@@ -142,7 +142,7 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
       setState('loading');
       onLoadingChange(true);
       setDismissed(false);
-      setCollapsed(false);
+      setCollapsed(true);
 
       const columnProfiles = buildColumnProfiles(targetCols, data.rows);
 
