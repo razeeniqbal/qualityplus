@@ -797,8 +797,9 @@ export default function QualityConfiguration({
             return next;
           });
 
+          // Mark dirty so user knows to save — but do NOT unlock execute yet
+          // User must explicitly save or load a template before executing
           setIsTemplateDirty(true);
-          setHasTemplateAction(true);
         }}
       />
 
