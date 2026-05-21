@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+﻿import { useState, useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { X, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Download, XCircle, Search, Filter } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
@@ -170,7 +170,7 @@ export default function CombinedFailedRowsModal({ datasetId, results, onClose }:
           </div>
           <div className="flex items-center gap-2">
             <button onClick={exportCSV} disabled={loading || filteredRows.length === 0}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition disabled:opacity-40">
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition disabled:opacity-40">
               <Download className="w-3.5 h-3.5" /> Export CSV
             </button>
             <button onClick={onClose} className="p-1.5 hover:bg-slate-100 rounded-lg transition">
@@ -189,7 +189,7 @@ export default function CombinedFailedRowsModal({ datasetId, results, onClose }:
               placeholder="Search all columns…"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full pl-8 pr-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white"
+              className="w-full pl-8 pr-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none bg-white"
             />
           </div>
 
@@ -198,7 +198,7 @@ export default function CombinedFailedRowsModal({ datasetId, results, onClose }:
             onClick={() => setShowFilters(v => !v)}
             className={`flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg border transition ${
               showFilters || activeFilterCount > 0
-                ? 'bg-teal-600 text-white border-teal-600'
+                ? 'bg-[#008192] text-white border-[#03AD9A]'
                 : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-100'
             }`}
           >
@@ -212,7 +212,7 @@ export default function CombinedFailedRowsModal({ datasetId, results, onClose }:
             <select
               value={rowsPerPage}
               onChange={e => { setRowsPerPage(Number(e.target.value)); setCurrentPage(1); }}
-              className="px-2 py-1.5 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white"
+              className="px-2 py-1.5 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none bg-white"
             >
               {PAGE_SIZE_OPTIONS.map(n => (
                 <option key={n} value={n}>{n}</option>
@@ -243,7 +243,7 @@ export default function CombinedFailedRowsModal({ datasetId, results, onClose }:
                     placeholder="filter…"
                     value={colFilters[col] ?? ''}
                     onChange={e => setColFilters(prev => ({ ...prev, [col]: e.target.value }))}
-                    className="w-full px-2 py-1 text-xs border border-slate-200 rounded focus:ring-1 focus:ring-teal-400 outline-none bg-white"
+                    className="w-full px-2 py-1 text-xs border border-slate-200 rounded focus:ring-1 focus:ring-[#03AD9A] outline-none bg-white"
                   />
                 </div>
               ))}
@@ -251,7 +251,7 @@ export default function CombinedFailedRowsModal({ datasetId, results, onClose }:
             {activeFilterCount > 0 && (
               <button
                 onClick={() => setColFilters({})}
-                className="mt-2 text-xs text-teal-600 hover:underline"
+                className="mt-2 text-xs text-[#008192] hover:underline"
               >
                 Clear all filters
               </button>
@@ -263,7 +263,7 @@ export default function CombinedFailedRowsModal({ datasetId, results, onClose }:
         <div className="flex-1 overflow-auto">
           {loading ? (
             <div className="flex items-center justify-center py-20">
-              <div className="animate-spin w-10 h-10 border-4 border-teal-600 border-t-transparent rounded-full" />
+              <div className="animate-spin w-10 h-10 border-4 border-[#03AD9A] border-t-transparent rounded-full" />
             </div>
           ) : filteredRows.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-slate-400">

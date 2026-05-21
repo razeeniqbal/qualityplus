@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { X, Plus, CheckCircle, AlertCircle, Settings, Info } from 'lucide-react';
 import type { QualityDimension } from '../types/database';
 
@@ -114,7 +114,7 @@ export default function QualityDimensionCard({
           <div className="relative w-full">
             <button
               onClick={() => setShowDropdown(!showDropdown)}
-              className="w-full text-sm bg-white border-2 border-dashed border-slate-300 hover:border-teal-500 text-slate-600 hover:text-teal-600 font-medium py-2 px-3 rounded-lg transition flex items-center justify-center space-x-2"
+              className="w-full text-sm bg-white border-2 border-dashed border-slate-300 hover:border-[#28B98F] text-slate-600 hover:text-[#008192] font-medium py-2 px-3 rounded-lg transition flex items-center justify-center space-x-2"
             >
               <Plus className="w-4 h-4" />
               <span>Add Attributes</span>
@@ -129,10 +129,10 @@ export default function QualityDimensionCard({
                     <button
                       key={column}
                       onClick={() => handleSelectColumn(column)}
-                      className="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-teal-50 hover:text-teal-800 rounded transition flex items-center justify-between group"
+                      className="w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-[#f0faf8] hover:text-[#064B77] rounded transition flex items-center justify-between group"
                     >
                       <span>{column}</span>
-                      <Plus className="w-4 h-4 text-slate-400 group-hover:text-teal-600" />
+                      <Plus className="w-4 h-4 text-slate-400 group-hover:text-[#008192]" />
                     </button>
                   ))}
                 </div>

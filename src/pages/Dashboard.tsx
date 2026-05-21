@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { Search, Crown, Edit, Eye, Users, Trash2, X, FolderOpen, ImageIcon, Lock, Globe, Star } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import type { ProjectWithRole, ProjectUserRole } from '../types/database';
@@ -177,7 +177,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
         <h1 className="text-3xl font-bold text-slate-800">Dashboard</h1>
         <button
           onClick={openNewProject}
-          className="flex items-center space-x-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-6 py-3 rounded-lg hover:from-teal-700 hover:to-emerald-700 transition shadow-lg hover:shadow-xl"
+          className="flex items-center space-x-2 bg-gradient-to-r from-[#008192] to-[#064B77] text-white px-6 py-3 rounded-lg hover:from-[#064B77] hover:to-[#1D275A] transition shadow-lg hover:shadow-xl"
         >
           <FolderOpen className="w-5 h-5" />
           <span className="font-medium">New Project</span>
@@ -200,13 +200,13 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
               <div className="flex flex-col items-center space-y-3">
                 <div
                   onClick={() => iconInputRef.current?.click()}
-                  className="w-24 h-24 rounded-2xl border-2 border-dashed border-slate-300 hover:border-teal-400 cursor-pointer overflow-hidden flex items-center justify-center bg-slate-50 hover:bg-teal-50 transition group"
+                  className="w-24 h-24 rounded-2xl border-2 border-dashed border-slate-300 hover:border-[#63BF81] cursor-pointer overflow-hidden flex items-center justify-center bg-slate-50 hover:bg-[#f0faf8] transition group"
                   title="Click to upload project icon"
                 >
                   {iconPreview ? (
                     <img src={iconPreview} alt="Project icon" className="w-full h-full object-cover" />
                   ) : (
-                    <div className="flex flex-col items-center space-y-1 text-slate-400 group-hover:text-teal-500 transition">
+                    <div className="flex flex-col items-center space-y-1 text-slate-400 group-hover:text-[#28B98F] transition">
                       <ImageIcon className="w-8 h-8" />
                       <span className="text-xs font-medium">Upload Icon</span>
                     </div>
@@ -240,7 +240,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleCreateProject()}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none"
                   autoFocus
                 />
               </div>
@@ -255,7 +255,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
                   value={projectDescription}
                   onChange={(e) => setProjectDescription(e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none resize-none text-sm"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none resize-none text-sm"
                 />
               </div>
 
@@ -282,7 +282,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
                     onClick={() => setNewProjectIsPublic(true)}
                     className={`flex-1 flex items-center justify-center space-x-2 py-2.5 rounded-lg transition text-sm font-medium ${
                       newProjectIsPublic
-                        ? 'bg-white text-teal-700 shadow-sm border border-teal-200'
+                        ? 'bg-white text-[#008192] shadow-sm border border-[#a8e0d6]'
                         : 'text-slate-500 hover:text-slate-700'
                     }`}
                   >
@@ -308,7 +308,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
               <button
                 onClick={handleCreateProject}
                 disabled={!projectName.trim() || isCreating}
-                className="flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center space-x-2 px-5 py-2.5 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isCreating ? (
                   <>
@@ -335,7 +335,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
           placeholder="Search projects..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-xl bg-white shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm"
+          className="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-xl bg-white shadow-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none text-sm"
         />
       </div>
 
@@ -364,16 +364,16 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
           onClick={() => setActiveTab(activeTab === 'shared' ? 'all' : 'shared')}
           className={`flex items-center space-x-3 px-5 py-3 rounded-xl border-2 transition shadow-sm ${
             activeTab === 'shared'
-              ? 'border-teal-400 bg-teal-50 text-teal-700'
-              : 'border-slate-200 bg-white text-slate-600 hover:border-teal-300 hover:bg-teal-50/50'
+              ? 'border-[#63BF81] bg-[#f0faf8] text-[#008192]'
+              : 'border-slate-200 bg-white text-slate-600 hover:border-[#7bcfc2] hover:bg-[#f0faf8]/50'
           }`}
         >
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${activeTab === 'shared' ? 'bg-teal-100' : 'bg-slate-100'}`}>
-            <Users className={`w-4 h-4 ${activeTab === 'shared' ? 'text-teal-600' : 'text-slate-400'}`} />
+          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${activeTab === 'shared' ? 'bg-[#d4f0ea]' : 'bg-slate-100'}`}>
+            <Users className={`w-4 h-4 ${activeTab === 'shared' ? 'text-[#008192]' : 'text-slate-400'}`} />
           </div>
           <div className="text-left">
             <p className="text-xs text-slate-400 font-medium leading-none mb-0.5">Shared Projects</p>
-            <p className={`text-lg font-bold leading-none ${activeTab === 'shared' ? 'text-teal-700' : 'text-slate-700'}`}>{sharedProjects.length}</p>
+            <p className={`text-lg font-bold leading-none ${activeTab === 'shared' ? 'text-[#008192]' : 'text-slate-700'}`}>{sharedProjects.length}</p>
           </div>
         </button>
       </div>
@@ -381,7 +381,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
       {/* Projects Grid */}
       {loading ? (
         <div className="text-center py-20">
-          <div className="animate-spin w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full mx-auto"></div>
+          <div className="animate-spin w-12 h-12 border-4 border-[#03AD9A] border-t-transparent rounded-full mx-auto"></div>
           <p className="text-slate-600 mt-4">Loading projects...</p>
         </div>
       ) : filteredProjects.length === 0 ? (
@@ -396,7 +396,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
           {activeTab !== 'shared' && !searchQuery && (
             <button
               onClick={openNewProject}
-              className="bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-6 py-3 rounded-lg hover:from-teal-700 hover:to-emerald-700 transition inline-flex items-center space-x-2"
+              className="bg-gradient-to-r from-[#008192] to-[#064B77] text-white px-6 py-3 rounded-lg hover:from-[#064B77] hover:to-[#1D275A] transition inline-flex items-center space-x-2"
             >
               <FolderOpen className="w-5 h-5" />
               <span>New Project</span>
@@ -411,13 +411,13 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
             return (
               <div
                 key={project.id}
-                className="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md hover:border-teal-200 transition cursor-pointer group flex flex-col"
+                className="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md hover:border-[#a8e0d6] transition cursor-pointer group flex flex-col"
                 onClick={() => onNavigateToRecords(project.id)}
               >
                 {/* Top section: thumbnail + name/date + star */}
                 <div className="flex items-start gap-3 p-4">
                   {/* Square thumbnail */}
-                  <div className="w-16 h-16 rounded-lg flex-shrink-0 overflow-hidden bg-gradient-to-br from-teal-500 to-emerald-600">
+                  <div className="w-16 h-16 rounded-lg flex-shrink-0 overflow-hidden" style={{ background: 'linear-gradient(135deg, #1D275A, #008192)' }}>
                     {icon ? (
                       <img src={icon} alt={project.name} className="w-full h-full object-cover" />
                     ) : (
@@ -429,7 +429,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
 
                   {/* Name + date */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-slate-800 text-sm group-hover:text-teal-700 transition leading-tight" title={project.name}>
+                    <h3 className="font-bold text-slate-800 text-sm group-hover:text-[#008192] transition leading-tight" title={project.name}>
                       {project.name}
                     </h3>
                     <p className="text-xs text-slate-400 mt-0.5">
@@ -476,7 +476,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
                   ) : <span />}
                   <button
                     onClick={() => onNavigateToRecords(project.id)}
-                    className="text-xs text-teal-600 hover:text-teal-800 font-semibold transition"
+                    className="text-xs text-[#008192] hover:text-[#064B77] font-semibold transition"
                   >
                     Show datasets →
                   </button>

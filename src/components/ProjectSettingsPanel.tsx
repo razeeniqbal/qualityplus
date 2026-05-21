@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { X, Settings, Globe, Lock, UserPlus, UserMinus, Save, RotateCcw } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import type { ProjectMember, AppUser } from '../types/database';
@@ -241,7 +241,7 @@ export default function ProjectSettingsPanel({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 flex-shrink-0">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-[#28B98F] to-[#03AD9A] rounded-lg flex items-center justify-center">
               <Settings className="w-4 h-4 text-white" />
             </div>
             <div>
@@ -268,7 +268,7 @@ export default function ProjectSettingsPanel({
                     type="text"
                     value={editName}
                     onChange={e => setEditName(e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                    className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none"
                   />
                 </div>
                 <div>
@@ -278,14 +278,14 @@ export default function ProjectSettingsPanel({
                     onChange={e => setEditDescription(e.target.value)}
                     rows={2}
                     placeholder="Brief description of this project"
-                    className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none resize-none"
+                    className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none resize-none"
                   />
                 </div>
                 {infoChanged && (
                   <button
                     onClick={handleSaveInfo}
                     disabled={!editName.trim() || isSavingInfo}
-                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white text-sm font-medium rounded-lg hover:from-teal-700 hover:to-emerald-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#008192] to-[#064B77] text-white text-sm font-medium rounded-lg hover:from-[#064B77] hover:to-[#1D275A] transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSavingInfo
                       ? <><div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" /><span>Saving...</span></>
@@ -317,10 +317,10 @@ export default function ProjectSettingsPanel({
             <div className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-200">
               <div className="flex items-center space-x-3">
                 <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${
-                  stagedVisibility ? 'bg-teal-100' : 'bg-slate-200'
+                  stagedVisibility ? 'bg-[#d4f0ea]' : 'bg-slate-200'
                 }`}>
                   {stagedVisibility
-                    ? <Globe className="w-5 h-5 text-teal-600" />
+                    ? <Globe className="w-5 h-5 text-[#008192]" />
                     : <Lock className="w-5 h-5 text-slate-500" />}
                 </div>
                 <div>
@@ -339,7 +339,7 @@ export default function ProjectSettingsPanel({
                 <button
                   onClick={handleStageVisibility}
                   className={`relative w-12 h-6 rounded-full transition-colors flex-shrink-0 ${
-                    stagedVisibility ? 'bg-teal-600' : 'bg-slate-300'
+                    stagedVisibility ? 'bg-[#008192]' : 'bg-slate-300'
                   }`}
                   title={stagedVisibility ? 'Switch to Private' : 'Switch to Public'}
                 >
@@ -350,7 +350,7 @@ export default function ProjectSettingsPanel({
               ) : (
                 <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${
                   stagedVisibility
-                    ? 'bg-teal-50 text-teal-700 border-teal-200'
+                    ? 'bg-[#f0faf8] text-[#008192] border-[#a8e0d6]'
                     : 'bg-slate-50 text-slate-600 border-slate-200'
                 }`}>
                   {stagedVisibility ? 'Public' : 'Private'}
@@ -373,7 +373,7 @@ export default function ProjectSettingsPanel({
 
             {loadingMembers && (
               <div className="flex justify-center py-8">
-                <div className="animate-spin w-6 h-6 border-2 border-teal-600 border-t-transparent rounded-full" />
+                <div className="animate-spin w-6 h-6 border-2 border-[#03AD9A] border-t-transparent rounded-full" />
               </div>
             )}
 
@@ -414,7 +414,7 @@ export default function ProjectSettingsPanel({
                       }`}
                     >
                       <div className="flex items-center space-x-3 min-w-0">
-                        <div className="w-8 h-8 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <div className="w-8 h-8 bg-gradient-to-br from-[#28B98F] to-[#03AD9A] rounded-full flex items-center justify-center flex-shrink-0">
                           <span className="text-white text-xs font-bold">
                             {(member.display_name ?? '?').charAt(0).toUpperCase()}
                           </span>
@@ -436,7 +436,7 @@ export default function ProjectSettingsPanel({
                             <select
                               value={effectiveRole(member)}
                               onChange={(e) => handleStageRoleChange(member.id, e.target.value as 'owner' | 'editor' | 'viewer')}
-                              className="text-xs border border-slate-200 rounded-lg px-2 py-1.5 focus:ring-1 focus:ring-teal-500 outline-none bg-white text-slate-700 cursor-pointer"
+                              className="text-xs border border-slate-200 rounded-lg px-2 py-1.5 focus:ring-1 focus:ring-[#03AD9A] outline-none bg-white text-slate-700 cursor-pointer"
                             >
                               <option value="owner">Co-owner</option>
                               <option value="editor">Editor</option>
@@ -453,7 +453,7 @@ export default function ProjectSettingsPanel({
                         ) : isOwner && isRemoved ? (
                           <button
                             onClick={() => handleUndoRemoval(member.id)}
-                            className="text-xs text-slate-500 hover:text-teal-600 underline transition"
+                            className="text-xs text-slate-500 hover:text-[#008192] underline transition"
                           >
                             Undo
                           </button>
@@ -471,7 +471,7 @@ export default function ProjectSettingsPanel({
                 {pendingAdds.map((pending) => (
                   <div
                     key={pending.displayName}
-                    className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-teal-50 border border-teal-100"
+                    className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-[#f0faf8] border border-[#d4f0ea]"
                   >
                     <div className="flex items-center space-x-3 min-w-0">
                       <div className="w-8 h-8 bg-gradient-to-br from-teal-400 to-emerald-400 rounded-full flex items-center justify-center flex-shrink-0">
@@ -481,14 +481,14 @@ export default function ProjectSettingsPanel({
                       </div>
                       <div className="min-w-0">
                         <span className="text-sm font-medium text-slate-700 truncate block">{pending.displayName}</span>
-                        <span className="text-xs text-teal-600">Will be added</span>
+                        <span className="text-xs text-[#008192]">Will be added</span>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2 flex-shrink-0">
                       <select
                         value={pending.role}
                         onChange={(e) => handleChangePendingRole(pending.displayName, e.target.value as 'owner' | 'editor' | 'viewer')}
-                        className="text-xs border border-teal-200 rounded-lg px-2 py-1.5 focus:ring-1 focus:ring-teal-500 outline-none bg-white text-slate-700 cursor-pointer"
+                        className="text-xs border border-[#a8e0d6] rounded-lg px-2 py-1.5 focus:ring-1 focus:ring-[#03AD9A] outline-none bg-white text-slate-700 cursor-pointer"
                       >
                         <option value="owner">Co-owner</option>
                         <option value="editor">Editor</option>
@@ -511,7 +511,7 @@ export default function ProjectSettingsPanel({
             {isOwner && (
               <div className="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
                 <p className="text-sm font-semibold text-slate-700 flex items-center space-x-2">
-                  <UserPlus className="w-4 h-4 text-teal-600" />
+                  <UserPlus className="w-4 h-4 text-[#008192]" />
                   <span>Add Member</span>
                 </p>
                 {availableUsers.length === 0 ? (
@@ -521,7 +521,7 @@ export default function ProjectSettingsPanel({
                     <select
                       value={newMemberDisplayName}
                       onChange={(e) => setNewMemberDisplayName(e.target.value)}
-                      className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white text-slate-700 cursor-pointer"
+                      className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none bg-white text-slate-700 cursor-pointer"
                     >
                       <option value="">— Select a user —</option>
                       {availableUsers.map(u => (
@@ -534,7 +534,7 @@ export default function ProjectSettingsPanel({
                       <select
                         value={newMemberRole}
                         onChange={(e) => setNewMemberRole(e.target.value as 'owner' | 'editor' | 'viewer')}
-                        className="flex-1 text-sm border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 outline-none bg-white text-slate-700"
+                        className="flex-1 text-sm border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#03AD9A] outline-none bg-white text-slate-700"
                       >
                         <option value="viewer">Viewer</option>
                         <option value="editor">Editor</option>
@@ -543,7 +543,7 @@ export default function ProjectSettingsPanel({
                       <button
                         onClick={handleAddToPending}
                         disabled={!newMemberDisplayName}
-                        className="flex items-center space-x-1.5 px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white text-sm font-medium rounded-lg hover:from-teal-700 hover:to-emerald-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center space-x-1.5 px-4 py-2 bg-gradient-to-r from-[#008192] to-[#064B77] text-white text-sm font-medium rounded-lg hover:from-[#064B77] hover:to-[#1D275A] transition disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <UserPlus className="w-4 h-4" />
                         <span>Add</span>
@@ -580,7 +580,7 @@ export default function ProjectSettingsPanel({
               <button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white text-sm font-medium rounded-lg hover:from-teal-700 hover:to-emerald-700 transition disabled:opacity-50"
+                className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-[#008192] to-[#064B77] text-white text-sm font-medium rounded-lg hover:from-[#064B77] hover:to-[#1D275A] transition disabled:opacity-50"
               >
                 {isSaving ? (
                   <>

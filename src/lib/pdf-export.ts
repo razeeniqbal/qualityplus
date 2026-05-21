@@ -6,7 +6,6 @@ import type { QualityResult } from '../types/database';
 interface ResultWithDetails extends QualityResult {
   rowDetails?: RowDetail[];
 }
-
 interface ExportOptions {
   datasetName: string;
   publishedBy?: string;
@@ -18,142 +17,335 @@ interface ExportOptions {
   rowFilter: 'all' | 'fail';
 }
 
-function scoreColor(score: number): [number, number, number] {
-  if (score >= 100) return [34, 197, 94];   // green
-  if (score >= 75)  return [234, 179, 8];   // yellow
-  if (score >= 50)  return [249, 115, 22];  // orange
-  return [239, 68, 68];                      // red
+// ── Classic black & white — no fills, thin rules, clean typography ────────────
+const BLACK  : [number,number,number] = [0,   0,   0];
+const INK    : [number,number,number] = [20,  20,  20];
+const GREY   : [number,number,number] = [90,  90,  90];
+const LIGHT  : [number,number,number] = [150, 150, 150];
+const RULE   : [number,number,number] = [180, 180, 180];
+const THBG   : [number,number,number] = [30,  30,  30];   // table header bg (near-black)
+const ALTBG  : [number,number,number] = [248, 248, 248];  // alternating row — barely visible
+const WHITE  : [number,number,number] = [255, 255, 255];
+
+type AT = { lastAutoTable: { finalY: number } };
+function lastY(doc: jsPDF) { return (doc as unknown as AT).lastAutoTable?.finalY ?? 0; }
+
+function grade(s: number) {
+  if (s >= 100) return 'Excellent';
+  if (s >= 75)  return 'Good';
+  if (s >= 50)  return 'Fair';
+  return 'Poor';
 }
 
-function drawScoreCircle(doc: jsPDF, x: number, y: number, score: number, size = 10) {
-  const [r, g, b] = scoreColor(score);
-  doc.setDrawColor(r, g, b);
-  doc.setLineWidth(1.5);
-  doc.circle(x, y, size / 2, 'S');
-  doc.setFontSize(size * 0.7);
-  doc.setTextColor(r, g, b);
-  doc.setFont('helvetica', 'bold');
-  const label = `${Math.round(score)}%`;
-  const tw = doc.getTextWidth(label);
-  doc.text(label, x - tw / 2, y + size * 0.25);
+function parseAI(raw: string) {
+  const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+  let sec = '';
+  const ov: string[] = [], is: string[] = [], re: string[] = [];
+  for (const line of lines) {
+    if (/^\[OVERVIEW\]$/i.test(line))        { sec = 'o'; continue; }
+    if (/^\[KEY ISSUES\]$/i.test(line))      { sec = 'i'; continue; }
+    if (/^\[RECOMMENDATIONS\]$/i.test(line)) { sec = 'r'; continue; }
+    if (sec === 'o') ov.push(line);
+    if (sec === 'i') is.push(line.replace(/^[-*]\s*/, ''));
+    if (sec === 'r') re.push(line.replace(/^\d+[.)]\s*/, ''));
+  }
+  return { overview: ov.join(' ').trim(), issues: is, recs: re };
 }
 
 export async function exportResultsPDF(opts: ExportOptions): Promise<void> {
-  const {
-    datasetName, publishedBy, overallScore, totalPassed, totalFailed,
-    results, aiSummary, rowFilter,
-  } = opts;
+  const { datasetName, publishedBy, overallScore, totalPassed, totalFailed,
+          results, aiSummary, rowFilter } = opts;
 
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-  const pageW = doc.internal.pageSize.getWidth();
-  const margin = 14;
-  const contentW = pageW - margin * 2;
-  let y = margin;
+  const pw  = doc.internal.pageSize.getWidth();
+  const ph  = doc.internal.pageSize.getHeight();
+  const ml  = 20;
+  const mr  = 20;
+  const cw  = pw - ml - mr;   // 170mm usable width
+  const bot = ph - 18;
+  let y     = 0;
 
-  // ── Header ─────────────────────────────────────────────────────────────────
-  doc.setFillColor(15, 118, 110); // teal-700
-  doc.rect(0, 0, pageW, 28, 'F');
-  doc.setFontSize(16);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(255, 255, 255);
-  doc.text('Quality Plus — Data Quality Report', margin, 12);
-  doc.setFontSize(9);
-  doc.setFont('helvetica', 'normal');
-  doc.text(`Dataset: ${datasetName}`, margin, 19);
-  doc.text(`Published by: ${publishedBy ?? 'Unknown'} · Generated: ${new Date().toLocaleString('en-GB')}`, margin, 24);
-  y = 36;
+  // ── Page helpers ────────────────────────────────────────────────────────────
+  function ensureSpace(n: number) { if (y + n > bot) addPage(); }
 
-  // ── Score Overview ──────────────────────────────────────────────────────────
-  doc.setFontSize(12);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(30, 41, 59);
-  doc.text('Score Overview', margin, y);
-  y += 7;
-
-  // Overall score circle area
-  const circleX = margin + 12;
-  drawScoreCircle(doc, circleX, y + 8, overallScore, 20);
-
-  // Stats
-  doc.setFontSize(9);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(71, 85, 105);
-  const statsX = margin + 30;
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(30, 41, 59);
-  doc.text('Overall Score', statsX, y + 3);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(71, 85, 105);
-  doc.text(`${overallScore.toFixed(1)}%`, statsX, y + 8);
-
-  doc.setFontSize(9);
-  const cols3X = statsX + 35;
-  doc.setFillColor(240, 253, 244);
-  doc.roundedRect(cols3X, y, 28, 10, 2, 2, 'F');
-  doc.setTextColor(22, 163, 74);
-  doc.setFont('helvetica', 'bold');
-  doc.text(`${totalPassed.toLocaleString()}`, cols3X + 14, y + 4, { align: 'center' });
-  doc.setFont('helvetica', 'normal');
-  doc.text('Passed', cols3X + 14, y + 8, { align: 'center' });
-
-  doc.setFillColor(254, 242, 242);
-  doc.roundedRect(cols3X + 32, y, 28, 10, 2, 2, 'F');
-  doc.setTextColor(220, 38, 38);
-  doc.setFont('helvetica', 'bold');
-  doc.text(`${totalFailed.toLocaleString()}`, cols3X + 46, y + 4, { align: 'center' });
-  doc.setFont('helvetica', 'normal');
-  doc.text('Failed', cols3X + 46, y + 8, { align: 'center' });
-  y += 20;
-
-  // ── Dimension scores ────────────────────────────────────────────────────────
-  const dims = ['completeness', 'uniqueness', 'consistency', 'validity'];
-  const dimW = contentW / dims.length;
-  dims.forEach((dim, i) => {
-    const dimResults = results.filter(r => r.dimension === dim);
-    if (dimResults.length === 0) return;
-    const dimScore = dimResults.reduce((s, r) => s + r.score, 0) / dimResults.length;
-    const dx = margin + i * dimW;
-    const [r2, g2, b2] = scoreColor(dimScore);
-    doc.setDrawColor(226, 232, 240);
-    doc.setFillColor(248, 250, 252);
-    doc.roundedRect(dx, y, dimW - 2, 16, 2, 2, 'FD');
-    doc.setFontSize(8);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(71, 85, 105);
-    doc.text(dim.charAt(0).toUpperCase() + dim.slice(1), dx + (dimW - 2) / 2, y + 5, { align: 'center' });
-    doc.setFontSize(11);
-    doc.setTextColor(r2, g2, b2);
-    doc.text(`${dimScore.toFixed(0)}%`, dx + (dimW - 2) / 2, y + 12, { align: 'center' });
-  });
-  y += 22;
-
-  // ── AI Summary ──────────────────────────────────────────────────────────────
-  if (aiSummary) {
-    doc.setFontSize(12);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(30, 41, 59);
-    doc.text('AI Summary', margin, y);
-    y += 5;
-
-    doc.setFillColor(240, 253, 250);
-    const summaryLines = doc.splitTextToSize(aiSummary, contentW - 8);
-    const summaryH = summaryLines.length * 4.5 + 6;
-    doc.roundedRect(margin, y, contentW, summaryH, 2, 2, 'F');
-    doc.setFontSize(8.5);
+  function addPage() {
+    doc.addPage();
+    y = 22;
+    doc.setDrawColor(...RULE);
+    doc.setLineWidth(0.25);
+    doc.line(ml, 13, pw - mr, 13);
+    doc.setFontSize(7.5);
     doc.setFont('helvetica', 'normal');
-    doc.setTextColor(71, 85, 105);
-    doc.text(summaryLines, margin + 4, y + 5);
-    y += summaryH + 6;
+    doc.setTextColor(...LIGHT);
+    doc.text('Quality Plus  —  Data Quality Report', ml, 10);
+    doc.text(datasetName, pw - mr, 10, { align: 'right' });
   }
 
-  // ── Detailed Results grouped by column ──────────────────────────────────────
-  doc.setFontSize(12);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(30, 41, 59);
-  doc.text('Detailed Results', margin, y);
-  y += 2;
+  function sectionTitle(title: string) {
+    ensureSpace(14);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(...BLACK);
+    doc.text(title.toUpperCase(), ml, y);
+    y += 2;
+    // Double rule: thick then thin
+    doc.setDrawColor(...BLACK);
+    doc.setLineWidth(0.7);
+    doc.line(ml, y, pw - mr, y);
+    y += 1;
+    doc.setDrawColor(...RULE);
+    doc.setLineWidth(0.25);
+    doc.line(ml, y, pw - mr, y);
+    y += 7;
+  }
 
-  // Group by column
+  // ── HEADER — classic letterhead style ─────────────────────────────────────
+  // Top thick rule
+  doc.setFillColor(...BLACK);
+  doc.rect(0, 0, pw, 1.5, 'F');
+
+  // Report title
+  doc.setFontSize(18);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...BLACK);
+  doc.text('DATA QUALITY REPORT', ml, 16);
+
+  // Subtitle
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(...GREY);
+  doc.text('Quality Plus  ·  AEM Energy Solutions', ml, 23);
+
+  // Meta block — right aligned
+  doc.setFontSize(8);
+  doc.setTextColor(...GREY);
+  doc.text(`Dataset: ${datasetName}`, pw - mr, 9, { align: 'right' });
+  doc.text(`Published by: ${publishedBy ?? 'Unknown'}`, pw - mr, 15, { align: 'right' });
+  doc.text(new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }), pw - mr, 21, { align: 'right' });
+
+  // Bottom rule of header area
+  doc.setDrawColor(...BLACK);
+  doc.setLineWidth(0.5);
+  doc.line(ml, 27, pw - mr, 27);
+
+  y = 36;
+
+  // ── SCORE OVERVIEW ──────────────────────────────────────────────────────────
+  sectionTitle('Score Overview');
+
+  // Layout: 4 equal columns separated by thin rules
+  // Col 1: Overall Score  | Col 2: Grade | Col 3: Passed | Col 4: Failed
+  const scH  = 22;
+  const scW  = cw / 4;
+
+  // Outer border
+  doc.setDrawColor(...RULE);
+  doc.setLineWidth(0.3);
+  doc.rect(ml, y, cw, scH, 'S');
+
+  // Column internal dividers
+  for (let i = 1; i < 4; i++) {
+    doc.line(ml + i * scW, y + 2, ml + i * scW, y + scH - 2);
+  }
+
+  // Column 1 — Overall Score
+  doc.setFontSize(7);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(...LIGHT);
+  doc.text('OVERALL SCORE', ml + scW / 2, y + 6, { align: 'center' });
+  doc.setFontSize(17);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...BLACK);
+  doc.text(`${overallScore.toFixed(1)}%`, ml + scW / 2, y + 17, { align: 'center' });
+
+  // Column 2 — Grade
+  doc.setFontSize(7);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(...LIGHT);
+  doc.text('GRADE', ml + scW + scW / 2, y + 6, { align: 'center' });
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...INK);
+  doc.text(grade(overallScore).toUpperCase(), ml + scW + scW / 2, y + 17, { align: 'center' });
+
+  // Column 3 — Passed
+  doc.setFontSize(7);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(...LIGHT);
+  doc.text('PASSED', ml + 2 * scW + scW / 2, y + 6, { align: 'center' });
+  doc.setFontSize(17);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...INK);
+  doc.text(totalPassed.toLocaleString(), ml + 2 * scW + scW / 2, y + 17, { align: 'center' });
+
+  // Column 4 — Failed
+  doc.setFontSize(7);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(...LIGHT);
+  doc.text('FAILED', ml + 3 * scW + scW / 2, y + 6, { align: 'center' });
+  doc.setFontSize(17);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...INK);
+  doc.text(totalFailed.toLocaleString(), ml + 3 * scW + scW / 2, y + 17, { align: 'center' });
+
+  y += scH + 8;
+
+  // ── DIMENSION BREAKDOWN ───────────────────────────────────────────────────
+  const activeDims = ['completeness','uniqueness','consistency','validity']
+    .filter(d => results.some(r => r.dimension === d));
+  const dw = cw / activeDims.length;
+  const dh = 16;
+
+  doc.setDrawColor(...RULE);
+  doc.setLineWidth(0.3);
+  doc.rect(ml, y, cw, dh, 'S');
+
+  activeDims.forEach((dim, i) => {
+    const dRes   = results.filter(r => r.dimension === dim);
+    const dScore = dRes.reduce((s, r) => s + r.score, 0) / dRes.length;
+    const dx     = ml + i * dw;
+
+    if (i > 0) {
+      doc.setDrawColor(...RULE);
+      doc.setLineWidth(0.25);
+      doc.line(dx, y + 2, dx, y + dh - 2);
+    }
+
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(...LIGHT);
+    doc.text(dim.toUpperCase(), dx + dw / 2, y + 7, { align: 'center' });
+
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(...INK);
+    doc.text(`${dScore.toFixed(0)}%`, dx + dw / 2, y + 14, { align: 'center' });
+  });
+
+  y += dh + 12;
+
+  // ── AI SUMMARY ──────────────────────────────────────────────────────────────
+  if (aiSummary) {
+    sectionTitle('AI Summary');
+    const { overview, issues, recs } = parseAI(aiSummary);
+
+    // Overview — full width, no box, just indented paragraph
+    if (overview) {
+      // Wrap to full content width
+      const lines = doc.splitTextToSize(overview, cw);
+      const h     = lines.length * 5.5 + 2;
+      ensureSpace(h + 6);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(...INK);
+      doc.text(lines, ml, y, { lineHeightFactor: 1.5 });
+      y += h + 8;
+    }
+
+    // Key Issues
+    if (issues.length > 0) {
+      ensureSpace(12);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(...BLACK);
+      doc.text('Key Issues', ml, y);
+      y += 2;
+      doc.setDrawColor(...RULE);
+      doc.setLineWidth(0.25);
+      doc.line(ml, y, pw - mr, y);
+      y += 5;
+
+      for (const issue of issues) {
+        const parts  = issue.split(' - ');
+        const col    = parts[0]?.trim() ?? '';
+        const dim    = parts[1]?.trim() ?? '';
+        const count  = parts[2]?.trim() ?? '';
+        const reason = parts.slice(3).join(' — ').trim() || issue;
+
+        // Wrap reason to full content width minus small indent
+        const rLines = doc.splitTextToSize(reason, cw - 4);
+        const rowH   = rLines.length * 5 + 10;
+        ensureSpace(rowH + 3);
+
+        // Simple left rule only
+        doc.setDrawColor(...INK);
+        doc.setLineWidth(1.2);
+        doc.line(ml, y, ml, y + rowH - 2);
+        doc.setLineWidth(0.25);
+
+        // Column name bold + dimension + count
+        doc.setFontSize(8.5);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(...INK);
+        doc.text(col, ml + 4, y + 5.5);
+
+        if (dim) {
+          const cw2 = doc.getTextWidth(col);
+          doc.setFontSize(7.5);
+          doc.setFont('helvetica', 'normal');
+          doc.setTextColor(...GREY);
+          doc.text(`[${dim}]`, ml + 5 + cw2, y + 5.5);
+        }
+
+        if (count) {
+          doc.setFontSize(7.5);
+          doc.setFont('helvetica', 'bold');
+          doc.setTextColor(...GREY);
+          doc.text(count, pw - mr, y + 5.5, { align: 'right' });
+        }
+
+        // Reason — full width
+        doc.setFontSize(8);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(...GREY);
+        doc.text(rLines, ml + 4, y + rowH - rLines.length * 5 + 1);
+
+        // Bottom hairline
+        doc.setDrawColor(...RULE);
+        doc.setLineWidth(0.2);
+        doc.line(ml + 4, y + rowH, pw - mr, y + rowH);
+
+        y += rowH + 4;
+      }
+      y += 4;
+    }
+
+    // Recommendations
+    if (recs.length > 0) {
+      ensureSpace(12);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(...BLACK);
+      doc.text('Recommendations', ml, y);
+      y += 2;
+      doc.setDrawColor(...RULE);
+      doc.setLineWidth(0.25);
+      doc.line(ml, y, pw - mr, y);
+      y += 5;
+
+      recs.forEach((rec, i) => {
+        // Wrap to full content width minus number indent
+        const rLines = doc.splitTextToSize(rec, cw - 8);
+        const rH     = rLines.length * 5 + 3;
+        ensureSpace(rH + 2);
+
+        doc.setFontSize(8.5);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(...INK);
+        doc.text(`${i + 1}.`, ml, y + 4.5);
+
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(...INK);
+        doc.text(rLines, ml + 7, y + 4.5, { lineHeightFactor: 1.4 });
+        y += rH + 4;
+      });
+    }
+  }
+
+  // ── DETAILED RESULTS — always starts on a new page ────────────────────────
+  addPage();
+  sectionTitle('Detailed Results');
+
   const grouped = new Map<string, ResultWithDetails[]>();
   for (const r of results) {
     if (!grouped.has(r.column_name)) grouped.set(r.column_name, []);
@@ -161,70 +353,75 @@ export async function exportResultsPDF(opts: ExportOptions): Promise<void> {
   }
 
   for (const [columnName, colResults] of grouped) {
-    const colOverall = colResults.reduce((s, r) => s + r.score, 0) / colResults.length;
-    const [cr, cg, cb] = scoreColor(colOverall);
+    const colScore = colResults.reduce((s, r) => s + r.score, 0) / colResults.length;
 
-    // Column header band
-    if (y > 260) { doc.addPage(); y = margin; }
-    doc.setFillColor(248, 250, 252);
-    doc.rect(margin, y + 2, contentW, 8, 'F');
-    doc.setFontSize(9);
+    ensureSpace(18);
+
+    // Column header row — near-black fill, white text (classic table header)
+    doc.setFillColor(...THBG);
+    doc.rect(ml, y, cw, 8, 'F');
+    doc.setFontSize(8.5);
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(30, 41, 59);
-    doc.text(columnName, margin + 2, y + 7.5);
-    doc.setTextColor(cr, cg, cb);
-    doc.text(`${colOverall.toFixed(0)}%`, pageW - margin - 2, y + 7.5, { align: 'right' });
-    y += 11;
+    doc.setTextColor(...WHITE);
+    doc.text(columnName, ml + 3, y + 5.8);
+    doc.text(`${colScore.toFixed(0)}%`, pw - mr - 3, y + 5.8, { align: 'right' });
 
-    // Dimension summary table for this column
-    const dimSummaryRows = colResults.map(r => [
-      r.dimension.charAt(0).toUpperCase() + r.dimension.slice(1),
-      `${r.score.toFixed(0)}%`,
-      r.passed_count.toLocaleString(),
-      r.failed_count.toLocaleString(),
-      r.total_count.toLocaleString(),
-    ]);
+    y += 8;
 
+    // Dimension summary
     autoTable(doc, {
       startY: y,
       head: [['Dimension', 'Score', 'Passed', 'Failed', 'Total']],
-      body: dimSummaryRows,
-      margin: { left: margin, right: margin },
-      styles: { fontSize: 8, cellPadding: 2 },
-      headStyles: { fillColor: [15, 118, 110], textColor: 255, fontStyle: 'bold', fontSize: 8 },
-      columnStyles: {
-        0: { cellWidth: 40 },
-        1: { cellWidth: 20, halign: 'center' },
-        2: { cellWidth: 25, halign: 'center', textColor: [22, 163, 74] },
-        3: { cellWidth: 25, halign: 'center', textColor: [220, 38, 38] },
-        4: { cellWidth: 25, halign: 'center' },
+      body: colResults.map(r => [
+        r.dimension.charAt(0).toUpperCase() + r.dimension.slice(1),
+        `${r.score.toFixed(0)}%`,
+        r.passed_count.toLocaleString(),
+        r.failed_count.toLocaleString(),
+        r.total_count.toLocaleString(),
+      ]),
+      margin: { left: ml, right: mr },
+      tableWidth: cw,
+      styles: {
+        fontSize: 8, cellPadding: 2.5,
+        lineColor: RULE, lineWidth: 0.25,
+        textColor: INK,
       },
-      alternateRowStyles: { fillColor: [248, 250, 252] },
+      headStyles: {
+        fillColor: [70, 70, 70], textColor: WHITE,
+        fontStyle: 'bold', fontSize: 8, cellPadding: 3,
+      },
+      columnStyles: {
+        0: { cellWidth: 52 },
+        1: { cellWidth: 24, halign: 'center', fontStyle: 'bold' },
+        2: { cellWidth: 32, halign: 'center' },
+        3: { cellWidth: 32, halign: 'center' },
+        4: { cellWidth: 30, halign: 'center', textColor: LIGHT },
+      },
+      alternateRowStyles: { fillColor: ALTBG },
       didParseCell: (data) => {
-        if (data.section === 'body' && data.column.index === 1) {
-          const score = parseFloat(data.cell.text[0]);
-          const [r2, g2, b2] = scoreColor(score);
-          data.cell.styles.textColor = [r2, g2, b2];
-          data.cell.styles.fontStyle = 'bold';
+        if (data.section === 'body' && data.column.index === 3) {
+          const v = parseInt(data.cell.text[0].replace(/,/g, ''));
+          if (v > 0) data.cell.styles.fontStyle = 'bold';
         }
       },
     });
-    y = (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 3;
+    y = lastY(doc) + 4;
 
-    // Per-row details for each check in this column
+    // Row detail tables
     for (const result of colResults) {
       const rowDetails = result.rowDetails ?? [];
-      const filtered = rowFilter === 'fail'
-        ? rowDetails.filter(d => !d.passed)
-        : rowDetails;
+      const filtered   = rowFilter === 'fail' ? rowDetails.filter(d => !d.passed) : rowDetails;
       if (filtered.length === 0) continue;
 
-      if (y > 255) { doc.addPage(); y = margin; }
-      doc.setFontSize(8);
+      ensureSpace(16);
+      doc.setFontSize(7.5);
       doc.setFont('helvetica', 'italic');
-      doc.setTextColor(100, 116, 139);
-      doc.text(`Row details — ${result.dimension} (${filtered.length} rows${rowFilter === 'fail' ? ' · failed only' : ''})`, margin + 4, y + 3);
-      y += 5;
+      doc.setTextColor(...LIGHT);
+      doc.text(
+        `Row details  ·  ${result.dimension.charAt(0).toUpperCase() + result.dimension.slice(1)}  ·  ${filtered.length} row${filtered.length !== 1 ? 's' : ''}${rowFilter === 'fail' ? '  ·  failed only' : ''}`,
+        ml + 2, y + 4
+      );
+      y += 7;
 
       autoTable(doc, {
         startY: y,
@@ -235,46 +432,58 @@ export async function exportResultsPDF(opts: ExportOptions): Promise<void> {
           d.passed ? 'Pass' : 'Fail',
           d.reason ?? '—',
         ]),
-        margin: { left: margin + 4, right: margin },
-        styles: { fontSize: 7.5, cellPadding: 1.5 },
-        headStyles: { fillColor: [71, 85, 105], textColor: 255, fontSize: 7.5 },
+        margin: { left: ml + 2, right: mr },
+        tableWidth: cw - 2,
+        styles: {
+          fontSize: 7.5, cellPadding: 2,
+          lineColor: RULE, lineWidth: 0.2,
+          textColor: INK,
+        },
+        headStyles: {
+          fillColor: [70, 70, 70], textColor: WHITE,
+          fontSize: 7.5, cellPadding: 2.5, fontStyle: 'bold',
+        },
         columnStyles: {
-          0: { cellWidth: 14, halign: 'center' },
-          1: { cellWidth: 35 },
-          2: { cellWidth: 14, halign: 'center' },
+          0: { cellWidth: 14, halign: 'center', textColor: LIGHT },
+          1: { cellWidth: 42 },
+          2: { cellWidth: 16, halign: 'center', fontStyle: 'bold' },
           3: { cellWidth: 'auto' },
         },
+        alternateRowStyles: { fillColor: ALTBG },
         didParseCell: (data) => {
-          if (data.section === 'body' && data.column.index === 2) {
-            data.cell.styles.textColor = data.cell.text[0] === 'Pass' ? [22, 163, 74] : [220, 38, 38];
-            data.cell.styles.fontStyle = 'bold';
-          }
-          if (data.section === 'body' && !filtered[data.row.index]?.passed) {
-            if (data.column.index !== 2) {
-              data.cell.styles.fillColor = [255, 242, 242];
+          if (data.section === 'body') {
+            const row = filtered[data.row.index];
+            if (data.column.index === 2) {
+              data.cell.styles.textColor = row?.passed ? [60, 130, 60] : [160, 30, 30];
             }
           }
         },
-        alternateRowStyles: {},
       });
-      y = (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 4;
+      y = lastY(doc) + 5;
     }
+
     y += 4;
+    doc.setDrawColor(...RULE);
+    doc.setLineWidth(0.2);
+    doc.line(ml, y, pw - mr, y);
+    y += 6;
   }
 
-  // ── Footer on each page ─────────────────────────────────────────────────────
+  // ── FOOTER on every page ──────────────────────────────────────────────────
   const pageCount = doc.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);
+    const fy = ph - 10;
+    doc.setDrawColor(...RULE);
+    doc.setLineWidth(0.3);
+    doc.line(ml, fy - 2, pw - mr, fy - 2);
     doc.setFontSize(7.5);
     doc.setFont('helvetica', 'normal');
-    doc.setTextColor(148, 163, 184);
-    doc.text(`Quality Plus — ${datasetName}`, margin, 293);
-    doc.text(`Page ${i} of ${pageCount}`, pageW - margin, 293, { align: 'right' });
-    doc.setDrawColor(226, 232, 240);
-    doc.line(margin, 290, pageW - margin, 290);
+    doc.setTextColor(...LIGHT);
+    doc.text(`Quality Plus  ·  ${datasetName}`, ml, fy + 3);
+    doc.text(`Page ${i} of ${pageCount}`, pw - mr, fy + 3, { align: 'right' });
   }
 
-  const filename = `quality_report_${datasetName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+  const filename = `QualityPlus_Report_${datasetName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
   doc.save(filename);
 }

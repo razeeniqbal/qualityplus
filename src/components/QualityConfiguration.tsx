@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { AlertCircle, Save, Play, Sparkles } from 'lucide-react';
 import type { QualityDimension, QualityDimensionConfig, Template } from '../types/database';
 import QualityDimensionCard from './QualityDimensionCard';
@@ -25,6 +25,8 @@ interface QualityConfigurationProps {
   onExecute: (results: QualityCheckResult[]) => void;
   projectName?: string;
   projectDescription?: string;
+  datasetName?: string;
+  datasetDescription?: string;
 }
 
 export interface RowDetail {
@@ -55,6 +57,8 @@ export default function QualityConfiguration({
   onExecute,
   projectName = '',
   projectDescription = '',
+  datasetName = '',
+  datasetDescription = '',
 }: QualityConfigurationProps) {
   const [dimensions, setDimensions] = useState<QualityDimensionConfig[]>([]);
   const [dimensionRules, setDimensionRules] = useState<DimensionRules>({});
@@ -614,7 +618,7 @@ export default function QualityConfiguration({
   if (loadingDimensions) {
     return (
       <div className="bg-white rounded-lg shadow-md p-6 text-center py-12">
-        <div className="animate-spin w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full mx-auto mb-4"></div>
+        <div className="animate-spin w-12 h-12 border-4 border-[#03AD9A] border-t-transparent rounded-full mx-auto mb-4"></div>
         <p className="text-slate-600">Loading dimensions...</p>
       </div>
     );
@@ -633,7 +637,7 @@ export default function QualityConfiguration({
                 setSelectedTemplate('');
               }
             }}
-            className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium cursor-pointer outline-none"
+            className="px-4 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition font-medium cursor-pointer outline-none"
           >
             <option value="">Select Template</option>
             {templates.map((template) => {
@@ -669,7 +673,7 @@ export default function QualityConfiguration({
                 ? <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 : <Sparkles className="w-4 h-4" />
               }
-              <span>AI Rule Check</span>
+              <span>AI Recommend</span>
             </button>
           )}
           {selectedTemplate && isTemplateDirty && (
@@ -696,7 +700,7 @@ export default function QualityConfiguration({
           <button
             onClick={handleExecute}
             disabled={totalConfigured === 0 || isExecuting || !hasTemplateAction || !allRequiredConfigured}
-            className="px-6 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center space-x-2"
+            className="px-6 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center space-x-2"
           >
             {isExecuting ? (
               <>
@@ -727,32 +731,47 @@ export default function QualityConfiguration({
         ref={aiRecommenderRef}
         projectName={projectName}
         projectDescription={projectDescription}
+        datasetName={datasetName}
+        datasetDescription={datasetDescription}
         validityColumns={dimensionRules['validity'] ?? []}
         data={data}
         onLoadingChange={setIsAiLoading}
         onApply={allRecommendations => {
-          // Separate by dimension
-          const validityRecs = allRecommendations.filter(r => r.dimension === 'validity' && r.validationType);
-          const consistencyRecs = allRecommendations.filter(r => r.dimension === 'consistency');
+          const validityRecs     = allRecommendations.filter(r => r.dimension === 'validity' && r.validationType);
+          const consistencyRecs  = allRecommendations.filter(r => r.dimension === 'consistency');
+          const uniquenessRecs   = allRecommendations.filter(r => r.dimension === 'uniqueness');
 
           setDimensionRules(prev => {
             const next = { ...prev };
-            // Add validity columns
+
+            // Validity columns
             if (validityRecs.length > 0) {
-              const existing = new Set(prev['validity'] ?? []);
-              const toAdd = validityRecs.map(r => r.column).filter(c => !existing.has(c) && data.headers.includes(c));
+              const ex = new Set(prev['validity'] ?? []);
+              const toAdd = validityRecs.map(r => r.column).filter(c => !ex.has(c) && data.headers.includes(c));
               if (toAdd.length > 0) next['validity'] = [...(prev['validity'] ?? []), ...toAdd];
             }
-            // Add consistency-flagged columns to consistency dimension
+
+            // Consistency columns — also mirror to completeness
             if (consistencyRecs.length > 0) {
-              const existing = new Set(prev['consistency'] ?? []);
-              const toAdd = consistencyRecs.map(r => r.column).filter(c => !existing.has(c) && data.headers.includes(c));
-              if (toAdd.length > 0) next['consistency'] = [...(prev['consistency'] ?? []), ...toAdd];
+              const exC = new Set(prev['consistency'] ?? []);
+              const exCo = new Set(prev['completeness'] ?? []);
+              const toAddC  = consistencyRecs.map(r => r.column).filter(c => !exC.has(c) && data.headers.includes(c));
+              const toAddCo = consistencyRecs.map(r => r.column).filter(c => !exCo.has(c) && data.headers.includes(c));
+              if (toAddC.length > 0)  next['consistency']  = [...(prev['consistency']  ?? []), ...toAddC];
+              if (toAddCo.length > 0) next['completeness'] = [...(prev['completeness'] ?? []), ...toAddCo];
             }
+
+            // Uniqueness columns — add to uniqueness dimension
+            if (uniquenessRecs.length > 0) {
+              const exU = new Set(prev['uniqueness'] ?? []);
+              const toAdd = uniquenessRecs.map(r => r.column).filter(c => !exU.has(c) && data.headers.includes(c));
+              if (toAdd.length > 0) next['uniqueness'] = [...(prev['uniqueness'] ?? []), ...toAdd];
+            }
+
             return next;
           });
 
-          // Pre-fill validity configs only (consistency needs manual reference setup)
+          // Pre-fill validity configs
           setColumnConfigs(prev => {
             const next = new Map(prev);
             for (const rec of validityRecs) {
@@ -764,12 +783,17 @@ export default function QualityConfiguration({
             return next;
           });
 
-          // Mark validity columns as configured (consistency stays as "needs config")
+          // Mark validity + completeness as configured (completeness needs no config — always ready)
           setConfiguredColumns(prev => {
             const next = new Map(prev);
+            // Validity — mark rules as configured
             const validityCols = new Set(prev.get('validity') ?? []);
             for (const rec of validityRecs) validityCols.add(rec.column);
             next.set('validity', validityCols);
+            // Completeness — all columns are auto-configured (no rule config needed)
+            const completenessCols = new Set(prev.get('completeness') ?? []);
+            for (const rec of consistencyRecs) completenessCols.add(rec.column);
+            next.set('completeness', completenessCols);
             return next;
           });
 
@@ -827,7 +851,7 @@ export default function QualityConfiguration({
       {showSaveTemplateModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-md w-full">
-            <div className="bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-6 py-4 rounded-t-xl">
+            <div className="bg-gradient-to-r from-[#008192] to-[#064B77] text-white px-6 py-4 rounded-t-xl">
               <h2 className="text-xl font-bold">Save Template</h2>
             </div>
             <div className="p-6 space-y-4">
@@ -840,7 +864,7 @@ export default function QualityConfiguration({
                   value={templateName}
                   onChange={(e) => setTemplateName(e.target.value)}
                   placeholder="e.g., Standard Quality Check"
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none"
                 />
               </div>
               <div className="flex items-center justify-end space-x-3 pt-4">
@@ -857,7 +881,7 @@ export default function QualityConfiguration({
                 <button
                   onClick={confirmSaveTemplate}
                   disabled={isSavingTemplate}
-                  className="px-6 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition disabled:opacity-50 flex items-center space-x-2"
+                  className="px-6 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition disabled:opacity-50 flex items-center space-x-2"
                 >
                   {isSavingTemplate ? (
                     <>

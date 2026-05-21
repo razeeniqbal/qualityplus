@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { FileText, ArrowLeft, ChevronUp, CheckCircle, XCircle, Eye, Search, BookMarked, X } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import type { QualityResult } from '../types/database';
@@ -48,11 +48,16 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
   const [showPdfModal, setShowPdfModal] = useState(false);
   const [aiSummaryText, setAiSummaryText] = useState<string | undefined>(undefined);
 
-  // Fetch AI summary text when score is available (for PDF export)
-  useEffect(() => {
-    if (!savedScoreId) return;
-    apiClient.getAiSummary(savedScoreId).then(s => { if (s) setAiSummaryText(s); }).catch(() => {});
-  }, [savedScoreId]);
+  async function openPdfModal() {
+    // Always fetch the latest summary at open time — n8n may have finished after the score was saved
+    if (savedScoreId) {
+      try {
+        const s = await apiClient.getAiSummary(savedScoreId);
+        if (s) setAiSummaryText(s);
+      } catch { /* summary stays undefined — PDF still exports without it */ }
+    }
+    setShowPdfModal(true);
+  }
 
   const [expandedResult, setExpandedResult] = useState<string | null>(null);
   const [detailFilter, setDetailFilter] = useState<'all' | 'pass' | 'fail'>('all');
@@ -229,7 +234,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
   if (loading) {
     return (
       <div className="text-center py-20">
-        <div className="animate-spin w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full mx-auto"></div>
+        <div className="animate-spin w-12 h-12 border-4 border-[#03AD9A] border-t-transparent rounded-full mx-auto"></div>
         <p className="text-slate-600 mt-4">Loading results...</p>
       </div>
     );
@@ -239,7 +244,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
     <div className="space-y-6">
       {/* Published toast */}
       {savedToast && (
-        <div className="fixed top-5 right-5 z-50 flex items-center gap-2 bg-emerald-600 text-white px-4 py-3 rounded-xl shadow-xl animate-fade-in">
+        <div className="fixed top-5 right-5 z-50 flex items-center gap-2 bg-[#008192] text-white px-4 py-3 rounded-xl shadow-xl animate-fade-in">
           <CheckCircle className="w-5 h-5 flex-shrink-0" />
           <span className="text-sm font-medium">Result score saved successfully</span>
         </div>
@@ -251,7 +256,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-sm mx-4">
             <div className="flex items-center justify-between p-5 border-b border-slate-200">
               <div className="flex items-center gap-2">
-                <BookMarked className="w-5 h-5 text-teal-600" />
+                <BookMarked className="w-5 h-5 text-[#008192]" />
                 <h2 className="text-base font-bold text-slate-800">Save Result Score</h2>
               </div>
               <button onClick={() => setShowSaveModal(false)} className="p-1.5 hover:bg-slate-100 rounded-lg transition">
@@ -273,7 +278,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
                   placeholder={`e.g. Sprint 12 – ${datasetName ?? 'Dataset'}`}
                   onKeyDown={e => e.key === 'Enter' && handleSave()}
                   autoFocus
-                  className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                  className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none"
                 />
               </div>
               <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg text-xs text-slate-500">
@@ -296,7 +301,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
                     type="checkbox"
                     checked={trimDataset}
                     onChange={e => setTrimDataset(e.target.checked)}
-                    className="mt-0.5 accent-teal-600 flex-shrink-0"
+                    className="mt-0.5 accent-[#03AD9A] flex-shrink-0"
                   />
                   <div>
                     <p className="text-sm font-medium text-slate-700">
@@ -326,7 +331,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
               <button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="flex items-center gap-2 px-4 py-2 text-sm bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition font-medium disabled:opacity-50"
+                className="flex items-center gap-2 px-4 py-2 text-sm bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition font-medium disabled:opacity-50"
               >
                 {isSaving
                   ? <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /><span>Saving...</span></>
@@ -348,8 +353,8 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
         </button>
         <div className="flex items-center space-x-4">
           <button
-            onClick={() => setShowPdfModal(true)}
-            className="flex items-center space-x-2 bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700 transition"
+            onClick={openPdfModal}
+            className="flex items-center space-x-2 bg-[#008192] text-white px-6 py-2 rounded-lg hover:bg-[#064B77] transition"
           >
             <FileText className="w-4 h-4" />
             <span>Export PDF</span>
@@ -357,7 +362,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
           {!readOnly && (
             <button
               onClick={() => setShowSaveModal(true)}
-              className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition font-medium"
+              className="flex items-center gap-2 px-6 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition font-medium"
             >
               <BookMarked className="w-4 h-4" />
               <span>Save Result Score</span>
@@ -417,7 +422,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
                 onClick={() => setFilterStatus(status)}
                 className={`px-4 py-2 rounded-lg transition text-sm font-medium ${
                   filterStatus === status
-                    ? status === 'all' ? 'bg-teal-600 text-white'
+                    ? status === 'all' ? 'bg-[#008192] text-white'
                       : status === 'pass' ? 'bg-green-600 text-white'
                       : 'bg-red-600 text-white'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -519,7 +524,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
               placeholder="Search column or dimension..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+              className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none"
             />
           </div>
         </div>
@@ -539,23 +544,55 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
 
             return (
               <div key={columnName}>
-                {/* Column group header */}
-                <div className="flex items-center justify-between px-6 py-3 bg-slate-50 border-b border-slate-200">
-                  <div className="flex items-center gap-3">
-                    <span className="font-semibold text-slate-800 text-sm">{columnName}</span>
-                    <span className="text-xs text-slate-400">{colResults.length} check{colResults.length !== 1 ? 's' : ''}</span>
-                  </div>
-                  <div className="flex items-center gap-4 text-xs">
-                    <span className="text-green-600 font-medium">{colPassed.toLocaleString()} passed</span>
-                    <span className={`font-medium ${colFailed > 0 ? 'text-red-600' : 'text-slate-400'}`}>{colFailed.toLocaleString()} failed</span>
-                    <div className={`w-9 h-9 rounded-full border-4 ${getScoreRingColor(colOverall)} flex items-center justify-center`}>
-                      <span className={`text-[10px] font-bold ${getScoreColor(colOverall)}`}>{colOverall.toFixed(0)}%</span>
-                    </div>
-                  </div>
-                </div>
+                {/* Column group header — uses same table layout so columns align perfectly */}
+                <table className="w-full bg-slate-50 border-b-2 border-slate-200">
+                  <colgroup>
+                    <col />
+                    <col style={{ width: '88px' }} />
+                    <col style={{ width: '88px' }} />
+                    <col style={{ width: '88px' }} />
+                    <col style={{ width: '88px' }} />
+                    <col style={{ width: '72px' }} />
+                  </colgroup>
+                  <tbody>
+                    <tr>
+                      <td className="px-6 py-3">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-slate-800 text-sm">{columnName}</span>
+                          <span className="text-xs text-slate-400">{colResults.length} check{colResults.length !== 1 ? 's' : ''}</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-3 text-center">
+                        <div className="flex justify-center">
+                          <div className={`w-10 h-10 rounded-full border-4 ${getScoreRingColor(colOverall)} flex items-center justify-center`}>
+                            <span className={`text-xs font-bold ${getScoreColor(colOverall)}`}>{colOverall.toFixed(0)}%</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-3 text-center">
+                        <span className="text-sm font-semibold text-green-600">{colPassed.toLocaleString()}</span>
+                      </td>
+                      <td className="px-6 py-3 text-center">
+                        <span className={`text-sm font-semibold ${colFailed > 0 ? 'text-red-600' : 'text-slate-400'}`}>{colFailed.toLocaleString()}</span>
+                      </td>
+                      <td className="px-6 py-3 text-center">
+                        <span className="text-sm text-slate-500">{(colPassed + colFailed).toLocaleString()}</span>
+                      </td>
+                      <td />
+                    </tr>
+                  </tbody>
+                </table>
 
                 {/* Dimension rows for this column */}
                 <table className="w-full">
+                  <colgroup>
+                    <col />
+                    <col style={{ width: '88px' }} />
+                    <col style={{ width: '88px' }} />
+                    <col style={{ width: '88px' }} />
+                    <col style={{ width: '88px' }} />
+                    <col style={{ width: '72px' }} />
+                  </colgroup>
                   {colResults.map((result) => {
                     const isExpanded = expandedResult === result.id;
                     const hasDetails = result.rowDetails && result.rowDetails.length > 0;
@@ -583,7 +620,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
                       <tbody key={result.id}>
                     <tr
                       className={`border-b border-slate-100 transition cursor-pointer ${
-                        isExpanded ? 'bg-teal-50' : 'hover:bg-slate-50'
+                        isExpanded ? 'bg-[#f0faf8]' : 'hover:bg-slate-50'
                       }`}
                       onClick={() => hasDetails && toggleExpand(result.id)}
                     >
@@ -614,7 +651,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
                       </td>
                       <td className="px-6 py-4 text-center">
                         {hasDetails ? (
-                          <button className="text-teal-600 hover:text-teal-800 transition">
+                          <button className="text-[#008192] hover:text-[#064B77] transition">
                             {isExpanded ? (
                               <ChevronUp className="w-5 h-5 mx-auto" />
                             ) : (
@@ -631,14 +668,14 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
                     {isExpanded && hasDetails && (
                       <tr>
                         <td colSpan={6} className="px-0 py-0">
-                          <div className="bg-slate-50 border-t-2 border-b-2 border-teal-200">
+                          <div className="bg-slate-50 border-t-2 border-b-2 border-[#a8e0d6]">
                             {/* Detail Header */}
-                            <div className="px-6 py-3 flex items-center justify-between gap-3 bg-teal-50 border-b border-teal-100 flex-wrap">
+                            <div className="px-6 py-3 flex items-center justify-between gap-3 bg-[#f0faf8] border-b border-[#d4f0ea] flex-wrap">
                               <div className="flex items-center space-x-2">
-                                <span className="text-sm font-semibold text-teal-800">
+                                <span className="text-sm font-semibold text-[#064B77]">
                                   Row-Level Details: {result.column_name} ({result.dimension})
                                 </span>
-                                <span className="text-xs text-teal-600">
+                                <span className="text-xs text-[#008192]">
                                   {filteredDetails.length} of {result.rowDetails!.length} rows
                                 </span>
                               </div>
@@ -651,7 +688,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
                                     placeholder="Search value or reason..."
                                     value={detailSearch}
                                     onChange={e => { setDetailSearch(e.target.value); setDetailPage(0); }}
-                                    className="pl-7 pr-3 py-1 text-xs border border-slate-200 rounded-lg focus:ring-1 focus:ring-teal-400 focus:border-transparent outline-none bg-white w-44"
+                                    className="pl-7 pr-3 py-1 text-xs border border-slate-200 rounded-lg focus:ring-1 focus:ring-[#03AD9A] focus:border-transparent outline-none bg-white w-44"
                                   />
                                 </div>
                                 {/* Pass/Fail filter */}
@@ -661,7 +698,7 @@ export default function ResultsView({ datasetId, datasetName, publishedBy, initi
                                     onClick={(e) => { e.stopPropagation(); setDetailFilter(f); setDetailPage(0); }}
                                     className={`px-3 py-1 rounded text-xs font-medium transition ${
                                       detailFilter === f
-                                        ? f === 'all' ? 'bg-teal-600 text-white'
+                                        ? f === 'all' ? 'bg-[#008192] text-white'
                                           : f === 'pass' ? 'bg-green-600 text-white'
                                           : 'bg-red-600 text-white'
                                         : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'

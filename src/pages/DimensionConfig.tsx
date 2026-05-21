@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Plus, Trash2, CheckCircle2, Circle, ChevronRight, X, Save, AlertTriangle } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import type { QualityDimensionConfig } from '../types/database';
@@ -130,7 +130,7 @@ export default function DimensionConfig() {
   if (loading) {
     return (
       <div className="text-center py-20">
-        <div className="animate-spin w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full mx-auto mb-4"></div>
+        <div className="animate-spin w-12 h-12 border-4 border-[#03AD9A] border-t-transparent rounded-full mx-auto mb-4"></div>
         <p className="text-slate-600">Loading dimensions...</p>
       </div>
     );
@@ -152,7 +152,7 @@ export default function DimensionConfig() {
           </div>
           <button
             onClick={openAdd}
-            className="flex items-center space-x-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-5 py-2.5 rounded-lg hover:from-teal-700 hover:to-emerald-700 transition shadow-md hover:shadow-lg text-sm font-medium"
+            className="flex items-center space-x-2 bg-gradient-to-r from-[#008192] to-[#064B77] text-white px-5 py-2.5 rounded-lg hover:from-[#064B77] hover:to-[#1D275A] transition shadow-md hover:shadow-lg text-sm font-medium"
           >
             <Plus className="w-4 h-4" />
             <span>Add Dimension</span>
@@ -169,7 +169,7 @@ export default function DimensionConfig() {
             <p className="text-slate-400 text-sm mb-6">Add your first quality dimension to get started</p>
             <button
               onClick={openAdd}
-              className="bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-5 py-2.5 rounded-lg hover:from-teal-700 hover:to-emerald-700 transition text-sm font-medium"
+              className="bg-gradient-to-r from-[#008192] to-[#064B77] text-white px-5 py-2.5 rounded-lg hover:from-[#064B77] hover:to-[#1D275A] transition text-sm font-medium"
             >
               Add Dimension
             </button>
@@ -190,7 +190,7 @@ export default function DimensionConfig() {
               <div
                 key={dimension.id}
                 className={`grid grid-cols-12 gap-4 pl-5 pr-6 py-4 items-center transition hover:bg-slate-50 border-l-2 ${
-                  dimension.is_active ? 'border-teal-500' : 'border-slate-200 opacity-50'
+                  dimension.is_active ? 'border-[#28B98F]' : 'border-slate-200 opacity-50'
                 } ${idx !== dimensions.length - 1 ? 'border-b border-slate-100' : ''}`}
               >
                 {/* Toggle */}
@@ -201,7 +201,7 @@ export default function DimensionConfig() {
                     className="transition hover:scale-110"
                   >
                     {dimension.is_active ? (
-                      <CheckCircle2 className="w-5 h-5 text-teal-600" />
+                      <CheckCircle2 className="w-5 h-5 text-[#008192]" />
                     ) : (
                       <Circle className="w-5 h-5 text-slate-300" />
                     )}
@@ -237,7 +237,7 @@ export default function DimensionConfig() {
                 <div className="col-span-1 flex items-center justify-end space-x-1">
                   <button
                     onClick={() => openEdit(dimension)}
-                    className="p-1.5 text-slate-400 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition"
+                    className="p-1.5 text-slate-400 hover:text-[#008192] hover:bg-[#f0faf8] rounded-lg transition"
                     title="Edit"
                   >
                     <ChevronRight className="w-4 h-4" />
@@ -307,7 +307,7 @@ export default function DimensionConfig() {
                     if (formErrors.name) setFormErrors({ ...formErrors, name: undefined });
                   }}
                   placeholder="e.g. Completeness"
-                  className={`w-full px-3 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none ${
+                  className={`w-full px-3 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none ${
                     formErrors.name ? 'border-red-400 bg-red-50' : 'border-slate-300'
                   }`}
                   autoFocus
@@ -335,7 +335,7 @@ export default function DimensionConfig() {
                   }}
                   placeholder="e.g. completeness"
                   disabled={!!editingId}
-                  className={`w-full px-3 py-2.5 border rounded-lg text-sm font-mono focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none ${
+                  className={`w-full px-3 py-2.5 border rounded-lg text-sm font-mono focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none ${
                     formErrors.key
                       ? 'border-red-400 bg-red-50'
                       : editingId
@@ -364,7 +364,7 @@ export default function DimensionConfig() {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Describe what this dimension measures..."
                   rows={3}
-                  className="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none resize-none"
+                  className="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none resize-none"
                 />
               </div>
 
@@ -378,7 +378,7 @@ export default function DimensionConfig() {
                   type="button"
                   onClick={() => setFormData({ ...formData, is_active: !formData.is_active })}
                   className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                    formData.is_active ? 'bg-teal-600' : 'bg-slate-300'
+                    formData.is_active ? 'bg-[#008192]' : 'bg-slate-300'
                   }`}
                 >
                   <span
@@ -401,7 +401,7 @@ export default function DimensionConfig() {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center space-x-2 px-4 py-2 text-sm bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition font-medium disabled:opacity-50"
+                className="flex items-center space-x-2 px-4 py-2 text-sm bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition font-medium disabled:opacity-50"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span>{saving ? 'Saving...' : 'Save'}</span>

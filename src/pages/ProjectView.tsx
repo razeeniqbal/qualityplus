@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { ArrowLeft, Table2, Target, FileText, Plus, Upload, X, Search, ChevronDown, ChevronRight, FilterX, Info, Pencil, Trash2, Settings, BookMarked, BarChart2, Eye, Loader2 } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import { useUser } from '../contexts/UserContext';
@@ -341,7 +341,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
   if (loading) {
     return (
       <div className="text-center py-20 bg-white rounded-lg shadow-md">
-        <div className="animate-spin w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full mx-auto mb-4" />
+        <div className="animate-spin w-12 h-12 border-4 border-[#03AD9A] border-t-transparent rounded-full mx-auto mb-4" />
         <p className="text-slate-600 font-medium">Loading project...</p>
       </div>
     );
@@ -360,7 +360,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
         {(currentUserRole === 'owner' || currentUserRole === 'co-owner') && (
           <button
             onClick={() => setShowSettings(true)}
-            className="flex items-center space-x-2 px-3 py-2 text-slate-600 hover:text-teal-700 hover:bg-teal-50 border border-slate-200 rounded-lg transition"
+            className="flex items-center space-x-2 px-3 py-2 text-slate-600 hover:text-[#008192] hover:bg-[#f0faf8] border border-slate-200 rounded-lg transition"
             title="Project Settings"
           >
             <Settings className="w-4 h-4" />
@@ -396,7 +396,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
           <button
             onClick={() => setActiveTab('records')}
             className={`flex items-center space-x-2 px-6 py-4 font-medium transition border-b-2 ${
-              activeTab === 'records' ? 'border-teal-600 text-teal-700' : 'border-transparent text-slate-600 hover:text-slate-800'
+              activeTab === 'records' ? 'border-[#03AD9A] text-[#008192]' : 'border-transparent text-slate-600 hover:text-slate-800'
             }`}
           >
             <Table2 className="w-4 h-4" /><span>Records</span>
@@ -404,7 +404,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
           <button
             onClick={() => setActiveTab('score')}
             className={`flex items-center space-x-2 px-6 py-4 font-medium transition border-b-2 ${
-              activeTab === 'score' ? 'border-teal-600 text-teal-700' : 'border-transparent text-slate-600 hover:text-slate-800'
+              activeTab === 'score' ? 'border-[#03AD9A] text-[#008192]' : 'border-transparent text-slate-600 hover:text-slate-800'
             }`}
           >
             <Target className="w-4 h-4" /><span>Quality Check</span>
@@ -412,7 +412,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
           <button
             onClick={() => setActiveTab('results')}
             className={`flex items-center space-x-2 px-6 py-4 font-medium transition border-b-2 ${
-              activeTab === 'results' ? 'border-teal-600 text-teal-700' : 'border-transparent text-slate-600 hover:text-slate-800'
+              activeTab === 'results' ? 'border-[#03AD9A] text-[#008192]' : 'border-transparent text-slate-600 hover:text-slate-800'
             }`}
           >
             <BookMarked className="w-4 h-4" /><span>Result Scores</span>
@@ -450,18 +450,18 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                       {datasets.map((ds) => (
                         <li key={ds.id} className="border-b border-slate-100 last:border-0 group/item">
                           <div className={`flex items-start gap-2.5 px-4 py-3 transition ${
-                            selectedDatasetId === ds.id ? 'bg-teal-50' : 'hover:bg-slate-50'
+                            selectedDatasetId === ds.id ? 'bg-[#f0faf8]' : 'hover:bg-slate-50'
                           }`}>
                             <input
                               type="radio"
                               name="dataset"
                               checked={selectedDatasetId === ds.id}
                               onChange={() => setSelectedDatasetId(ds.id)}
-                              className="mt-0.5 accent-teal-600 flex-shrink-0 cursor-pointer"
+                              className="mt-0.5 accent-[#03AD9A] flex-shrink-0 cursor-pointer"
                             />
                             <div className="min-w-0 flex-1 cursor-pointer" onClick={() => setSelectedDatasetId(ds.id)}>
                               <p className={`text-sm font-medium truncate ${
-                                selectedDatasetId === ds.id ? 'text-teal-700' : 'text-slate-700'
+                                selectedDatasetId === ds.id ? 'text-[#008192]' : 'text-slate-700'
                               }`} title={ds.name}>{ds.name}</p>
                               <p className="text-xs text-slate-400 mt-0.5">
                                 {ds.row_count.toLocaleString()} rows · {ds.column_count} cols
@@ -471,7 +471,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                             <div className="flex items-center gap-0.5 opacity-30 group-hover/item:opacity-100 transition flex-shrink-0 mt-0.5">
                               <button
                                 onClick={(e) => { e.stopPropagation(); openDetail(ds); }}
-                                className="p-1 text-slate-400 hover:text-teal-600 rounded transition"
+                                className="p-1 text-slate-400 hover:text-[#008192] rounded transition"
                                 title="Dataset details"
                               >
                                 <Info className="w-3.5 h-3.5" />
@@ -497,7 +497,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                   {(currentUserRole === 'owner' || currentUserRole === 'co-owner' || currentUserRole === 'editor') && (
                     <button
                       onClick={() => setShowAddDataset(true)}
-                      className="w-full flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-medium text-teal-600 hover:bg-teal-50 border-t border-slate-100 transition"
+                      className="w-full flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-medium text-[#008192] hover:bg-[#f0faf8] border-t border-slate-100 transition"
                     >
                       <Plus className="w-3.5 h-3.5" />Add Dataset
                     </button>
@@ -515,7 +515,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Filters</span>
                   {activeFilterCount > 0 && (
-                    <span className="text-xs bg-teal-600 text-white rounded-full px-1.5 py-0.5 leading-none font-medium">
+                    <span className="text-xs bg-[#008192] text-white rounded-full px-1.5 py-0.5 leading-none font-medium">
                       {activeFilterCount}
                     </span>
                   )}
@@ -542,7 +542,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                             placeholder="Search columns..."
                             value={columnSearch}
                             onChange={(e) => setColumnSearch(e.target.value)}
-                            className="w-full pl-7 pr-3 py-1.5 text-xs border border-slate-200 rounded focus:ring-1 focus:ring-teal-400 focus:border-transparent outline-none"
+                            className="w-full pl-7 pr-3 py-1.5 text-xs border border-slate-200 rounded focus:ring-1 focus:ring-[#03AD9A] focus:border-transparent outline-none"
                           />
                         </div>
                       </div>
@@ -580,11 +580,11 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                                   className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 transition text-left"
                                 >
                                   <div className="flex items-center gap-2 min-w-0">
-                                    <span className={`text-xs font-medium truncate ${isFiltered ? 'text-teal-700' : 'text-slate-700'}`} title={col}>
+                                    <span className={`text-xs font-medium truncate ${isFiltered ? 'text-[#008192]' : 'text-slate-700'}`} title={col}>
                                       {col}
                                     </span>
                                     {isFiltered && (
-                                      <span className="text-xs bg-teal-100 text-teal-700 rounded px-1 py-0.5 leading-none flex-shrink-0">
+                                      <span className="text-xs bg-[#d4f0ea] text-[#008192] rounded px-1 py-0.5 leading-none flex-shrink-0">
                                         {selectedVals.size}/{uniqueVals.length}
                                       </span>
                                     )}
@@ -617,7 +617,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                                         <div className="flex items-center justify-between px-4 py-1.5 border-b border-slate-100">
                                           <button
                                             onClick={() => clearColumnFilter(col)}
-                                            className="text-xs text-teal-600 hover:text-teal-800 font-medium transition"
+                                            className="text-xs text-[#008192] hover:text-[#064B77] font-medium transition"
                                           >
                                             Select All
                                           </button>
@@ -638,7 +638,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                                                 type="checkbox"
                                                 checked={selectedVals.has(val)}
                                                 onChange={() => toggleColumnValue(col, val)}
-                                                className="accent-teal-600 flex-shrink-0"
+                                                className="accent-[#03AD9A] flex-shrink-0"
                                               />
                                               <span className="text-xs text-slate-600 truncate" title={val}>
                                                 {val === '' ? <em className="text-slate-400">(empty)</em> : val}
@@ -714,21 +714,21 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                 <BookMarked className="w-7 h-7 text-slate-400" />
               </div>
               <h3 className="text-base font-semibold text-slate-700 mb-1">No result scores yet</h3>
-              <p className="text-sm text-slate-400 max-w-xs">Go to the <span className="font-semibold text-teal-600">Quality Check</span> tab, run a check, and save it to record a result score.</p>
+              <p className="text-sm text-slate-400 max-w-xs">Go to the <span className="font-semibold text-[#008192]">Quality Check</span> tab, run a check, and save it to record a result score.</p>
             </div>
           ) : (
             <div>
               <div className="px-6 py-4 border-b border-slate-100 bg-slate-50 flex items-center gap-3">
-                <BookMarked className="w-4 h-4 text-teal-600" />
+                <BookMarked className="w-4 h-4 text-[#008192]" />
                 <span className="text-sm font-semibold text-slate-700">All Result Scores</span>
-                <span className="text-xs bg-teal-100 text-teal-700 font-semibold px-2 py-0.5 rounded-full">
+                <span className="text-xs bg-[#d4f0ea] text-[#008192] font-semibold px-2 py-0.5 rounded-full">
                   {resultsDatasetFilter === 'all' ? allScores.length : allScores.filter(s => s.dataset_id === resultsDatasetFilter).length}
                 </span>
                 <div className="ml-auto relative">
                   <select
                     value={resultsDatasetFilter}
                     onChange={e => setResultsDatasetFilter(e.target.value)}
-                    className="text-xs border border-slate-200 rounded-lg px-3 py-1.5 pr-7 bg-white text-slate-600 appearance-none focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="text-xs border border-slate-200 rounded-lg px-3 py-1.5 pr-7 bg-white text-slate-600 appearance-none focus:outline-none focus:ring-2 focus:ring-[#03AD9A]"
                   >
                     <option value="all">All Datasets</option>
                     {datasets.map(d => (
@@ -758,14 +758,14 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                           }
                         }}
                       >
-                        <BarChart2 className="w-4 h-4 text-teal-400 flex-shrink-0" />
+                        <BarChart2 className="w-4 h-4 text-[#63BF81] flex-shrink-0" />
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-semibold text-slate-800 truncate">{score.label}</p>
                           <p className="text-xs text-slate-400 mt-0.5">{date}{score.published_by ? ` · by ${score.published_by}` : ''}</p>
                         </div>
                         <span className="text-[11px] text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full flex-shrink-0">{score.datasetName}</span>
                         <span className={`text-base font-bold flex-shrink-0 ${color}`}>{score.overall_score.toFixed(1)}%</span>
-                        <Eye className="w-4 h-4 text-slate-300 group-hover:text-teal-500 transition flex-shrink-0" />
+                        <Eye className="w-4 h-4 text-slate-300 group-hover:text-[#28B98F] transition flex-shrink-0" />
                       </li>
                     );
                   })}
@@ -784,7 +784,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-bold text-slate-800">Dataset Details</h2>
                 {detailEditMode && (
-                  <span className="text-xs bg-teal-100 text-teal-700 font-medium px-2 py-0.5 rounded-full">Editing</span>
+                  <span className="text-xs bg-[#d4f0ea] text-[#008192] font-medium px-2 py-0.5 rounded-full">Editing</span>
                 )}
               </div>
               <button onClick={closeDetail} className="p-2 hover:bg-slate-100 rounded-lg transition">
@@ -809,7 +809,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                 onClick={() => setDetailTab('info')}
                 className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium border-b-2 -mb-px transition ${
                   detailTab === 'info'
-                    ? 'border-teal-600 text-teal-700'
+                    ? 'border-[#03AD9A] text-[#008192]'
                     : 'border-transparent text-slate-500 hover:text-slate-700'
                 }`}
               >
@@ -820,14 +820,14 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                 onClick={() => setDetailTab('scores')}
                 className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium border-b-2 -mb-px transition ${
                   detailTab === 'scores'
-                    ? 'border-teal-600 text-teal-700'
+                    ? 'border-[#03AD9A] text-[#008192]'
                     : 'border-transparent text-slate-500 hover:text-slate-700'
                 }`}
               >
                 <BookMarked className="w-4 h-4" />
                 Result Scores
                 {detailScores.length > 0 && (
-                  <span className="ml-1 text-xs bg-teal-100 text-teal-700 font-semibold px-1.5 py-0.5 rounded-full">
+                  <span className="ml-1 text-xs bg-[#d4f0ea] text-[#008192] font-semibold px-1.5 py-0.5 rounded-full">
                     {detailScores.length}
                   </span>
                 )}
@@ -847,7 +847,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                         value={detailName}
                         onChange={e => setDetailName(e.target.value)}
                         autoFocus
-                        className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                        className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent"
                       />
                     ) : (
                       <p className="px-4 py-2.5 bg-slate-50 rounded-lg text-sm text-slate-800 font-medium">{detailName}</p>
@@ -865,7 +865,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                         onChange={e => setDetailDescription(e.target.value)}
                         rows={3}
                         placeholder="Add a description..."
-                        className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm resize-none outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                        className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm resize-none outline-none focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent"
                       />
                     ) : (
                       <p className={`px-4 py-2.5 bg-slate-50 rounded-lg text-sm min-h-[72px] ${detailDescription ? 'text-slate-700' : 'text-slate-400 italic'}`}>
@@ -878,7 +878,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                 /* Result Scores tab */
                 detailScoresLoading ? (
                   <div className="py-10 text-center text-slate-400 text-sm">
-                    <div className="animate-spin w-6 h-6 border-2 border-teal-500 border-t-transparent rounded-full mx-auto mb-2" />
+                    <div className="animate-spin w-6 h-6 border-2 border-[#28B98F] border-t-transparent rounded-full mx-auto mb-2" />
                     Loading result scores...
                   </div>
                 ) : detailScores.length === 0 ? (
@@ -901,7 +901,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                         'text-red-600';
                       return (
                         <li key={score.id} className="flex items-center gap-3 px-6 py-3.5 hover:bg-slate-50 transition group">
-                          <BarChart2 className="w-4 h-4 text-teal-400 flex-shrink-0" />
+                          <BarChart2 className="w-4 h-4 text-[#63BF81] flex-shrink-0" />
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold text-slate-800 truncate">{score.label}</p>
                             <p className="text-xs text-slate-400 mt-0.5">
@@ -939,7 +939,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                   {!detailEditMode && (currentUserRole === 'owner' || currentUserRole === 'co-owner' || currentUserRole === 'editor') && (
                     <button
                       onClick={() => setDetailEditMode(true)}
-                      className="flex items-center gap-1.5 px-3 py-2 text-sm text-teal-700 border border-teal-300 rounded-lg hover:bg-teal-50 transition font-medium"
+                      className="flex items-center gap-1.5 px-3 py-2 text-sm text-[#008192] border border-[#7bcfc2] rounded-lg hover:bg-[#f0faf8] transition font-medium"
                     >
                       <Pencil className="w-3.5 h-3.5" />
                       Edit
@@ -962,7 +962,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                       <button
                         onClick={async () => { await handleSaveDetail(); setDetailEditMode(false); }}
                         disabled={!detailName.trim() || isSavingDetail}
-                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center gap-2 px-4 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isSavingDetail
                           ? <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /><span>Saving...</span></>
@@ -1000,7 +1000,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                 <button
                   onClick={() => setAddDatasetSource('upload')}
                   className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition ${
-                    addDatasetSource === 'upload' ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+                    addDatasetSource === 'upload' ? 'bg-white text-[#008192] shadow-sm' : 'text-slate-500 hover:text-slate-700'
                   }`}
                 >
                   <Upload className="w-4 h-4" /> Upload CSV
@@ -1008,7 +1008,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                 <button
                   onClick={() => setAddDatasetSource('database')}
                   className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition ${
-                    addDatasetSource === 'database' ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+                    addDatasetSource === 'database' ? 'bg-white text-[#008192] shadow-sm' : 'text-slate-500 hover:text-slate-700'
                   }`}
                 >
                   <Settings className="w-4 h-4" /> Connect to Database
@@ -1027,7 +1027,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                       placeholder="Enter a name for this dataset"
                       value={addDatasetName}
                       onChange={e => setAddDatasetName(e.target.value)}
-                      className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm ${
+                      className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none text-sm ${
                         addDatasetName.trim() === '' && addFile ? 'border-red-300 bg-red-50' : 'border-slate-300'
                       }`}
                       autoFocus
@@ -1046,7 +1046,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                       value={addDatasetDescription}
                       onChange={e => setAddDatasetDescription(e.target.value)}
                       rows={2}
-                      className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm resize-none ${
+                      className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none text-sm resize-none ${
                         addDatasetDescription.trim() === '' && addFile ? 'border-red-300 bg-red-50' : 'border-slate-300'
                       }`}
                     />
@@ -1062,21 +1062,21 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
                     onDrop={handleDrop}
                     onClick={() => document.getElementById('add-dataset-file')?.click()}
                     className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition ${
-                      isDragging ? 'border-teal-500 bg-teal-50'
-                      : addFile ? 'border-teal-400 bg-teal-50'
+                      isDragging ? 'border-[#28B98F] bg-[#f0faf8]'
+                      : addFile ? 'border-[#63BF81] bg-[#f0faf8]'
                       : 'border-slate-300 hover:border-slate-400'
                     }`}
                   >
                     {addFile ? (
                       <div className="flex flex-col items-center space-y-1">
-                        <FileText className="w-8 h-8 text-teal-600" />
+                        <FileText className="w-8 h-8 text-[#008192]" />
                         <p className="font-medium text-slate-800 text-sm truncate max-w-full px-2" title={addFile.name}>{addFile.name}</p>
                         <p className="text-xs text-slate-500">{(addFile.size / 1024).toFixed(1)} KB — click to change</p>
                       </div>
                     ) : (
                       <div className="flex flex-col items-center space-y-1">
                         <Upload className="w-8 h-8 text-slate-400" />
-                        <p className="text-sm text-slate-600"><span className="text-teal-600 font-semibold">Browse</span> or drag & drop</p>
+                        <p className="text-sm text-slate-600"><span className="text-[#008192] font-semibold">Browse</span> or drag & drop</p>
                         <p className="text-xs text-slate-400">CSV files only</p>
                       </div>
                     )}
@@ -1107,7 +1107,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
               </button>
               {addDatasetSource === 'upload' && (
                 <button onClick={handleAddDataset} disabled={!addFile || !addDatasetName.trim() || !addDatasetDescription.trim() || isAdding}
-                  className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+                  className="flex items-center space-x-2 px-4 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
                   {isAdding
                     ? <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /><span>Uploading...</span></>
                     : <><Upload className="w-4 h-4" /><span>Upload Dataset</span></>}

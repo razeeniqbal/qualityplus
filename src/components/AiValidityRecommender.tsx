@@ -1,4 +1,4 @@
-import { useState, useImperativeHandle, forwardRef } from 'react';
+﻿import { useState, useImperativeHandle, forwardRef } from 'react';
 import { Sparkles, X, CheckCircle2, ChevronDown, ChevronUp, AlertCircle, ArrowRightLeft } from 'lucide-react';
 
 interface ColumnData {
@@ -11,7 +11,7 @@ interface ColumnData {
 
 export interface Recommendation {
   column: string;
-  dimension: 'validity' | 'consistency';
+  dimension: 'validity' | 'consistency' | 'uniqueness';
   validationType: string | null;
   config: Record<string, unknown>;
   reason: string;
@@ -25,6 +25,8 @@ export interface AiValidityRecommenderHandle {
 interface AiValidityRecommenderProps {
   projectName: string;
   projectDescription: string;
+  datasetName?: string;
+  datasetDescription?: string;
   validityColumns: string[];
   data: {
     headers: string[];
@@ -120,7 +122,7 @@ function SkeletonCard() {
 
 const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidityRecommenderProps>(
   function AiValidityRecommender(
-    { projectName, projectDescription, validityColumns, data, onApply, onLoadingChange },
+    { projectName, projectDescription, datasetName = '', datasetDescription = '', validityColumns, data, onApply, onLoadingChange },
     ref,
   ) {
     const [state, setState] = useState<State>('idle');
@@ -151,12 +153,15 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
           body: JSON.stringify({
             project_name: projectName,
             project_description: projectDescription,
+            dataset_name: datasetName,
+            dataset_description: datasetDescription,
             columns: columnProfiles.map(c => ({
               name: c.name,
               sample_values: c.sampleValues,
               distinct_count: c.distinctCount,
               is_numeric: c.isNumeric,
               null_count: c.nullCount,
+              total_count: data.rows.length,
             })),
           }),
         });
@@ -190,8 +195,9 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
 
     if (!webhookUrl || dismissed || state === 'idle') return null;
 
-    const validityRecs = recommendations.filter(r => r.dimension === 'validity');
-    const consistencyRecs = recommendations.filter(r => r.dimension === 'consistency');
+    const validityRecs     = recommendations.filter(r => r.dimension === 'validity');
+    const consistencyRecs  = recommendations.filter(r => r.dimension === 'consistency');
+    const uniquenessRecs   = recommendations.filter(r => r.dimension === 'uniqueness');
 
     // ── Loading skeleton ──────────────────────────────────────────
     if (state === 'loading') {
@@ -202,7 +208,7 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center flex-shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
-            <span className="text-sm font-semibold text-violet-800">AI Rule Check Recommendations</span>
+            <span className="text-sm font-semibold text-violet-800">AI Configuration Recommendations</span>
             <span className="flex items-center gap-1.5 text-xs text-violet-500 bg-violet-100 px-2 py-0.5 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
               Analysing {data.headers.length} columns…
@@ -243,15 +249,20 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center flex-shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
-            <span className="text-sm font-semibold text-violet-800">AI Rule Check Recommendations</span>
+            <span className="text-sm font-semibold text-violet-800">AI Configuration Recommendations</span>
             {validityRecs.length > 0 && (
-              <span className="text-xs text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+              <span className="text-xs text-[#008192] bg-[#f0faf8] px-2 py-0.5 rounded-full border border-[#a8e0d6]">
                 {validityRecs.length} validity applied
               </span>
             )}
             {consistencyRecs.length > 0 && (
               <span className="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
                 {consistencyRecs.length} use Consistency
+              </span>
+            )}
+            {uniquenessRecs.length > 0 && (
+              <span className="text-xs text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                {uniquenessRecs.length} use Uniqueness
               </span>
             )}
             <span className="text-xs text-slate-400">Based on "{projectName}"</span>
@@ -277,7 +288,7 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
             {validityRecs.length > 0 && (
               <div className="p-4 space-y-3">
                 <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                  Validity Rules — Auto Applied
+                  Validity — Rules Auto Applied
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {validityRecs.map(rec => (
@@ -287,7 +298,7 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
                     >
                       <div className="flex items-start justify-between gap-2">
                         <span className="text-sm font-semibold text-slate-800 break-all">{rec.column}</span>
-                        <span className="flex items-center gap-1 text-xs text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200 whitespace-nowrap flex-shrink-0">
+                        <span className="flex items-center gap-1 text-xs text-[#008192] bg-[#f0faf8] px-1.5 py-0.5 rounded-full border border-[#a8e0d6] whitespace-nowrap flex-shrink-0">
                           <CheckCircle2 className="w-3 h-3" />
                           Applied
                         </span>
@@ -312,10 +323,10 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
               <div className="p-4 space-y-3">
                 <div className="flex items-center gap-2">
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                    Configure Under Consistency Instead
+                    Consistency — Add Reference Source
                   </p>
                   <span className="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
-                    Not applied to Validity
+                    Added to Consistency + Completeness
                   </span>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -341,16 +352,59 @@ const AiValidityRecommender = forwardRef<AiValidityRecommenderHandle, AiValidity
               </div>
             )}
 
+            {/* Divider before uniqueness */}
+            {uniquenessRecs.length > 0 && (
+              <div className="mx-4 border-t border-slate-100" />
+            )}
+
+            {/* Uniqueness suggestions */}
+            {uniquenessRecs.length > 0 && (
+              <div className="p-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                    Uniqueness — Added to Dimension
+                  </p>
+                  <span className="text-xs text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                    Configure if composite key needed
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {uniquenessRecs.map(rec => (
+                    <div
+                      key={rec.column}
+                      className="p-4 border border-amber-100 rounded-lg bg-amber-50/40 hover:bg-amber-50 transition space-y-2"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <span className="text-sm font-semibold text-slate-800 break-all">{rec.column}</span>
+                        <span className="flex items-center gap-1 text-xs text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full border border-amber-200 whitespace-nowrap flex-shrink-0">
+                          Uniqueness
+                        </span>
+                      </div>
+                      <div className="text-xs font-medium text-amber-700 bg-white px-2 py-1 rounded border border-amber-100">
+                        Check for duplicate values
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">{rec.reason}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Footer */}
             <div className="px-5 py-2.5 border-t border-violet-50 bg-violet-50/30 space-y-0.5">
               {validityRecs.length > 0 && (
                 <p className="text-xs text-violet-500">
-                  Validity rules auto-applied and configured. Review, save as template, then execute.
+                  Validity rules applied and configured. Review each column, save as template, then execute.
                 </p>
               )}
               {consistencyRecs.length > 0 && (
                 <p className="text-xs text-blue-500">
-                  Consistency columns auto-added to the Consistency dimension — you still need to configure each one with a reference dataset or inline list.
+                  Consistency columns added to both Consistency and Completeness dimensions. Configure a reference dataset or inline list for each.
+                </p>
+              )}
+              {uniquenessRecs.length > 0 && (
+                <p className="text-xs text-amber-600">
+                  Uniqueness columns added to the Uniqueness dimension. They are ready to execute as single-column checks or configure composite keys as needed.
                 </p>
               )}
             </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import UploadInterface from '../components/UploadInterface';
 import DataPreview from '../components/DataPreview';
 import QualityConfiguration from '../components/QualityConfiguration';
@@ -164,14 +164,14 @@ async function loadDatasets(projId: string) {
           <div className="px-6 py-4">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-sm font-medium text-slate-700 flex-shrink-0">
-                <FileText className="w-4 h-4 text-teal-600" />
+                <FileText className="w-4 h-4 text-[#008192]" />
                 <span>Dataset</span>
               </div>
               <div className="relative flex-1 max-w-sm">
                 <select
                   value={selectedDatasetId ?? ''}
                   onChange={(e) => handleDatasetChange(e.target.value)}
-                  className="w-full appearance-none pl-4 pr-9 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white text-slate-700 cursor-pointer"
+                  className="w-full appearance-none pl-4 pr-9 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none bg-white text-slate-700 cursor-pointer"
                 >
                   {datasets.map((ds) => (
                     <option key={ds.id} value={ds.id}>
@@ -196,7 +196,7 @@ async function loadDatasets(projId: string) {
         <>
           {loading && (
             <div className="text-center py-20 bg-white rounded-lg shadow-md">
-              <div className="animate-spin w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full mx-auto mb-4" />
+              <div className="animate-spin w-12 h-12 border-4 border-[#03AD9A] border-t-transparent rounded-full mx-auto mb-4" />
               <p className="text-slate-600 font-medium">Loading dataset...</p>
             </div>
           )}
@@ -209,7 +209,7 @@ async function loadDatasets(projId: string) {
                 </div>
                 <h3 className="text-base font-semibold text-slate-700 mb-1">No dataset uploaded yet</h3>
                 <p className="text-sm text-slate-400 max-w-xs">
-                  Go to the <span className="font-semibold text-teal-600">Data Records</span> tab to upload a dataset first, then come back here to run a quality check.
+                  Go to the <span className="font-semibold text-[#008192]">Data Records</span> tab to upload a dataset first, then come back here to run a quality check.
                 </p>
               </div>
             ) : (
@@ -226,6 +226,8 @@ async function loadDatasets(projId: string) {
                 onExecute={handleExecuteRules}
                 projectName={projectName}
                 projectDescription={projectDescription}
+                datasetName={selectedDataset?.name ?? ''}
+                datasetDescription={(selectedDataset as unknown as { description?: string })?.description ?? ''}
               />
             </div>
           )}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import {
   Cpu, Database, Layout, Layers, Shield, Zap, CheckCircle2,
   ExternalLink, Code2, Package, Plus, Pencil, Trash2, Save, Loader2,
@@ -46,14 +46,14 @@ function NodeForm({
         placeholder="Label"
         autoFocus
         onKeyDown={e => { if (e.key === 'Enter') handle(); if (e.key === 'Escape') onCancel(); }}
-        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none"
       />
       <textarea
         value={desc}
         onChange={e => setDesc(e.target.value)}
         placeholder="Description (optional)"
         rows={2}
-        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm resize-none focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm resize-none focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none"
       />
       {/* Status toggle */}
       <div className="flex gap-2">
@@ -78,7 +78,7 @@ function NodeForm({
         <button
           onClick={handle}
           disabled={saving || !label.trim()}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold rounded-lg transition disabled:opacity-40"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-[#008192] hover:bg-[#064B77] text-white text-xs font-semibold rounded-lg transition disabled:opacity-40"
         >
           {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
           {submitLabel}
@@ -266,7 +266,7 @@ function CapabilityCard({
           )}
 
           {addingChild ? (
-            <div className="bg-white rounded-lg border border-dashed border-teal-300 p-3">
+            <div className="bg-white rounded-lg border border-dashed border-[#7bcfc2] p-3">
               <NodeForm
                 submitLabel="Add"
                 onSubmit={handleAddChild}
@@ -276,7 +276,7 @@ function CapabilityCard({
           ) : (
             <button
               onClick={() => setAddingChild(true)}
-              className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-400 hover:text-teal-600 transition"
+              className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-400 hover:text-[#008192] transition"
             >
               <Plus className="w-3.5 h-3.5" /> Add feature
             </button>
@@ -392,14 +392,14 @@ function FrameworkTree({ nodes, onRefresh }: { nodes: FrameworkNode[]; onRefresh
 
       {/* ── Add new capability ── */}
       {addingRoot ? (
-        <div className="border border-dashed border-teal-300 rounded-xl bg-white p-4">
-          <p className="text-xs font-semibold text-teal-600 mb-3">New capability</p>
+        <div className="border border-dashed border-[#7bcfc2] rounded-xl bg-white p-4">
+          <p className="text-xs font-semibold text-[#008192] mb-3">New capability</p>
           <NodeForm submitLabel="Add" onSubmit={handleAddTopLevel} onCancel={() => setAddingRoot(false)} />
         </div>
       ) : (
         <button
           onClick={() => setAddingRoot(true)}
-          className="w-full flex items-center justify-center gap-2 py-3 border border-dashed border-slate-300 rounded-xl text-slate-400 hover:border-teal-400 hover:text-teal-600 text-xs font-semibold transition"
+          className="w-full flex items-center justify-center gap-2 py-3 border border-dashed border-slate-300 rounded-xl text-slate-400 hover:border-[#63BF81] hover:text-[#008192] text-xs font-semibold transition"
         >
           <Plus className="w-4 h-4" /> Add capability
         </button>
@@ -525,7 +525,7 @@ const stackItems: StackItem[] = [
 
 const SC: Record<string, { bg: string; border: string; text: string; badge: string; header: string }> = {
   blue:    { bg: 'bg-blue-50',    border: 'border-blue-200',    text: 'text-blue-700',    badge: 'bg-blue-100 text-blue-700',    header: 'bg-blue-600'    },
-  emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700', badge: 'bg-emerald-100 text-emerald-700', header: 'bg-emerald-600' },
+  emerald: { bg: 'bg-[#f0faf8]', border: 'border-[#a8e0d6]', text: 'text-[#008192]', badge: 'bg-[#d4f0ea] text-[#008192]', header: 'bg-[#008192]' },
   purple:  { bg: 'bg-purple-50',  border: 'border-purple-200',  text: 'text-purple-700',  badge: 'bg-purple-100 text-purple-700',  header: 'bg-purple-600'  },
 };
 
@@ -632,7 +632,7 @@ export default function SystemOverviewPage() {
 
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-xl flex items-center justify-center">
+        <div className="w-10 h-10 bg-gradient-to-br from-[#28B98F] to-[#03AD9A] rounded-xl flex items-center justify-center">
           <Cpu className="w-5 h-5 text-white" />
         </div>
         <div>
@@ -646,8 +646,8 @@ export default function SystemOverviewPage() {
       </div>
 
       {/* Recent changes banner */}
-      <div className="bg-teal-50 border border-teal-200 rounded-xl px-5 py-4 space-y-2">
-        <p className="text-xs font-bold uppercase tracking-widest text-teal-600">Recent Updates</p>
+      <div className="bg-[#f0faf8] border border-[#a8e0d6] rounded-xl px-5 py-4 space-y-2">
+        <p className="text-xs font-bold uppercase tracking-widest text-[#008192]">Recent Updates</p>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1.5">
           {[
             { label: 'AI Summary', detail: 'Auto-generated quality summary via n8n + Ollama after saving a result score' },
@@ -662,7 +662,7 @@ export default function SystemOverviewPage() {
             { label: 'Result Scores', detail: 'Dataset filter + full detail view with row drill-down and AI summary' },
           ].map(item => (
             <li key={item.label} className="flex items-start gap-2 text-xs">
-              <CheckCircle2 className="w-3.5 h-3.5 text-teal-500 flex-shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#28B98F] flex-shrink-0 mt-0.5" />
               <span><span className="font-semibold text-slate-700">{item.label}:</span> <span className="text-slate-500">{item.detail}</span></span>
             </li>
           ))}
@@ -694,7 +694,7 @@ export default function SystemOverviewPage() {
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
           {loading ? (
             <div className="flex justify-center py-12">
-              <Loader2 className="w-7 h-7 animate-spin text-teal-500" />
+              <Loader2 className="w-7 h-7 animate-spin text-[#28B98F]" />
             </div>
           ) : (
             <FrameworkTree nodes={nodes} onRefresh={load} />

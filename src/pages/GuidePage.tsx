@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import {
   BookOpen, CheckCircle2, XCircle, AlertCircle,
   Fingerprint, ShieldCheck, List, Info, ChevronRight, Lightbulb,
@@ -58,9 +58,9 @@ const C = {
   text:        'text-slate-700',
   border:      'border-slate-300',
   pill:        'bg-slate-200 text-slate-700',
-  checkBg:     'bg-teal-50',
-  checkText:   'text-teal-700',
-  checkBadge:  'bg-teal-100 text-teal-700',
+  checkBg:     'bg-[#f0faf8]',
+  checkText:   'text-[#008192]',
+  checkBadge:  'bg-[#d4f0ea] text-[#008192]',
   companionBg: 'bg-indigo-50',
   companionTx: 'text-indigo-700',
   companionBd: 'bg-indigo-100 text-indigo-700',
@@ -415,7 +415,7 @@ function ListPreviewPanel({ preview }: { preview: ListPreview }) {
         </div>
         <div className="flex flex-wrap gap-1.5 px-3 py-2">
           {preview.values?.map((v) => (
-            <span key={v} className="px-2 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 text-[11px] font-medium">
+            <span key={v} className="px-2 py-0.5 rounded-full bg-[#f0faf8] border border-[#a8e0d6] text-[#008192] text-[11px] font-medium">
               {v}
             </span>
           ))}
@@ -468,7 +468,7 @@ function MiniSampleTable({
       {/* Column legend */}
       <div className="flex items-center gap-3 text-[10px] text-slate-500">
         <span className="flex items-center gap-1">
-          <span className="w-3 h-3 rounded-sm bg-teal-100 border border-teal-300 inline-block" />
+          <span className="w-3 h-3 rounded-sm bg-[#d4f0ea] border border-[#7bcfc2] inline-block" />
           Checked column
         </span>
         {companions.size > 0 && (
@@ -495,7 +495,7 @@ function MiniSampleTable({
                     key={col}
                     className={`px-2 py-1.5 text-left font-semibold border-b border-slate-200 whitespace-nowrap ${
                       isCheck
-                        ? 'bg-teal-50 text-teal-700'
+                        ? 'bg-[#f0faf8] text-[#008192]'
                         : isComp
                         ? 'bg-indigo-50 text-indigo-700'
                         : 'bg-slate-50 text-slate-500'
@@ -504,7 +504,7 @@ function MiniSampleTable({
                     {isCheck ? (
                       <span className="flex items-center gap-1">
                         {col}
-                        <span className="text-[8px] font-bold px-1 rounded bg-teal-100 text-teal-700">checking</span>
+                        <span className="text-[8px] font-bold px-1 rounded bg-[#d4f0ea] text-[#008192]">checking</span>
                       </span>
                     ) : isComp ? (
                       <span className="flex items-center gap-1">
@@ -542,7 +542,7 @@ function MiniSampleTable({
                           isCheck && isFail
                             ? 'bg-red-100 text-red-700 font-bold'
                             : isCheck
-                            ? 'bg-teal-50 text-teal-700'
+                            ? 'bg-[#f0faf8] text-[#008192]'
                             : isComp
                             ? 'bg-indigo-50 text-indigo-700'
                             : 'text-slate-700'
@@ -600,14 +600,14 @@ export default function GuidePage() {
 
       {/* ── Header ──────────────────────────────────────────────────────────── */}
       <div className="bg-white rounded-xl shadow-md p-6 flex items-start gap-4">
-        <div className="w-11 h-11 bg-teal-100 rounded-xl flex items-center justify-center flex-shrink-0">
-          <BookOpen className="w-5 h-5 text-teal-700" />
+        <div className="w-11 h-11 bg-[#d4f0ea] rounded-xl flex items-center justify-center flex-shrink-0">
+          <BookOpen className="w-5 h-5 text-[#008192]" />
         </div>
         <div>
           <h1 className="text-xl font-bold text-slate-800">Quality Dimensions Guide</h1>
           <p className="text-sm text-slate-500 mt-0.5 max-w-2xl">
             Learn how each of the 4 quality dimensions works in{' '}
-            <span className="font-semibold text-teal-700">Quality Plus</span>.
+            <span className="font-semibold text-[#008192]">Quality Plus</span>.
             Click a rule card to expand its configuration steps and sample table.
             Hover table rows to reveal the exact fail reason. Sample data is fictional — it mirrors the OSDU wellbore schema.
           </p>
@@ -630,7 +630,7 @@ export default function GuidePage() {
                     : 'text-slate-600 hover:bg-slate-100 border border-transparent'
                 }`}
               >
-                <span className={active ? 'text-teal-600' : 'text-slate-400'}>{d.icon}</span>
+                <span className={active ? 'text-[#008192]' : 'text-slate-400'}>{d.icon}</span>
                 <span>{d.label}</span>
                 {active && <ChevronRight className="w-3.5 h-3.5 ml-auto text-slate-500" />}
               </button>
@@ -644,7 +644,7 @@ export default function GuidePage() {
           {/* Overview */}
           <div className="rounded-xl border border-slate-200 bg-white p-5">
             <div className="flex items-center gap-3 mb-2">
-              <span className="text-teal-600">{dim.icon}</span>
+              <span className="text-[#008192]">{dim.icon}</span>
               <h2 className="text-lg font-bold text-slate-800">{dim.label}</h2>
             </div>
             <p className="text-slate-700 text-sm font-medium mb-1">{dim.summary}</p>
@@ -684,7 +684,7 @@ export default function GuidePage() {
                     </div>
                     <ChevronRight
                       className={`w-4 h-4 flex-shrink-0 mt-0.5 transition-transform duration-200 ${
-                        expanded ? 'rotate-90 text-teal-600' : 'text-slate-400'
+                        expanded ? 'rotate-90 text-[#008192]' : 'text-slate-400'
                       }`}
                     />
                   </button>

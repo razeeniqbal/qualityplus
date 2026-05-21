@@ -1,4 +1,4 @@
-import { Table } from 'lucide-react';
+﻿import { Table } from 'lucide-react';
 
 interface DataPreviewProps {
   data: {
@@ -13,7 +13,7 @@ export default function DataPreview({ data }: DataPreviewProps) {
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <div className="flex items-center space-x-2 mb-4">
-        <Table className="w-5 h-5 text-teal-600" />
+        <Table className="w-5 h-5 text-[#008192]" />
         <h2 className="text-lg font-semibold text-slate-800">Preview</h2>
         <span className="text-sm text-slate-500 ml-auto">{data.rows.length} rows</span>
       </div>

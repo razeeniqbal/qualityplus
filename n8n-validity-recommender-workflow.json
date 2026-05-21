@@ -12,7 +12,10 @@
       "name": "Webhook Trigger",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [240, 300],
+      "position": [
+        240,
+        300
+      ],
       "webhookId": "validity-recommender"
     },
     {
@@ -22,8 +25,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey", "value": "sb_publishable_3xA7NsPN6yy7wsZcMd8pxA_MQdPAgDt" },
-            { "name": "Authorization", "value": "Bearer sb_publishable_3xA7NsPN6yy7wsZcMd8pxA_MQdPAgDt" }
+            {
+              "name": "apikey",
+              "value": "sb_publishable_3xA7NsPN6yy7wsZcMd8pxA_MQdPAgDt"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer sb_publishable_3xA7NsPN6yy7wsZcMd8pxA_MQdPAgDt"
+            }
           ]
         },
         "options": {}
@@ -32,7 +41,10 @@
       "name": "Fetch Validity Rules",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [460, 300]
+      "position": [
+        460,
+        300
+      ]
     },
     {
       "parameters": {
@@ -41,8 +53,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "apikey", "value": "sb_publishable_3xA7NsPN6yy7wsZcMd8pxA_MQdPAgDt" },
-            { "name": "Authorization", "value": "Bearer sb_publishable_3xA7NsPN6yy7wsZcMd8pxA_MQdPAgDt" }
+            {
+              "name": "apikey",
+              "value": "sb_publishable_3xA7NsPN6yy7wsZcMd8pxA_MQdPAgDt"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer sb_publishable_3xA7NsPN6yy7wsZcMd8pxA_MQdPAgDt"
+            }
           ]
         },
         "options": {}
@@ -51,17 +69,23 @@
       "name": "Fetch Domain Knowledge",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [680, 300]
+      "position": [
+        680,
+        300
+      ]
     },
     {
       "parameters": {
-        "jsCode": "// ── Gather inputs ─────────────────────────────────────────────\nconst webhookData = $('Webhook Trigger').first().json.body ?? $('Webhook Trigger').first().json;\nconst validityRules = $('Fetch Validity Rules').all().map(i => i.json);\nconst domainKnowledge = $input.all().map(i => i.json);\n\nconst projectName = webhookData.project_name ?? 'Unknown Project';\nconst projectDescription = webhookData.project_description ?? '';\nconst columns = webhookData.columns ?? [];\n\n// ── Word-boundary pattern match ───────────────────────────────\n// Match pattern as a whole word segment (split by _ - . space)\n// e.g. pattern \"field\" matches \"FieldName\" and \"field_name\" but NOT \"oilfield\" or \"MeasuredCrudeOilProduction_bbls\"\nfunction matchesPattern(columnName, pattern) {\n  const col = columnName.toLowerCase();\n  const pat = pattern.toLowerCase();\n  // Exact match\n  if (col === pat) return true;\n  // Suffix match e.g. _perc, _pct, _percent\n  if (pat.startsWith('_') && col.endsWith(pat)) return true;\n  // Split on delimiters AND camelCase boundaries, then check tokens\n  // e.g. \"FieldName\" -> [\"field\", \"name\"], \"well_id\" -> [\"well\", \"id\"]\n  const withSpaces = columnName.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2');\n  const tokens = withSpaces.toLowerCase().split(/[_\\-\\.\\s]+/).filter(Boolean);\n  if (tokens.includes(pat)) return true;\n  // Delimiter-bounded start/end\n  if (col.startsWith(pat + '_') || col.startsWith(pat + '-') || col.startsWith(pat + '.')) return true;\n  if (col.endsWith('_' + pat) || col.endsWith('-' + pat) || col.endsWith('.' + pat)) return true;\n  return false;\n}\n\n// ── Pre-classify columns using domain knowledge ───────────────\nconst consistencyPatterns = domainKnowledge.filter(d => d.recommended_dimension === 'consistency');\nconst validityPatterns    = domainKnowledge.filter(d => d.recommended_dimension === 'validity');\n\nconst preClassified = {};\nfor (const col of columns) {\n  const colName = col.name;\n  // Consistency check first (higher priority)\n  const consMatch = consistencyPatterns.find(d => matchesPattern(colName, d.column_pattern));\n  if (consMatch) {\n    preClassified[colName] = {\n      dimension: 'consistency',\n      validationType: null,\n      config: {},\n      reason: consMatch.reason,\n      source: 'domain_knowledge'\n    };\n    continue;\n  }\n  // Validity domain match\n  const valMatch = validityPatterns.find(d => matchesPattern(colName, d.column_pattern));\n  if (valMatch) {\n    preClassified[colName] = {\n      dimension: 'validity',\n      validationType: valMatch.recommended_rule,\n      config: valMatch.config_template ?? {},\n      reason: valMatch.reason,\n      source: 'domain_knowledge'\n    };\n  }\n}\n\n// ── Auto-detect date/timestamp columns not caught by domain knowledge ────\n// If a TEXT column's sample values all look like ISO dates/timestamps, classify as datatype:date\nconst ISO_DATE_RE = /^\\d{4}-\\d{2}-\\d{2}(T\\d{2}:\\d{2}:\\d{2})?/;\nfor (const col of columns) {\n  if (preClassified[col.name]) continue; // already classified\n  if (col.is_numeric) continue;          // skip numeric columns\n  const samples = (col.sample_values ?? []).map(v => String(v).trim()).filter(Boolean);\n  if (samples.length === 0) continue;\n  const allLookLikeDates = samples.every(v => ISO_DATE_RE.test(v) && !isNaN(Date.parse(v)));\n  if (allLookLikeDates) {\n    preClassified[col.name] = {\n      dimension: 'validity',\n      validationType: 'datatype',\n      config: { dataType: 'date' },\n      reason: `All sample values are ISO date/timestamp strings — validate as date type.`,\n      source: 'auto_detect'\n    };\n  }\n}\n\n// ── Columns that need LLM analysis (no domain match) ─────────\nconst unknownColumns = columns.filter(c => !preClassified[c.name]);\n\n// ── Build rules reference for LLM ────────────────────────────\nconst rulesSection = validityRules.map(r => {\n  const configStr = Object.keys(r.config_fields ?? {}).length > 0\n    ? `  Config: ${JSON.stringify(r.config_fields)}`\n    : '  Config: {} (no extra fields needed)';\n  return `RULE: ${r.rule_key}\\n  Name: ${r.display_name}\\n${configStr}\\n  Logic: ${r.pass_logic}\\n  Use when: ${r.when_to_use}`;\n}).join('\\n\\n');\n\n// ── Build column profiles for unknown columns only ────────────\nconst colLines = unknownColumns.map(c => {\n  const samples = (c.sample_values ?? []).slice(0, 20).join(', ');\n  const numericNote = c.is_numeric ? '[NUMERIC]' : '[TEXT]';\n  const allSamples = (c.sample_values ?? []).map(v => String(v));\n  const distinctVals = [...new Set(allSamples)].slice(0, 20);\n  const distinctStr = c.distinct_count <= 20 ? ` | distinct values: ${distinctVals.join(', ')}` : '';\n  return `Column: \"${c.name}\" ${numericNote}\\n  Samples: ${samples}\\n  Distinct: ${c.distinct_count}, Nulls: ${c.null_count}${distinctStr}`;\n}).join('\\n\\n');\n\n// ── If all columns were pre-classified, skip LLM entirely ─────\nif (unknownColumns.length === 0) {\n  const results = columns.map(c => ({ column: c.name, ...preClassified[c.name] }));\n  // Pass directly to Parse JSON node via a special marker\n  return [{ json: { chatInput: '__SKIP_LLM__', preClassifiedResults: results } }];\n}\n\n// ── Assemble prompt for unknown columns only ──────────────────\nconst chatInput = `You are a data quality engineer specialising in oil and gas upstream operations.\nAnalyse ONLY the columns listed below and recommend a validity rule OR flag as consistency.\n\n== PLATFORM VALIDITY RULES ==\n${rulesSection}\n\nCONSTRAINTS:\n- Null/empty values are auto-skipped. Do NOT catch missing data here — that is Completeness.\n- If sample values look like dates, timestamps, or ISO 8601 strings (e.g. 2021-12-01T00:00:00): ALWAYS use datatype:date — NEVER use list, even if distinct count is low.\n- TEXT columns with <= 15 distinct values AND values are NOT dates: use \"list\" with actual distinct values as allowedValues (comma-separated, no spaces).\n- Numeric columns: prefer range, vali_val_pos, or vali_high_val over datatype:number.\n- Skip columns you are less than 80% confident about.\n- For \"range\": minValue and maxValue must be strings e.g. \"0\", \"100\".\n\n== COLUMNS TO ANALYSE ==\nProject: \"${projectName}\" — ${projectDescription}\n\n${colLines}\n\nReturn ONLY a valid JSON array. No explanation, no markdown.\n[\n  {\n    \"column\": \"exact_column_name\",\n    \"dimension\": \"validity\",\n    \"validationType\": \"rule_key\",\n    \"config\": {},\n    \"reason\": \"one sentence\"\n  }\n]`;\n\n// Attach pre-classified results so Parse JSON can merge them\nreturn [{ json: { chatInput, preClassifiedResults: Object.entries(preClassified).map(([col, v]) => ({ column: col, ...v })) } }];"
+        "jsCode": "// ── Gather inputs ─────────────────────────────────────────────\nconst webhookData = $('Webhook Trigger').first().json.body ?? $('Webhook Trigger').first().json;\nconst validityRules = $('Fetch Validity Rules').all().map(i => i.json);\nconst domainKnowledge = $input.all().map(i => i.json);\n\nconst projectName = webhookData.project_name ?? 'Unknown Project';\nconst projectDescription = webhookData.project_description ?? '';\nconst datasetName = webhookData.dataset_name ?? '';\nconst datasetDescription = webhookData.dataset_description ?? '';\nconst columns = webhookData.columns ?? [];\n\n// ── Word-boundary pattern match ───────────────────────────────\n// Match pattern as a whole word segment (split by _ - . space)\n// e.g. pattern \"field\" matches \"FieldName\" and \"field_name\" but NOT \"oilfield\" or \"MeasuredCrudeOilProduction_bbls\"\nfunction matchesPattern(columnName, pattern) {\n  const col = columnName.toLowerCase();\n  const pat = pattern.toLowerCase();\n  // Exact match\n  if (col === pat) return true;\n  // Suffix match e.g. _perc, _pct, _percent\n  if (pat.startsWith('_') && col.endsWith(pat)) return true;\n  // Split on delimiters AND camelCase boundaries, then check tokens\n  // e.g. \"FieldName\" -> [\"field\", \"name\"], \"well_id\" -> [\"well\", \"id\"]\n  const withSpaces = columnName.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2');\n  const tokens = withSpaces.toLowerCase().split(/[_\\-\\.\\s]+/).filter(Boolean);\n  if (tokens.includes(pat)) return true;\n  // Delimiter-bounded start/end\n  if (col.startsWith(pat + '_') || col.startsWith(pat + '-') || col.startsWith(pat + '.')) return true;\n  if (col.endsWith('_' + pat) || col.endsWith('-' + pat) || col.endsWith('.' + pat)) return true;\n  return false;\n}\n\n// ── Pre-classify columns using domain knowledge ───────────────\nconst consistencyPatterns = domainKnowledge.filter(d => d.recommended_dimension === 'consistency');\nconst validityPatterns    = domainKnowledge.filter(d => d.recommended_dimension === 'validity');\n\nconst preClassified = {};\nfor (const col of columns) {\n  const colName = col.name;\n  // Consistency check first (higher priority)\n  const consMatch = consistencyPatterns.find(d => matchesPattern(colName, d.column_pattern));\n  if (consMatch) {\n    preClassified[colName] = {\n      dimension: 'consistency',\n      validationType: null,\n      config: {},\n      reason: consMatch.reason,\n      source: 'domain_knowledge'\n    };\n    continue;\n  }\n  // Validity domain match\n  const valMatch = validityPatterns.find(d => matchesPattern(colName, d.column_pattern));\n  if (valMatch) {\n    preClassified[colName] = {\n      dimension: 'validity',\n      validationType: valMatch.recommended_rule,\n      config: valMatch.config_template ?? {},\n      reason: valMatch.reason,\n      source: 'domain_knowledge'\n    };\n  }\n}\n\n// ── Auto-detect date/timestamp columns not caught by domain knowledge ────\n// If a TEXT column's sample values all look like ISO dates/timestamps, classify as datatype:date\nconst ISO_DATE_RE = /^\\d{4}-\\d{2}-\\d{2}(T\\d{2}:\\d{2}:\\d{2})?/;\nfor (const col of columns) {\n  if (preClassified[col.name]) continue; // already classified\n  if (col.is_numeric) continue;          // skip numeric columns\n  const samples = (col.sample_values ?? []).map(v => String(v).trim()).filter(Boolean);\n  if (samples.length === 0) continue;\n  const allLookLikeDates = samples.every(v => ISO_DATE_RE.test(v) && !isNaN(Date.parse(v)));\n  if (allLookLikeDates) {\n    preClassified[col.name] = {\n      dimension: 'validity',\n      validationType: 'datatype',\n      config: { dataType: 'date' },\n      reason: `All sample values are ISO date/timestamp strings — validate as date type.`,\n      source: 'auto_detect'\n    };\n  }\n}\n\n// ── Columns that need LLM analysis (no domain match) ─────────\nconst unknownColumns = columns.filter(c => !preClassified[c.name]);\n\n// ── Build rules reference for LLM ────────────────────────────\nconst rulesSection = validityRules.map(r => {\n  const configStr = Object.keys(r.config_fields ?? {}).length > 0\n    ? `  Config: ${JSON.stringify(r.config_fields)}`\n    : '  Config: {} (no extra fields needed)';\n  return `RULE: ${r.rule_key}\\n  Name: ${r.display_name}\\n${configStr}\\n  Logic: ${r.pass_logic}\\n  Use when: ${r.when_to_use}`;\n}).join('\\n\\n');\n\n// ── Build column profiles for unknown columns only ────────────\nconst colLines = unknownColumns.map(c => {\n  const samples = (c.sample_values ?? []).slice(0, 20).join(', ');\n  const numericNote = c.is_numeric ? '[NUMERIC]' : '[TEXT]';\n  const allSamples = (c.sample_values ?? []).map(v => String(v));\n  const distinctVals = [...new Set(allSamples)].slice(0, 20);\n  const distinctStr = c.distinct_count <= 20 ? ` | distinct values: ${distinctVals.join(', ')}` : '';\n  return `Column: \"${c.name}\" ${numericNote}\\n  Samples: ${samples}\\n  Distinct: ${c.distinct_count}, Nulls: ${c.null_count}${distinctStr}`;\n}).join('\\n\\n');\n\n// ── Build ALL column profiles (uniqueness needs to see every column) ──\nconst allColLines = columns.map(c => {\n  const samples = (c.sample_values ?? []).slice(0, 20).join(', ');\n  const numericNote = c.is_numeric ? '[NUMERIC]' : '[TEXT]';\n  const allSamples = (c.sample_values ?? []).map(v => String(v));\n  const distinctVals = [...new Set(allSamples)].slice(0, 20);\n  const distinctStr = c.distinct_count <= 20 ? ` | distinct values: ${distinctVals.join(', ')}` : '';\n  const totalRows = c.total_count || ((c.sample_values ?? []).length + c.null_count);\n  const dupRatio = totalRows > 0 ? (totalRows - c.distinct_count) / totalRows : 0;\n  const dupeNote = dupRatio > 0.1 ? ` [${Math.round(dupRatio * 100)}% duplicates]` : ' [mostly unique]';\n  const uniqueHint = !c.is_numeric ? dupeNote : '';\n  return `Column: \"${c.name}\" ${numericNote}${uniqueHint}\\n  Samples: ${samples}\\n  Distinct: ${c.distinct_count} of ${totalRows} rows, Nulls: ${c.null_count}${distinctStr}`;\n}).join('\\n\\n');\n\n// ── Assemble prompt — all columns sent so LLM can suggest uniqueness ──\nconst chatInput = `You are a data quality engineer specialising in oil and gas upstream operations.\nFor each column below: recommend a validity rule, flag as consistency, OR suggest as uniqueness candidate.\n\n== PLATFORM VALIDITY RULES ==\n${rulesSection}\n\n== CONSTRAINTS ==\n- Null/empty values are auto-skipped. Do NOT use validity to catch missing data — that is Completeness.\n- If sample values are ISO dates/timestamps (e.g. 2021-12-01T00:00:00): use datatype:date — NOT list.\n- TEXT columns with <= 15 non-date distinct values: use list rule with actual distinct values.\n- Numeric columns: prefer range, vali_val_pos, or vali_high_val over datatype:number.\n- For range: minValue and maxValue must be strings e.g. \"0\", \"100\".\n- Skip validity if less than 80% confident.\n\n== UNIQUENESS RULE ==\nSuggest dimension: \"uniqueness\" (validationType: null) for columns that SHOULD logically be unique by nature,\nregardless of whether the current data contains duplicates (duplicates are what the check will catch).\n\nSuggest uniqueness when the column:\n- Name suggests an identifier: contains id, key, code, ref, uuid, serial, no, num, number, wellid, uwi\n- Name suggests a combination key: date + field name together imply one record per date per field\n- Has few distinct values relative to total rows but the column TYPE suggests it should be unique (e.g. well_id)\n- Is a timestamp or date column that combined with another column forms a natural composite key\n\nDo NOT suggest uniqueness for:\n- Numeric measurement columns (production, pressure, temperature, etc.)\n- Name/description free text columns\n- Percentage or ratio columns\n- Columns where repeating values are expected by design (e.g. region, status)\n\n== CONTEXT ==\nProject: \"${projectName}\"\nProject Description: \"${projectDescription}\"\nDataset: \"${datasetName}\"\nDataset Description: \"${datasetDescription}\"\n\n== COLUMNS ==\n${allColLines}\n\nReturn ONLY a valid JSON array with one object per column you are recommending. No explanation, no markdown, no preamble.\n\nExamples of valid output:\n[\n  { \"column\": \"Crude_API\", \"dimension\": \"validity\", \"validationType\": \"range\", \"config\": { \"minValue\": \"10\", \"maxValue\": \"70\" }, \"reason\": \"API gravity must be between 10 and 70\" },\n  { \"column\": \"Region\", \"dimension\": \"consistency\", \"validationType\": null, \"config\": {}, \"reason\": \"Region is a hierarchy value — validate against reference\" },\n  { \"column\": \"WellID\", \"dimension\": \"uniqueness\", \"validationType\": null, \"config\": {}, \"reason\": \"Well identifier should be unique per record\" }\n]\n\nYour actual output (JSON array only):`;\n\n// Attach pre-classified results so Parse JSON can merge them\nreturn [{ json: { chatInput, preClassifiedResults: Object.entries(preClassified).map(([col, v]) => ({ column: col, ...v })) } }];"
       },
       "id": "a1b2c3d4-0002-0002-0002-000000000002",
       "name": "Build Prompt",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [900, 300]
+      "position": [
+        900,
+        300
+      ]
     },
     {
       "parameters": {
@@ -69,7 +93,10 @@
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
-      "position": [1120, 300],
+      "position": [
+        1120,
+        300
+      ],
       "id": "a1b2c3d4-0003-0003-0003-000000000003",
       "name": "AI Agent"
     },
@@ -83,7 +110,10 @@
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
       "typeVersion": 1,
-      "position": [1060, 520],
+      "position": [
+        1060,
+        520
+      ],
       "id": "a1b2c3d4-0004-0004-0004-000000000004",
       "name": "Ollama Chat Model",
       "credentials": {
@@ -95,13 +125,16 @@
     },
     {
       "parameters": {
-        "jsCode": "// Pre-classified results come from Build Prompt node (not lost through AI Agent)\nconst buildPromptOutput = $('Build Prompt').first().json;\nconst preClassified = buildPromptOutput.preClassifiedResults ?? [];\nconst skipLLM = buildPromptOutput.chatInput === '__SKIP_LLM__';\n\nlet llmResults = [];\n\nif (!skipLLM) {\n  const agentOutput = $input.first().json.output ?? $input.first().json.text ?? '';\n  let cleaned = agentOutput\n    .replace(/^```[\\w]*\\n?/gm, '')\n    .replace(/```$/gm, '')\n    .trim();\n  const arrayMatch = cleaned.match(/\\[\\s*\\{[\\s\\S]*?\\}\\s*\\]/);\n  if (arrayMatch) cleaned = arrayMatch[0];\n  try {\n    const parsed = JSON.parse(cleaned);\n    llmResults = Array.isArray(parsed) ? parsed : [];\n  } catch(e) {\n    llmResults = [];\n  }\n}\n\n// Merge: pre-classified takes priority over LLM for same column\nconst preClassifiedMap = {};\nfor (const r of preClassified) preClassifiedMap[r.column] = r;\n\nconst llmMap = {};\nfor (const r of llmResults) {\n  if (r.column && !preClassifiedMap[r.column]) llmMap[r.column] = r;\n}\n\nconst all = [...preClassified, ...Object.values(llmMap)];\n\nconst recommendations = all\n  .map(r => ({\n    column: r.column ?? '',\n    dimension: r.dimension === 'consistency' ? 'consistency' : 'validity',\n    validationType: r.validationType ?? null,\n    config: r.config ?? {},\n    reason: r.reason ?? ''\n  }))\n  .filter(r => r.column !== '');\n\nreturn [{ json: { recommendations } }];"
+        "jsCode": "// Pre-classified results come from Build Prompt node (not lost through AI Agent)\nconst buildPromptOutput = $('Build Prompt').first().json;\nconst preClassified = buildPromptOutput.preClassifiedResults ?? [];\nconst skipLLM = buildPromptOutput.chatInput === '__SKIP_LLM__';\n\nlet llmResults = [];\n\nif (!skipLLM) {\n  const agentOutput = $input.first().json.output ?? $input.first().json.text ?? '';\n  let cleaned = agentOutput\n    .replace(/^```[\\w]*\\n?/gm, '')\n    .replace(/```$/gm, '')\n    .trim();\n  const arrayMatch = cleaned.match(/\\[\\s*\\{[\\s\\S]*?\\}\\s*\\]/);\n  if (arrayMatch) cleaned = arrayMatch[0];\n  try {\n    const parsed = JSON.parse(cleaned);\n    llmResults = Array.isArray(parsed) ? parsed : [];\n  } catch(e) {\n    llmResults = [];\n  }\n}\n\n// Merge: pre-classified takes priority over LLM for same column\nconst preClassifiedMap = {};\nfor (const r of preClassified) preClassifiedMap[r.column] = r;\n\n// LLM uniqueness suggestions can coexist with pre-classified validity/consistency for same column\nconst llmMap = {};\nfor (const r of llmResults) {\n  if (!r.column) continue;\n  if (r.dimension === 'uniqueness') {\n    // Uniqueness can be added even if column already has validity/consistency\n    llmMap[`uniqueness:${r.column}`] = r;\n  } else if (!preClassifiedMap[r.column]) {\n    llmMap[r.column] = r;\n  }\n}\n\nconst all = [...preClassified, ...Object.values(llmMap).map(r => ({ ...r, column: r.column }))];\n\nconst recommendations = all\n  .map(r => ({\n    column: r.column ?? '',\n    dimension: ['consistency','uniqueness'].includes(r.dimension) ? r.dimension : 'validity',\n    validationType: r.validationType ?? null,\n    config: r.config ?? {},\n    reason: r.reason ?? ''\n  }))\n  .filter(r => r.column !== '');\n\nreturn [{ json: { recommendations } }];"
       },
       "id": "a1b2c3d4-0005-0005-0005-000000000005",
       "name": "Parse JSON",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1340, 300]
+      "position": [
+        1340,
+        300
+      ]
     },
     {
       "parameters": {
@@ -110,8 +143,14 @@
         "options": {
           "responseHeaders": {
             "entries": [
-              { "name": "Content-Type", "value": "application/json" },
-              { "name": "Access-Control-Allow-Origin", "value": "*" }
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
             ]
           }
         }
@@ -120,44 +159,89 @@
       "name": "Respond to App",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [1560, 300]
+      "position": [
+        1560,
+        300
+      ]
     }
   ],
   "pinData": {},
   "connections": {
     "Webhook Trigger": {
       "main": [
-        [{ "node": "Fetch Validity Rules", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Fetch Validity Rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Fetch Validity Rules": {
       "main": [
-        [{ "node": "Fetch Domain Knowledge", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Fetch Domain Knowledge",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Fetch Domain Knowledge": {
       "main": [
-        [{ "node": "Build Prompt", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Build Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Build Prompt": {
       "main": [
-        [{ "node": "AI Agent", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Ollama Chat Model": {
       "ai_languageModel": [
-        [{ "node": "AI Agent", "type": "ai_languageModel", "index": 0 }]
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
       ]
     },
     "AI Agent": {
       "main": [
-        [{ "node": "Parse JSON", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Parse JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Parse JSON": {
       "main": [
-        [{ "node": "Respond to App", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Respond to App",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },

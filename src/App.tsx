@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+﻿import { useState, useRef, useEffect } from 'react';
 import Dashboard from './pages/Dashboard';
 import DimensionConfig from './pages/DimensionConfig';
 import GuidePage from './pages/GuidePage';
@@ -37,7 +37,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex flex-col">
-      <header className="bg-gradient-to-r from-teal-700 via-teal-600 to-emerald-500 text-white shadow-lg">
+      <header className="text-white shadow-lg" style={{ background: 'linear-gradient(to right, #28B98F, #1D275A)' }}>
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <button
@@ -49,7 +49,7 @@ function AppContent() {
               </div>
               <div className="text-left">
                 <h1 className="text-xl font-bold">Quality Plus</h1>
-                <p className="text-xs text-teal-100">AEM ENERGY SOLUTIONS</p>
+                <p className="text-xs text-white/70">AEM ENERGY SOLUTIONS</p>
               </div>
             </button>
 
@@ -60,12 +60,12 @@ function AppContent() {
                 className="flex items-center space-x-2 bg-white/10 hover:bg-white/20 rounded-xl px-3 py-2 transition"
               >
                 <div className="w-7 h-7 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-teal-700 font-bold text-sm">
+                  <span className="text-[#03AD9A] font-bold text-sm">
                     {user.displayName.charAt(0).toUpperCase()}
                   </span>
                 </div>
                 <span className="text-sm font-medium text-white">{user.displayName}</span>
-                <ChevronDown className={`w-4 h-4 text-teal-100 transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-4 h-4 text-white/70 transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {userMenuOpen && (
@@ -78,7 +78,7 @@ function AppContent() {
                     onClick={() => { setCurrentPage('admin'); setUserMenuOpen(false); }}
                     className={`w-full flex items-center space-x-2 px-4 py-2.5 text-sm transition ${
                       currentPage === 'admin'
-                        ? 'bg-teal-50 text-teal-700 font-medium'
+                        ? 'bg-[#f0faf8] text-[#008192] font-medium'
                         : 'text-slate-600 hover:bg-slate-50'
                     }`}
                   >
@@ -90,7 +90,7 @@ function AppContent() {
                       onClick={() => { setCurrentPage('system'); setUserMenuOpen(false); }}
                       className={`w-full flex items-center space-x-2 px-4 py-2.5 text-sm transition ${
                         currentPage === 'system'
-                          ? 'bg-teal-50 text-teal-700 font-medium'
+                          ? 'bg-[#f0faf8] text-[#008192] font-medium'
                           : 'text-slate-600 hover:bg-slate-50'
                       }`}
                     >
@@ -114,15 +114,15 @@ function AppContent() {
         </div>
       </header>
 
-      <nav className="bg-gradient-to-r from-slate-700 to-slate-600 shadow-md">
+      <nav className="shadow-md" style={{ background: 'linear-gradient(to right, #008192, #064B77)' }}>
         <div className="container mx-auto px-6">
           <div className="flex items-center space-x-1">
             <button
               onClick={() => setCurrentPage('dashboard')}
               className={`flex items-center space-x-2 px-4 py-3 transition border-b-2 ${
                 currentPage === 'dashboard'
-                  ? 'border-teal-400 text-white bg-slate-600'
-                  : 'border-transparent text-slate-300 hover:text-white hover:bg-slate-600'
+                  ? 'border-[#03AD9A] text-white bg-[#008192]/30'
+                  : 'border-transparent text-slate-200 hover:text-white hover:bg-[#064B77]/20'
               }`}
             >
               <LayoutGrid className="w-5 h-5" />
@@ -132,8 +132,8 @@ function AppContent() {
               onClick={() => setCurrentPage('config')}
               className={`flex items-center space-x-2 px-4 py-3 transition border-b-2 ${
                 currentPage === 'config'
-                  ? 'border-teal-400 text-white bg-slate-600'
-                  : 'border-transparent text-slate-300 hover:text-white hover:bg-slate-600'
+                  ? 'border-[#03AD9A] text-white bg-[#008192]/30'
+                  : 'border-transparent text-slate-200 hover:text-white hover:bg-[#064B77]/20'
               }`}
             >
               <Settings className="w-5 h-5" />
@@ -143,8 +143,8 @@ function AppContent() {
               onClick={() => setCurrentPage('guide')}
               className={`flex items-center space-x-2 px-4 py-3 transition border-b-2 ${
                 currentPage === 'guide'
-                  ? 'border-teal-400 text-white bg-slate-600'
-                  : 'border-transparent text-slate-300 hover:text-white hover:bg-slate-600'
+                  ? 'border-[#03AD9A] text-white bg-[#008192]/30'
+                  : 'border-transparent text-slate-200 hover:text-white hover:bg-[#064B77]/20'
               }`}
             >
               <BookOpen className="w-5 h-5" />

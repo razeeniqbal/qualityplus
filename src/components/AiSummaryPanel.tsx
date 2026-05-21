@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { Sparkles, ChevronDown, ChevronUp, ExternalLink, Loader2, AlertCircle, TableProperties } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import type { RowDetail } from './QualityConfiguration';
@@ -209,7 +209,7 @@ export default function AiSummaryPanel({ scoreId, datasetId, results, overallSco
         onClick={() => setCollapsed(c => !c)}
       >
         <div className="flex items-center gap-2.5">
-          <div className="flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 flex-shrink-0">
+          <div className="flex items-center justify-center w-7 h-7 rounded-full flex-shrink-0" style={{ background: 'linear-gradient(135deg, #1D275A, #008192)' }}>
             <Sparkles className="w-4 h-4 text-white" />
           </div>
           <span className="text-sm font-semibold text-slate-800">AI Summary</span>
@@ -221,7 +221,7 @@ export default function AiSummaryPanel({ scoreId, datasetId, results, overallSco
             </span>
           )}
           {state === 'ready' && (
-            <span className="text-xs text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+            <span className="text-xs text-[#008192] bg-[#f0faf8] px-2 py-0.5 rounded-full border border-[#a8e0d6]">
               AI-generated
             </span>
           )}
@@ -275,7 +275,7 @@ export default function AiSummaryPanel({ scoreId, datasetId, results, overallSco
           {state === 'ready' && summary && (
             <div className="px-6 py-5 space-y-5">
               {summary.overview && (
-                <p className="text-sm text-slate-700 leading-relaxed">{summary.overview}</p>
+                <p className="text-sm text-slate-700 leading-relaxed text-justify">{summary.overview}</p>
               )}
 
               {failedIssues.length > 0 && (
@@ -307,7 +307,7 @@ export default function AiSummaryPanel({ scoreId, datasetId, results, overallSco
                         </div>
                         <button
                           onClick={() => onViewFailedRows(issue.columnName, issue.dimension)}
-                          className="flex items-center gap-1 text-xs text-teal-600 hover:text-teal-800 font-medium whitespace-nowrap flex-shrink-0 opacity-80 group-hover:opacity-100 transition"
+                          className="flex items-center gap-1 text-xs text-[#008192] hover:text-[#064B77] font-medium whitespace-nowrap flex-shrink-0 opacity-80 group-hover:opacity-100 transition"
                         >
                           View rows
                           <ExternalLink className="w-3 h-3" />
@@ -330,7 +330,7 @@ export default function AiSummaryPanel({ scoreId, datasetId, results, overallSco
                   <ol className="space-y-1.5">
                     {summary.recommendations.map((rec, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-teal-100 text-teal-700 text-xs font-bold flex items-center justify-center mt-0.5">
+                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-[#d4f0ea] text-[#008192] text-xs font-bold flex items-center justify-center mt-0.5">
                           {i + 1}
                         </span>
                         {rec}

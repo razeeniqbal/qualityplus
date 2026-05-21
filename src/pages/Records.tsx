@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { apiClient } from '../lib/api-client';
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Download, Search, Table2, ClipboardCheck } from 'lucide-react';
 import type { ColumnValueFilters } from './ProjectView';
@@ -109,7 +109,7 @@ export default function Records({ datasetId, columnValueFilters, onDataLoaded, o
   if (loading) {
     return (
       <div className="text-center py-20 bg-white rounded-lg shadow-md">
-        <div className="animate-spin w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full mx-auto mb-4" />
+        <div className="animate-spin w-12 h-12 border-4 border-[#03AD9A] border-t-transparent rounded-full mx-auto mb-4" />
         <p className="text-slate-600 font-medium">Loading records...</p>
       </div>
     );
@@ -132,7 +132,7 @@ export default function Records({ datasetId, columnValueFilters, onDataLoaded, o
         <span className="text-sm text-slate-500">
           {filteredRecords.length.toLocaleString()} of {records.length.toLocaleString()} record{records.length !== 1 ? 's' : ''}
           {activeFilterCount > 0 && (
-            <span className="ml-2 text-teal-600 font-medium">· {activeFilterCount} filter{activeFilterCount !== 1 ? 's' : ''} active</span>
+            <span className="ml-2 text-[#008192] font-medium">· {activeFilterCount} filter{activeFilterCount !== 1 ? 's' : ''} active</span>
           )}
         </span>
         <div className="flex items-center gap-2">
@@ -140,7 +140,7 @@ export default function Records({ datasetId, columnValueFilters, onDataLoaded, o
             <button
               onClick={onQualityCheck}
               disabled={!datasetId}
-              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition disabled:opacity-40 disabled:cursor-not-allowed font-medium"
+              className="flex items-center gap-2 px-4 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition disabled:opacity-40 disabled:cursor-not-allowed font-medium"
               title="Run quality checks on this dataset"
             >
               <ClipboardCheck className="w-4 h-4" />
@@ -166,7 +166,7 @@ export default function Records({ datasetId, columnValueFilters, onDataLoaded, o
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search all fields..."
-            className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent"
           />
         </div>
       </div>
@@ -195,7 +195,7 @@ export default function Records({ datasetId, columnValueFilters, onDataLoaded, o
                   {columns.map((col, i) => (
                     <td
                       key={col}
-                      className={`px-4 py-3 text-sm text-slate-700 whitespace-nowrap max-w-[300px] truncate cursor-default transition-colors hover:bg-teal-600 hover:text-white ${
+                      className={`px-4 py-3 text-sm text-slate-700 whitespace-nowrap max-w-[300px] truncate cursor-default transition-colors hover:bg-[#064B77] hover:text-white ${
                         i < columns.length - 1 ? 'border-r border-slate-200' : ''
                       }`}
                       title={String(record[col] ?? '')}
@@ -228,7 +228,7 @@ export default function Records({ datasetId, columnValueFilters, onDataLoaded, o
               <select
                 value={rowsPerPage}
                 onChange={(e) => { setRowsPerPage(Number(e.target.value)); setCurrentPage(1); }}
-                className="px-3 py-1 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="px-3 py-1 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent"
               >
                 <option value={10}>10 per page</option>
                 <option value={25}>25 per page</option>

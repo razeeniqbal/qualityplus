@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, FileText, Loader2, CheckCircle2 } from 'lucide-react';
 import { exportResultsPDF } from '../lib/pdf-export';
@@ -61,7 +61,7 @@ export default function PdfExportModal({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0">
+            <div className="w-8 h-8 bg-gradient-to-br from-[#28B98F] to-[#03AD9A] rounded-lg flex items-center justify-center flex-shrink-0">
               <FileText className="w-4 h-4 text-white" />
             </div>
             <div>
@@ -81,7 +81,7 @@ export default function PdfExportModal({
             <p className="text-sm font-semibold text-slate-700 mb-3">Include row-level details</p>
             <div className="space-y-2">
               <label className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition ${
-                rowFilter === 'fail' ? 'border-teal-500 bg-teal-50' : 'border-slate-200 hover:bg-slate-50'
+                rowFilter === 'fail' ? 'border-[#28B98F] bg-[#f0faf8]' : 'border-slate-200 hover:bg-slate-50'
               }`}>
                 <input
                   type="radio"
@@ -89,7 +89,7 @@ export default function PdfExportModal({
                   value="fail"
                   checked={rowFilter === 'fail'}
                   onChange={() => setRowFilter('fail')}
-                  className="mt-0.5 accent-teal-600"
+                  className="mt-0.5 accent-[#03AD9A]"
                 />
                 <div>
                   <p className="text-sm font-medium text-slate-800">Failed rows only</p>
@@ -100,7 +100,7 @@ export default function PdfExportModal({
                 </div>
               </label>
               <label className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition ${
-                rowFilter === 'all' ? 'border-teal-500 bg-teal-50' : 'border-slate-200 hover:bg-slate-50'
+                rowFilter === 'all' ? 'border-[#28B98F] bg-[#f0faf8]' : 'border-slate-200 hover:bg-slate-50'
               }`}>
                 <input
                   type="radio"
@@ -108,7 +108,7 @@ export default function PdfExportModal({
                   value="all"
                   checked={rowFilter === 'all'}
                   onChange={() => setRowFilter('all')}
-                  className="mt-0.5 accent-teal-600"
+                  className="mt-0.5 accent-[#03AD9A]"
                 />
                 <div>
                   <p className="text-sm font-medium text-slate-800">All rows (pass + fail)</p>
@@ -135,7 +135,7 @@ export default function PdfExportModal({
                   item.always || item.active ? 'bg-slate-50' : 'bg-slate-50 opacity-50'
                 }`}>
                   <CheckCircle2 className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
-                    item.always || item.active ? 'text-teal-500' : 'text-slate-300'
+                    item.always || item.active ? 'text-[#28B98F]' : 'text-slate-300'
                   }`} />
                   <div>
                     <p className="text-xs font-semibold text-slate-700">{item.label}</p>
@@ -154,7 +154,7 @@ export default function PdfExportModal({
             Cancel
           </button>
           <button onClick={handleExport} disabled={exporting || done}
-            className="flex items-center gap-2 px-5 py-2 text-sm bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition font-medium disabled:opacity-50">
+            className="flex items-center gap-2 px-5 py-2 text-sm bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition font-medium disabled:opacity-50">
             {done
               ? <><CheckCircle2 className="w-4 h-4" /><span>Downloaded!</span></>
               : exporting

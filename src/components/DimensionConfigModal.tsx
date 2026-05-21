@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { X, Save, AlertCircle, Upload, CheckCircle } from 'lucide-react';
 import type { QualityDimension } from '../types/database';
 
@@ -149,7 +149,7 @@ export default function DimensionConfigModal({
                   onClick={() => setConfig({ ...config, checkMode: 'default' })}
                   className={`px-4 py-3 rounded-lg border-2 text-sm font-medium transition text-left ${
                     !isConditional
-                      ? 'border-teal-500 bg-teal-50 text-teal-800'
+                      ? 'border-[#28B98F] bg-[#f0faf8] text-[#064B77]'
                       : 'border-slate-200 text-slate-600 hover:border-slate-300'
                   }`}
                 >
@@ -161,7 +161,7 @@ export default function DimensionConfigModal({
                   onClick={() => setConfig({ ...config, checkMode: 'conditional' })}
                   className={`px-4 py-3 rounded-lg border-2 text-sm font-medium transition text-left ${
                     isConditional
-                      ? 'border-teal-500 bg-teal-50 text-teal-800'
+                      ? 'border-[#28B98F] bg-[#f0faf8] text-[#064B77]'
                       : 'border-slate-200 text-slate-600 hover:border-slate-300'
                   }`}
                 >
@@ -180,7 +180,7 @@ export default function DimensionConfigModal({
                   <select
                     value={config.conditionColumn as string || ''}
                     onChange={e => setConfig({ ...config, conditionColumn: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                   >
                     <option value="">Select column to check</option>
                     {allColumns.filter(c => c !== column).map(c => (
@@ -200,7 +200,7 @@ export default function DimensionConfigModal({
                     onChange={e => setConfig({ ...config, conditionValues: e.target.value })}
                     placeholder='e.g., Success, Failed'
                     rows={2}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                   />
                   <p className="text-xs text-slate-500 mt-1">
                     "{column}" must be present when the condition column contains any of these values
@@ -227,7 +227,7 @@ export default function DimensionConfigModal({
                   onClick={() => setConfig({ ...config, checkMode: 'single', companionColumns: [] })}
                   className={`px-4 py-3 rounded-lg border-2 text-sm font-medium transition text-left ${
                     !isMulti
-                      ? 'border-teal-500 bg-teal-50 text-teal-800'
+                      ? 'border-[#28B98F] bg-[#f0faf8] text-[#064B77]'
                       : 'border-slate-200 text-slate-600 hover:border-slate-300'
                   }`}
                 >
@@ -239,7 +239,7 @@ export default function DimensionConfigModal({
                   onClick={() => setConfig({ ...config, checkMode: 'multi' })}
                   className={`px-4 py-3 rounded-lg border-2 text-sm font-medium transition text-left ${
                     isMulti
-                      ? 'border-teal-500 bg-teal-50 text-teal-800'
+                      ? 'border-[#28B98F] bg-[#f0faf8] text-[#064B77]'
                       : 'border-slate-200 text-slate-600 hover:border-slate-300'
                   }`}
                 >
@@ -270,7 +270,7 @@ export default function DimensionConfigModal({
                               : companionCols.filter(c => c !== col);
                             setConfig({ ...config, companionColumns: next });
                           }}
-                          className="accent-teal-600"
+                          className="accent-[#03AD9A]"
                         />
                         <span className="text-sm text-slate-700">{col}</span>
                       </label>
@@ -299,7 +299,7 @@ export default function DimensionConfigModal({
               <select
                 value={vType}
                 onChange={(e) => setConfig({ ...config, validationType: e.target.value })}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
               >
                 <optgroup label="Numeric">
                   <option value="sign">Sign (Positive / Negative)</option>
@@ -328,7 +328,7 @@ export default function DimensionConfigModal({
                 <select
                   value={config.expectedSign as string || 'positive'}
                   onChange={(e) => setConfig({ ...config, expectedSign: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                 >
                   <option value="positive">All Positive (≥ 0)</option>
                   <option value="negative">All Negative (&lt; 0)</option>
@@ -346,7 +346,7 @@ export default function DimensionConfigModal({
                     type="number"
                     value={config.minValue as string || ''}
                     onChange={(e) => setConfig({ ...config, minValue: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                   />
                 </div>
                 <div>
@@ -355,7 +355,7 @@ export default function DimensionConfigModal({
                     type="number"
                     value={config.maxValue as string || ''}
                     onChange={(e) => setConfig({ ...config, maxValue: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                   />
                 </div>
               </div>
@@ -372,7 +372,7 @@ export default function DimensionConfigModal({
                   value={config.threshold as string ?? ''}
                   onChange={(e) => setConfig({ ...config, threshold: e.target.value })}
                   placeholder="e.g., 1000"
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                 />
                 <p className="text-xs text-slate-500 mt-1">
                   {vType === 'vali_high_val'
@@ -391,7 +391,7 @@ export default function DimensionConfigModal({
                 <select
                   value={config.compareToColumn as string || ''}
                   onChange={(e) => setConfig({ ...config, compareToColumn: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                 >
                   <option value="">Select column</option>
                   {allColumns.filter(c => c !== column).map(c => (
@@ -416,7 +416,7 @@ export default function DimensionConfigModal({
                       type="number"
                       value={config.minValue as string || ''}
                       onChange={(e) => setConfig({ ...config, minValue: e.target.value })}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                     />
                   </div>
                   <div>
@@ -425,7 +425,7 @@ export default function DimensionConfigModal({
                       type="number"
                       value={config.maxValue as string || ''}
                       onChange={(e) => setConfig({ ...config, maxValue: e.target.value })}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                     />
                   </div>
                 </div>
@@ -436,7 +436,7 @@ export default function DimensionConfigModal({
                   <select
                     value={config.conditionColumn as string || ''}
                     onChange={(e) => setConfig({ ...config, conditionColumn: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                   >
                     <option value="">Select column</option>
                     {allColumns.filter(c => c !== column).map(c => (
@@ -453,7 +453,7 @@ export default function DimensionConfigModal({
                     onChange={(e) => setConfig({ ...config, conditionValues: e.target.value })}
                     placeholder='e.g., PERCENTAGE, TOTAL MARK'
                     rows={2}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                   />
                   <p className="text-xs text-slate-500 mt-1">
                     Range check only applies when the condition column contains one of these values
@@ -472,7 +472,7 @@ export default function DimensionConfigModal({
                   <select
                     value={config.conditionColumn as string || ''}
                     onChange={(e) => setConfig({ ...config, conditionColumn: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                   >
                     <option value="">Select column</option>
                     {allColumns.filter(c => c !== column).map(c => (
@@ -489,7 +489,7 @@ export default function DimensionConfigModal({
                     onChange={(e) => setConfig({ ...config, conditionValues: e.target.value })}
                     placeholder='e.g., PERCENTAGE, TOTAL MARK'
                     rows={2}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                   />
                   <p className="text-xs text-slate-500 mt-1">
                     Range check only applies when the condition column contains one of these values
@@ -503,7 +503,7 @@ export default function DimensionConfigModal({
                     <select
                       value={config.minColumn as string || ''}
                       onChange={(e) => setConfig({ ...config, minColumn: e.target.value })}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                     >
                       <option value="">Select column</option>
                       {allColumns.filter(c => c !== column).map(c => (
@@ -519,7 +519,7 @@ export default function DimensionConfigModal({
                     <select
                       value={config.maxColumn as string || ''}
                       onChange={(e) => setConfig({ ...config, maxColumn: e.target.value })}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                     >
                       <option value="">Select column</option>
                       {allColumns.filter(c => c !== column).map(c => (
@@ -541,7 +541,7 @@ export default function DimensionConfigModal({
                   onChange={(e) => setConfig({ ...config, allowedValues: e.target.value })}
                   placeholder="e.g., Active, Inactive, Pending"
                   rows={3}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                 />
               </div>
             )}
@@ -555,7 +555,7 @@ export default function DimensionConfigModal({
                   value={config.pattern as string || ''}
                   onChange={(e) => setConfig({ ...config, pattern: e.target.value })}
                   placeholder="e.g., ^[A-Z]{2}[0-9]{4}$"
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none font-mono text-sm"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none font-mono text-sm"
                 />
                 <p className="text-xs text-slate-500 mt-1">Enter a regular expression pattern to validate values</p>
               </div>
@@ -568,7 +568,7 @@ export default function DimensionConfigModal({
                 <select
                   value={config.dataType as string || 'string'}
                   onChange={(e) => setConfig({ ...config, dataType: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                 >
                   <option value="string">String</option>
                   <option value="number">Number</option>
@@ -594,7 +594,7 @@ export default function DimensionConfigModal({
                 onChange={(e) =>
                   setConfig({ ...config, referenceSource: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
               >
                 <option value="csv">Upload CSV File</option>
                 <option value="list">Inline List of Values</option>
@@ -615,7 +615,7 @@ export default function DimensionConfigModal({
                   onChange={(e) => setConfig({ ...config, inlineValues: e.target.value })}
                   placeholder="e.g., Active, Inactive, Pending"
                   rows={3}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                 />
                 <p className="text-xs text-slate-500 mt-1">
                   Column values must exactly match one of these entries (case-insensitive)
@@ -628,7 +628,7 @@ export default function DimensionConfigModal({
                 <label className="block text-sm font-medium text-slate-700 mb-2">
                   Upload Reference CSV
                 </label>
-                <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-teal-500 transition">
+                <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-[#28B98F] transition">
                   <input
                     type="file"
                     accept=".csv"
@@ -654,7 +654,7 @@ export default function DimensionConfigModal({
                         </p>
                         <button
                           type="button"
-                          className="mt-3 text-xs text-teal-600 hover:text-teal-700"
+                          className="mt-3 text-xs text-[#008192] hover:text-[#008192]"
                         >
                           Click to change file
                         </button>
@@ -683,7 +683,7 @@ export default function DimensionConfigModal({
                       onChange={(e) =>
                         setConfig({ ...config, referenceMatchColumn: e.target.value })
                       }
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                     >
                       <option value="">Select column to match against</option>
                       {filePreview.columns.map((col) => (
@@ -713,7 +713,7 @@ export default function DimensionConfigModal({
                       setConfig({ ...config, referenceDatasetId: e.target.value })
                     }
                     placeholder="Enter the dataset ID from an existing project"
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                   />
                   <p className="text-xs text-slate-500 mt-1">
                     The ID of an existing dataset in the database to use as reference
@@ -730,7 +730,7 @@ export default function DimensionConfigModal({
                       setConfig({ ...config, referenceDbColumn: e.target.value })
                     }
                     placeholder="e.g., country_code"
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                   />
                   <p className="text-xs text-slate-500 mt-1">
                     The column name in the reference dataset to validate against
@@ -753,7 +753,7 @@ export default function DimensionConfigModal({
                 onChange={(e) =>
                   setConfig({ ...config, accuracyMethod: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
               >
                 <option value="reference">Compare to Reference Data</option>
                 <option value="calculation">Calculation Verification</option>
@@ -766,7 +766,7 @@ export default function DimensionConfigModal({
                 <label className="block text-sm font-medium text-slate-700 mb-2">
                   Upload Master CSV for Comparison
                 </label>
-                <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-teal-500 transition">
+                <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-[#28B98F] transition">
                   <input
                     type="file"
                     accept=".csv"
@@ -792,7 +792,7 @@ export default function DimensionConfigModal({
                         </p>
                         <button
                           type="button"
-                          className="mt-3 text-xs text-teal-600 hover:text-teal-700"
+                          className="mt-3 text-xs text-[#008192] hover:text-[#008192]"
                         >
                           Click to change file
                         </button>
@@ -821,7 +821,7 @@ export default function DimensionConfigModal({
                       onChange={(e) =>
                         setConfig({ ...config, referenceMatchColumn: e.target.value })
                       }
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
                     >
                       <option value="">Select column to compare</option>
                       {filePreview.columns.map((col) => (
@@ -847,7 +847,7 @@ export default function DimensionConfigModal({
                 onChange={(e) =>
                   setConfig({ ...config, threshold: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
               />
               <p className="text-xs text-slate-500 mt-1">
                 Minimum percentage of values that must match the reference data
@@ -870,7 +870,7 @@ export default function DimensionConfigModal({
                 onChange={(e) =>
                   setConfig({ ...config, maxAgeDays: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
               />
               <p className="text-xs text-slate-500 mt-1">
                 Data older than this will be flagged
@@ -886,7 +886,7 @@ export default function DimensionConfigModal({
                 onChange={(e) =>
                   setConfig({ ...config, updateFrequency: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] outline-none"
               >
                 <option value="hourly">Hourly</option>
                 <option value="daily">Daily</option>
@@ -909,7 +909,7 @@ export default function DimensionConfigModal({
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-6 py-4 flex items-center justify-between rounded-t-xl">
+        <div className="sticky top-0 bg-gradient-to-r from-[#008192] to-[#064B77] text-white px-6 py-4 flex items-center justify-between rounded-t-xl">
           <div>
             <h2 className="text-xl font-bold">Configure {dimensionName}</h2>
             <p className="text-sm text-teal-50">Column: {column}</p>
@@ -973,7 +973,7 @@ export default function DimensionConfigModal({
             <button
               onClick={handleSave}
               disabled={!isSaveValid()}
-              className="ml-auto px-6 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 text-white rounded-lg hover:from-teal-700 hover:to-emerald-700 transition flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="ml-auto px-6 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Save className="w-4 h-4" />
               <span>Save Configuration</span>

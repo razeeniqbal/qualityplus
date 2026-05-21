@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+﻿import { useState, useRef } from 'react';
 import { Upload, Globe, ChevronDown } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 
@@ -180,7 +180,7 @@ export default function UploadInterface({ onDataUploaded, projectId }: UploadInt
   const tabClass = (tab: DataSourceTab) =>
     `flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-t-lg border-b-2 transition ${
       activeTab === tab
-        ? 'border-teal-600 text-teal-700 bg-white'
+        ? 'border-[#03AD9A] text-[#008192] bg-white'
         : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
     }`;
 
@@ -211,7 +211,7 @@ export default function UploadInterface({ onDataUploaded, projectId }: UploadInt
               placeholder="Enter dataset title (optional, defaults to filename)"
               value={datasetTitle}
               onChange={(e) => setDatasetTitle(e.target.value)}
-              className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none"
             />
           </div>
 
@@ -221,21 +221,21 @@ export default function UploadInterface({ onDataUploaded, projectId }: UploadInt
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             className={`border-2 border-dashed rounded-lg p-16 text-center transition ${
-              isDragging ? 'border-teal-500 bg-teal-50' : 'border-slate-300 hover:border-slate-400'
+              isDragging ? 'border-[#28B98F] bg-[#f0faf8]' : 'border-slate-300 hover:border-slate-400'
             }`}
           >
             {isProcessing ? (
               <div>
-                <div className="animate-spin w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full mx-auto mb-4" />
+                <div className="animate-spin w-12 h-12 border-4 border-[#03AD9A] border-t-transparent rounded-full mx-auto mb-4" />
                 <p className="text-slate-600 font-medium">Processing your file...</p>
               </div>
             ) : (
               <>
-                <Upload className="w-16 h-16 text-teal-600 mx-auto mb-4" />
+                <Upload className="w-16 h-16 text-[#008192] mx-auto mb-4" />
                 <h2 className="text-xl font-semibold text-slate-800 mb-2">
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="text-teal-600 hover:text-teal-700 font-bold underline"
+                    className="text-[#008192] hover:text-[#008192] font-bold underline"
                   >
                     Browse
                   </button>{' '}
@@ -264,7 +264,7 @@ export default function UploadInterface({ onDataUploaded, projectId }: UploadInt
               placeholder="Optional — defaults to API hostname"
               value={apiTitle}
               onChange={(e) => setApiTitle(e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm"
+              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none text-sm"
             />
           </div>
 
@@ -277,7 +277,7 @@ export default function UploadInterface({ onDataUploaded, projectId }: UploadInt
               placeholder="https://api.example.com/data"
               value={apiUrl}
               onChange={(e) => setApiUrl(e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm font-mono"
+              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none text-sm font-mono"
             />
           </div>
 
@@ -287,7 +287,7 @@ export default function UploadInterface({ onDataUploaded, projectId }: UploadInt
               <select
                 value={apiAuthType}
                 onChange={(e) => setApiAuthType(e.target.value as ApiAuthType)}
-                className="w-full appearance-none pl-4 pr-9 py-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none bg-white"
+                className="w-full appearance-none pl-4 pr-9 py-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none bg-white"
               >
                 <option value="none">No Authentication</option>
                 <option value="bearer">Bearer Token</option>
@@ -302,7 +302,7 @@ export default function UploadInterface({ onDataUploaded, projectId }: UploadInt
                 placeholder="Token value"
                 value={apiToken}
                 onChange={(e) => setApiToken(e.target.value)}
-                className="mt-2 w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm font-mono"
+                className="mt-2 w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none text-sm font-mono"
               />
             )}
 
@@ -313,14 +313,14 @@ export default function UploadInterface({ onDataUploaded, projectId }: UploadInt
                   placeholder="Header name (e.g. X-API-Key)"
                   value={apiKeyHeader}
                   onChange={(e) => setApiKeyHeader(e.target.value)}
-                  className="px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm font-mono"
+                  className="px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none text-sm font-mono"
                 />
                 <input
                   type="text"
                   placeholder="Header value"
                   value={apiKeyValue}
                   onChange={(e) => setApiKeyValue(e.target.value)}
-                  className="px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm font-mono"
+                  className="px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none text-sm font-mono"
                 />
               </div>
             )}
@@ -338,7 +338,7 @@ export default function UploadInterface({ onDataUploaded, projectId }: UploadInt
               placeholder="Leave blank if the response root is already an array"
               value={apiJsonPath}
               onChange={(e) => setApiJsonPath(e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-sm font-mono"
+              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none text-sm font-mono"
             />
           </div>
 
@@ -351,7 +351,7 @@ export default function UploadInterface({ onDataUploaded, projectId }: UploadInt
           <button
             onClick={handleApiFetch}
             disabled={apiLoading}
-            className="w-full flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 disabled:bg-teal-400 text-white font-semibold py-3 px-6 rounded-lg transition"
+            className="w-full flex items-center justify-center gap-2 bg-[#008192] hover:bg-[#064B77] disabled:bg-[#63BF81] text-white font-semibold py-3 px-6 rounded-lg transition"
           >
             {apiLoading ? (
               <>

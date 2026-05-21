@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Shield, Trash2, X, ChevronRight, FolderOpen, UserPlus } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import type { AppUser } from '../types/database';
@@ -122,7 +122,7 @@ export default function AdminPage() {
     <div className="max-w-5xl mx-auto">
       {/* Page header */}
       <div className="flex items-center space-x-3 mb-8">
-        <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-xl flex items-center justify-center">
+        <div className="w-10 h-10 bg-gradient-to-br from-[#28B98F] to-[#03AD9A] rounded-xl flex items-center justify-center">
           <Shield className="w-5 h-5 text-white" />
         </div>
         <div>
@@ -135,7 +135,7 @@ export default function AdminPage() {
       {currentUser?.role === 'admin' && (
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 px-6 py-5 mb-6">
           <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4 flex items-center space-x-2">
-            <UserPlus className="w-4 h-4 text-teal-500" />
+            <UserPlus className="w-4 h-4 text-[#28B98F]" />
             <span>Register New User</span>
           </p>
           <div className="flex items-center space-x-3">
@@ -146,12 +146,12 @@ export default function AdminPage() {
               onChange={(e) => { setNewUserName(e.target.value); setCreateUserError(null); }}
               onKeyDown={(e) => e.key === 'Enter' && handleCreateUser()}
               disabled={isCreatingUser}
-              className="flex-1 px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition disabled:opacity-50"
+              className="flex-1 px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none transition disabled:opacity-50"
             />
             <button
               onClick={handleCreateUser}
               disabled={!newUserName.trim() || isCreatingUser}
-              className="flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-teal-600 to-emerald-600 text-white text-sm font-semibold rounded-xl hover:from-teal-700 hover:to-emerald-700 transition disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
+              className="flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-[#008192] to-[#064B77] text-white text-sm font-semibold rounded-xl hover:from-[#064B77] hover:to-[#1D275A] transition disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
             >
               {isCreatingUser ? (
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -221,7 +221,7 @@ export default function AdminPage() {
                   <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${
                     appUser.role === 'admin'
                       ? 'bg-gradient-to-br from-purple-500 to-purple-600'
-                      : 'bg-gradient-to-br from-teal-500 to-emerald-500'
+                      : 'bg-gradient-to-br from-[#28B98F] to-[#03AD9A]'
                   }`}>
                     <span className="text-white text-sm font-bold">
                       {appUser.display_name.charAt(0).toUpperCase()}
@@ -232,7 +232,7 @@ export default function AdminPage() {
                       {appUser.display_name}
                     </span>
                     {appUser.id === currentUser?.id && (
-                      <span className="text-xs text-teal-600 font-medium">You</span>
+                      <span className="text-xs text-[#008192] font-medium">You</span>
                     )}
                   </div>
                   <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-400 flex-shrink-0 ml-auto" />
@@ -245,7 +245,7 @@ export default function AdminPage() {
                       value={appUser.role}
                       onChange={(e) => handleRoleChange(appUser.id, e.target.value as 'admin' | 'user')}
                       disabled={updatingRoleId === appUser.id}
-                      className="text-xs border border-slate-200 rounded-lg px-2 py-1.5 focus:ring-1 focus:ring-teal-500 outline-none bg-white text-slate-700 disabled:opacity-50 cursor-pointer"
+                      className="text-xs border border-slate-200 rounded-lg px-2 py-1.5 focus:ring-1 focus:ring-[#03AD9A] outline-none bg-white text-slate-700 disabled:opacity-50 cursor-pointer"
                     >
                       <option value="user">User</option>
                       <option value="admin">Admin</option>
@@ -312,7 +312,7 @@ export default function AdminPage() {
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                   selectedUser.role === 'admin'
                     ? 'bg-gradient-to-br from-purple-500 to-purple-600'
-                    : 'bg-gradient-to-br from-teal-500 to-emerald-500'
+                    : 'bg-gradient-to-br from-[#28B98F] to-[#03AD9A]'
                 }`}>
                   <span className="text-white font-bold">
                     {selectedUser.display_name.charAt(0).toUpperCase()}
@@ -357,7 +357,7 @@ export default function AdminPage() {
                       value={selectedUser.role}
                       onChange={(e) => handleRoleChange(selectedUser.id, e.target.value as 'admin' | 'user')}
                       disabled={updatingRoleId === selectedUser.id}
-                      className="text-xs border border-slate-200 rounded-lg px-2 py-1 focus:ring-1 focus:ring-teal-500 outline-none bg-white text-slate-700 disabled:opacity-50"
+                      className="text-xs border border-slate-200 rounded-lg px-2 py-1 focus:ring-1 focus:ring-[#03AD9A] outline-none bg-white text-slate-700 disabled:opacity-50"
                     >
                       <option value="user">User</option>
                       <option value="admin">Admin</option>
@@ -382,7 +382,7 @@ export default function AdminPage() {
 
                 {loadingMemberships && (
                   <div className="flex justify-center py-8">
-                    <div className="animate-spin w-6 h-6 border-2 border-teal-600 border-t-transparent rounded-full" />
+                    <div className="animate-spin w-6 h-6 border-2 border-[#03AD9A] border-t-transparent rounded-full" />
                   </div>
                 )}
 

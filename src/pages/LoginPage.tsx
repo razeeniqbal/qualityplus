@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { useUser } from '../contexts/UserContext';
 import { apiClient } from '../lib/api-client';
 import type { AppUser } from '../types/database';
@@ -34,7 +34,7 @@ export default function LoginPage() {
               <img src="/dataqualityplus.png" alt="Quality Plus" className="w-full h-full object-contain" />
             </div>
             <h1 className="text-xl font-bold text-white">Quality Plus</h1>
-            <p className="text-teal-100 text-sm mt-1">AEM Energy Solutions</p>
+            <p className="text-[#d4f0ea] text-sm mt-1">AEM Energy Solutions</p>
           </div>
 
           {/* Form */}
@@ -47,7 +47,7 @@ export default function LoginPage() {
             {/* Loading state */}
             {loadingUsers && (
               <div className="flex items-center justify-center py-6">
-                <div className="w-5 h-5 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-[#28B98F] border-t-transparent rounded-full animate-spin" />
               </div>
             )}
 
@@ -67,7 +67,7 @@ export default function LoginPage() {
                     value={selectedId}
                     onChange={(e) => setSelectedId(e.target.value)}
                     disabled={isLoggingIn}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition appearance-none bg-white text-slate-700 disabled:opacity-50 cursor-pointer"
+                    className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none transition appearance-none bg-white text-slate-700 disabled:opacity-50 cursor-pointer"
                   >
                     <option value="">— Select your name —</option>
                     {users.map(u => (
@@ -86,11 +86,11 @@ export default function LoginPage() {
 
                 {/* Selected user preview */}
                 {selectedUser && (
-                  <div className="flex items-center space-x-3 px-3 py-2.5 bg-teal-50 border border-teal-100 rounded-xl mb-4">
+                  <div className="flex items-center space-x-3 px-3 py-2.5 bg-[#f0faf8] border border-[#d4f0ea] rounded-xl mb-4">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                       selectedUser.role === 'admin'
                         ? 'bg-gradient-to-br from-purple-500 to-purple-600'
-                        : 'bg-gradient-to-br from-teal-500 to-emerald-500'
+                        : 'bg-gradient-to-br from-[#28B98F] to-[#03AD9A]'
                     }`}>
                       <span className="text-white text-sm font-bold">
                         {selectedUser.display_name.charAt(0).toUpperCase()}
@@ -114,7 +114,7 @@ export default function LoginPage() {
             <button
               onClick={handleSubmit}
               disabled={!selectedId || isLoggingIn || loadingUsers}
-              className="w-full py-3 bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-semibold rounded-xl hover:from-teal-700 hover:to-emerald-700 transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+              className="w-full py-3 bg-gradient-to-r from-[#008192] to-[#064B77] text-white font-semibold rounded-xl hover:from-[#064B77] hover:to-[#1D275A] transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
             >
               {isLoggingIn ? (
                 <>
