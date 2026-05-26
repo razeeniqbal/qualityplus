@@ -1,12 +1,9 @@
 ﻿import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, Crown, Edit, Eye, Users, Trash2, X, FolderOpen, ImageIcon, Lock, Globe, Star } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import type { ProjectWithRole, ProjectUserRole } from '../types/database';
 import { useUser } from '../contexts/UserContext';
-
-interface DashboardProps {
-  onNavigateToRecords: (projectId: string) => void;
-}
 
 // Legacy localStorage icon fallback (for icons saved before DB storage)
 function getLocalIcon(projectId: string): string | null {
@@ -40,7 +37,8 @@ function getRoleLabel(role: ProjectUserRole) {
   }
 }
 
-export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
+export default function Dashboard() {
+  const navigate = useNavigate();
   const { user } = useUser();
   const [myProjects, setMyProjects] = useState<ProjectWithRole[]>([]);
   const [sharedProjects, setSharedProjects] = useState<ProjectWithRole[]>([]);
@@ -153,7 +151,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
 
       await loadProjects();
       closeNewProject();
-      onNavigateToRecords(created.id);
+      navigate(`/projects/${created.id}`);
     } catch (error: unknown) {
       console.error('Error creating project:', error);
       const message = error instanceof Error ? error.message : 'Error creating project. Please try again.';
@@ -412,7 +410,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
               <div
                 key={project.id}
                 className="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md hover:border-[#a8e0d6] transition cursor-pointer group flex flex-col"
-                onClick={() => onNavigateToRecords(project.id)}
+                onClick={() => navigate(`/projects/${project.id}`)}
               >
                 {/* Top section: thumbnail + name/date + star */}
                 <div className="flex items-start gap-3 p-4">
@@ -475,7 +473,7 @@ export default function Dashboard({ onNavigateToRecords }: DashboardProps) {
                     </div>
                   ) : <span />}
                   <button
-                    onClick={() => onNavigateToRecords(project.id)}
+                    onClick={() => navigate(`/projects/${project.id}`)}
                     className="text-xs text-[#008192] hover:text-[#064B77] font-semibold transition"
                   >
                     Show datasets →

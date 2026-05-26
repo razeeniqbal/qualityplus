@@ -1,4 +1,5 @@
-﻿import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import DimensionConfig from './pages/DimensionConfig';
 import GuidePage from './pages/GuidePage';
@@ -9,12 +10,17 @@ import LoginPage from './pages/LoginPage';
 import { useUser } from './contexts/UserContext';
 import { LayoutGrid, Settings, LogOut, Shield, ChevronDown, BookOpen, Cpu } from 'lucide-react';
 
-type Page = 'dashboard' | 'config' | 'guide' | 'records' | 'admin' | 'system';
+function ProtectedRoute({ children, adminOnly = false }: { children: React.ReactNode; adminOnly?: boolean }) {
+  const { user } = useUser();
+  if (!user) return <Navigate to="/login" replace />;
+  if (adminOnly && user.role !== 'admin') return <Navigate to="/dashboard" replace />;
+  return <>{children}</>;
+}
 
-function AppContent() {
+function AppShell() {
   const { user, logout } = useUser();
-  const [currentPage, setCurrentPage] = useState<Page>('dashboard');
-  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
 
@@ -28,12 +34,7 @@ function AppContent() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  if (!user) return <LoginPage />;
-
-  function navigateToRecords(projectId: string) {
-    setSelectedProjectId(projectId);
-    setCurrentPage('records');
-  }
+  const currentPage = location.pathname.split('/')[1] || 'dashboard';
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex flex-col">
@@ -41,7 +42,7 @@ function AppContent() {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <button
-              onClick={() => { setCurrentPage('dashboard'); setSelectedProjectId(null); }}
+              onClick={() => navigate('/dashboard')}
               className="flex items-center space-x-3 hover:opacity-80 transition"
             >
               <div className="w-10 h-10 rounded overflow-hidden flex items-center justify-center">
@@ -53,7 +54,6 @@ function AppContent() {
               </div>
             </button>
 
-            {/* User menu */}
             <div className="relative" ref={userMenuRef}>
               <button
                 onClick={() => setUserMenuOpen((o) => !o)}
@@ -61,10 +61,10 @@ function AppContent() {
               >
                 <div className="w-7 h-7 bg-white rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-[#03AD9A] font-bold text-sm">
-                    {user.displayName.charAt(0).toUpperCase()}
+                    {user!.displayName.charAt(0).toUpperCase()}
                   </span>
                 </div>
-                <span className="text-sm font-medium text-white">{user.displayName}</span>
+                <span className="text-sm font-medium text-white">{user!.displayName}</span>
                 <ChevronDown className={`w-4 h-4 text-white/70 transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -72,10 +72,10 @@ function AppContent() {
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden z-50">
                   <div className="px-4 py-3 border-b border-slate-100">
                     <p className="text-xs text-slate-400">Signed in as</p>
-                    <p className="text-sm font-semibold text-slate-800 truncate">{user.displayName}</p>
+                    <p className="text-sm font-semibold text-slate-800 truncate">{user!.displayName}</p>
                   </div>
                   <button
-                    onClick={() => { setCurrentPage('admin'); setUserMenuOpen(false); }}
+                    onClick={() => { navigate('/admin'); setUserMenuOpen(false); }}
                     className={`w-full flex items-center space-x-2 px-4 py-2.5 text-sm transition ${
                       currentPage === 'admin'
                         ? 'bg-[#f0faf8] text-[#008192] font-medium'
@@ -85,9 +85,9 @@ function AppContent() {
                     <Shield className="w-4 h-4" />
                     <span>Admin Panel</span>
                   </button>
-                  {user.role === 'admin' && (
+                  {user!.role === 'admin' && (
                     <button
-                      onClick={() => { setCurrentPage('system'); setUserMenuOpen(false); }}
+                      onClick={() => { navigate('/system'); setUserMenuOpen(false); }}
                       className={`w-full flex items-center space-x-2 px-4 py-2.5 text-sm transition ${
                         currentPage === 'system'
                           ? 'bg-[#f0faf8] text-[#008192] font-medium'
@@ -100,7 +100,7 @@ function AppContent() {
                   )}
                   <div className="border-t border-slate-100">
                     <button
-                      onClick={() => { setCurrentPage('dashboard'); setSelectedProjectId(null); setUserMenuOpen(false); logout(); }}
+                      onClick={() => { navigate('/dashboard'); setUserMenuOpen(false); logout(); }}
                       className="w-full flex items-center space-x-2 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition"
                     >
                       <LogOut className="w-4 h-4" />
@@ -118,7 +118,7 @@ function AppContent() {
         <div className="container mx-auto px-6">
           <div className="flex items-center space-x-1">
             <button
-              onClick={() => setCurrentPage('dashboard')}
+              onClick={() => navigate('/dashboard')}
               className={`flex items-center space-x-2 px-4 py-3 transition border-b-2 ${
                 currentPage === 'dashboard'
                   ? 'border-[#03AD9A] text-white bg-[#008192]/30'
@@ -129,9 +129,9 @@ function AppContent() {
               <span className="font-medium">Dashboard</span>
             </button>
             <button
-              onClick={() => setCurrentPage('config')}
+              onClick={() => navigate('/quality-rules')}
               className={`flex items-center space-x-2 px-4 py-3 transition border-b-2 ${
-                currentPage === 'config'
+                currentPage === 'quality-rules'
                   ? 'border-[#03AD9A] text-white bg-[#008192]/30'
                   : 'border-transparent text-slate-200 hover:text-white hover:bg-[#064B77]/20'
               }`}
@@ -140,7 +140,7 @@ function AppContent() {
               <span className="font-medium">Quality Rules</span>
             </button>
             <button
-              onClick={() => setCurrentPage('guide')}
+              onClick={() => navigate('/guide')}
               className={`flex items-center space-x-2 px-4 py-3 transition border-b-2 ${
                 currentPage === 'guide'
                   ? 'border-[#03AD9A] text-white bg-[#008192]/30'
@@ -155,25 +155,28 @@ function AppContent() {
       </nav>
 
       <main className="container mx-auto px-6 py-8 flex-1">
-        {currentPage === 'dashboard' && (
-          <Dashboard
-            onNavigateToRecords={navigateToRecords}
-          />
-        )}
-        {currentPage === 'config' && <DimensionConfig />}
-        {currentPage === 'guide' && <GuidePage />}
-        {currentPage === 'records' && selectedProjectId && (
-          <ProjectView
-            projectId={selectedProjectId}
-            initialTab="records"
-            onBack={() => setCurrentPage('dashboard')}
-          />
-        )}
-        {currentPage === 'admin' && <AdminPage />}
-        {currentPage === 'system' && user.role === 'admin' && <SystemOverviewPage />}
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/projects/:projectId" element={<ProjectView />} />
+          <Route path="/quality-rules" element={<DimensionConfig />} />
+          <Route path="/guide" element={<GuidePage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/system" element={
+            <ProtectedRoute adminOnly>
+              <SystemOverviewPage />
+            </ProtectedRoute>
+          } />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
       </main>
     </div>
   );
 }
 
-export default AppContent;
+export default function App() {
+  const { user } = useUser();
+
+  if (!user) return <LoginPage />;
+
+  return <AppShell />;
+}

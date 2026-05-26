@@ -1,4 +1,5 @@
 ﻿import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Table2, Target, FileText, Plus, Upload, X, Search, ChevronDown, ChevronRight, FilterX, Info, Pencil, Trash2, Settings, BookMarked, BarChart2, Eye, Loader2 } from 'lucide-react';
 import { apiClient } from '../lib/api-client';
 import { useUser } from '../contexts/UserContext';
@@ -23,15 +24,16 @@ interface Dataset {
 // columnValueFilters: { [columnName]: Set of selected values (empty Set = all values allowed) }
 export type ColumnValueFilters = Record<string, Set<string>>;
 
-interface ProjectViewProps {
-  projectId: string;
-  initialTab?: 'records' | 'score';
-  onBack: () => void;
-}
-
-export default function ProjectView({ projectId, initialTab = 'records', onBack }: ProjectViewProps) {
+export default function ProjectView() {
+  const { projectId = '' } = useParams<{ projectId: string }>();
+  const navigate = useNavigate();
   const { user } = useUser();
-  const [activeTab, setActiveTab] = useState<ProjectTab>(initialTab);
+
+  if (!projectId) {
+    navigate('/dashboard');
+    return null;
+  }
+  const [activeTab, setActiveTab] = useState<ProjectTab>('records');
   const [projectName, setProjectName] = useState('');
   const [datasets, setDatasets] = useState<Dataset[]>([]);
   const [selectedDatasetId, setSelectedDatasetId] = useState<string | null>(null);
@@ -352,7 +354,7 @@ export default function ProjectView({ projectId, initialTab = 'records', onBack 
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <button onClick={onBack} className="p-2 hover:bg-slate-200 rounded-lg transition" title="Back to Dashboard">
+          <button onClick={() => navigate('/dashboard')} className="p-2 hover:bg-slate-200 rounded-lg transition" title="Back to Dashboard">
             <ArrowLeft className="w-6 h-6 text-slate-700" />
           </button>
           <h1 className="text-3xl font-bold text-slate-800">{projectName}</h1>
