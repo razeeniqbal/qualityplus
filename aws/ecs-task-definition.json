@@ -1,0 +1,39 @@
+{
+  "family": "quality-plus",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::<YOUR_ACCOUNT_ID>:role/quality-plus-execution-role",
+  "taskRoleArn": "arn:aws:iam::<YOUR_ACCOUNT_ID>:role/quality-plus-task-role",
+  "containerDefinitions": [
+    {
+      "name": "quality-plus-app",
+      "image": "<YOUR_ACCOUNT_ID>.dkr.ecr.<YOUR_REGION>.amazonaws.com/quality-plus:latest",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/quality-plus",
+          "awslogs-region": "<YOUR_REGION>",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "environment": [
+        {
+          "name": "VITE_SUPABASE_URL",
+          "value": "<YOUR_SUPABASE_URL>"
+        },
+        {
+          "name": "VITE_SUPABASE_ANON_KEY",
+          "value": "<YOUR_SUPABASE_ANON_KEY>"
+        }
+      ]
+    }
+  ]
+}
