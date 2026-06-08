@@ -81,6 +81,10 @@ export default function QualityConfiguration({
     dimension: QualityDimension | null;
     dimensionName: string;
     column: string;
+    existingConfig?: {
+      config_data: Record<string, unknown>;
+      is_configured: boolean;
+    };
   }>({
     isOpen: false,
     dimension: null,
@@ -167,11 +171,18 @@ export default function QualityConfiguration({
 
   function handleConfigure(dimension: QualityDimension, column: string) {
     const dimensionConfig = dimensions.find((d) => d.key === dimension);
+    const existingConfigData = columnConfigs.get(`${dimension}:${column}`);
     setConfigModal({
       isOpen: true,
       dimension,
       dimensionName: dimensionConfig?.name || dimension,
       column,
+      existingConfig: existingConfigData
+        ? {
+            config_data: existingConfigData,
+            is_configured: configuredColumns.get(dimension)?.has(column) ?? false,
+          }
+        : undefined,
     });
   }
 
@@ -625,9 +636,9 @@ export default function QualityConfiguration({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-4">
+    <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+        <div className="flex flex-wrap items-center gap-3">
           <select
             value={selectedTemplate}
             onChange={(e) => {
@@ -696,11 +707,11 @@ export default function QualityConfiguration({
             </button>
           )}
         </div>
-        <div className="relative group">
+        <div className="relative group self-start lg:self-auto">
           <button
             onClick={handleExecute}
             disabled={totalConfigured === 0 || isExecuting || !hasTemplateAction || !allRequiredConfigured}
-            className="px-6 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center space-x-2"
+            className="w-full lg:w-auto justify-center px-6 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center space-x-2"
           >
             {isExecuting ? (
               <>
@@ -803,7 +814,7 @@ export default function QualityConfiguration({
         }}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-2">
         {dimensions.map((dimension) => (
           <QualityDimensionCard
             key={dimension.id}
@@ -836,6 +847,7 @@ export default function QualityConfiguration({
           dimension={configModal.dimension}
           dimensionName={configModal.dimensionName}
           column={configModal.column}
+          existingConfig={configModal.existingConfig}
           allColumns={data.headers.filter(h => {
             // For the uniqueness modal, exclude companion columns already used by OTHER uniqueness configs
             if (configModal.dimension !== 'uniqueness') return true;

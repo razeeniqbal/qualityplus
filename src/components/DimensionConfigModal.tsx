@@ -143,7 +143,7 @@ export default function DimensionConfigModal({
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">Check Mode</label>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button
                   type="button"
                   onClick={() => setConfig({ ...config, checkMode: 'default' })}
@@ -221,7 +221,7 @@ export default function DimensionConfigModal({
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">Check Mode</label>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button
                   type="button"
                   onClick={() => setConfig({ ...config, checkMode: 'single', companionColumns: [] })}
@@ -339,7 +339,7 @@ export default function DimensionConfigModal({
 
             {/* Range */}
             {vType === 'range' && (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Min Value</label>
                   <input
@@ -409,7 +409,7 @@ export default function DimensionConfigModal({
             {/* vali_if_str_rang — conditional range */}
             {vType === 'vali_if_str_rang' && (
               <>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">Min Value <span className="text-red-500">*</span></label>
                     <input
@@ -495,7 +495,7 @@ export default function DimensionConfigModal({
                     Range check only applies when the condition column contains one of these values
                   </p>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
                       Min Column <span className="text-red-500">*</span>
@@ -628,7 +628,7 @@ export default function DimensionConfigModal({
                 <label className="block text-sm font-medium text-slate-700 mb-2">
                   Upload Reference CSV
                 </label>
-                <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-[#28B98F] transition">
+                <div className="border-2 border-dashed border-slate-300 rounded-lg p-4 sm:p-6 text-center hover:border-[#28B98F] transition">
                   <input
                     type="file"
                     accept=".csv"
@@ -766,7 +766,7 @@ export default function DimensionConfigModal({
                 <label className="block text-sm font-medium text-slate-700 mb-2">
                   Upload Master CSV for Comparison
                 </label>
-                <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-[#28B98F] transition">
+                <div className="border-2 border-dashed border-slate-300 rounded-lg p-4 sm:p-6 text-center hover:border-[#28B98F] transition">
                   <input
                     type="file"
                     accept=".csv"
@@ -907,22 +907,22 @@ export default function DimensionConfigModal({
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-gradient-to-r from-[#008192] to-[#064B77] text-white px-6 py-4 flex items-center justify-between rounded-t-xl">
-          <div>
-            <h2 className="text-xl font-bold">Configure {dimensionName}</h2>
-            <p className="text-sm text-teal-50">Column: {column}</p>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-0 sm:p-4">
+      <div className="bg-white rounded-none sm:rounded-xl shadow-2xl max-w-2xl w-full h-full sm:h-auto sm:max-h-[90vh] overflow-y-auto">
+        <div className="sticky top-0 bg-gradient-to-r from-[#008192] to-[#064B77] text-white px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between rounded-none sm:rounded-t-xl">
+          <div className="min-w-0">
+            <h2 className="text-lg sm:text-xl font-bold truncate">Configure {dimensionName}</h2>
+            <p className="text-sm text-teal-50 truncate">Column: {column}</p>
           </div>
           <button
             onClick={onClose}
-            className="hover:bg-white/20 p-2 rounded-lg transition"
+            className="hover:bg-white/20 p-2 rounded-lg transition flex-shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6 flex items-start space-x-3">
             <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
             <div className="text-sm text-amber-800">
@@ -936,7 +936,7 @@ export default function DimensionConfigModal({
 
           {renderConfigFields()}
 
-          <div className="flex items-center justify-between mt-6 pt-6 border-t">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-6 pt-6 border-t">
             {!isSaveValid() && (
               <p className="text-xs text-amber-600 flex items-center gap-1">
                 <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
@@ -973,7 +973,7 @@ export default function DimensionConfigModal({
             <button
               onClick={handleSave}
               disabled={!isSaveValid()}
-              className="ml-auto px-6 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full sm:w-auto sm:ml-auto px-6 py-2 bg-[#008192] text-white rounded-lg hover:bg-[#064B77] transition flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Save className="w-4 h-4" />
               <span>Save Configuration</span>
