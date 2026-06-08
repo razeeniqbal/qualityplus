@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Zoom out slightly on tablet widths (e.g. iPad) so the layout reads closer to desktop */
+@media (min-width: 768px) and (max-width: 1180px) {
+  #app-zoom-root {
+    zoom: 0.8;
+  }
+}

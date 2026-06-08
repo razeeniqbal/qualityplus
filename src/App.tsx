@@ -37,7 +37,7 @@ function AppShell() {
   const currentPage = location.pathname.split('/')[1] || 'dashboard';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex flex-col">
+    <div id="app-zoom-root" className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex flex-col">
       <header className="text-white shadow-lg" style={{ background: 'linear-gradient(to right, #1D275A, #28B98F)' }}>
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">

@@ -69,44 +69,40 @@ export default function QualityDimensionCard({
 
   return (
     <div className={`${classes.bg} ${classes.border} border-2 rounded-lg min-h-[400px] flex flex-col transition-all`}>
-      <div className={`${classes.headerBg} px-4 py-3 border-b-2 ${classes.border}`}>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <h3 className={`font-bold ${classes.text} text-lg`}>{title}</h3>
-            {logicDescription && (
-              <div className="relative">
-                <button
-                  onMouseEnter={() => setShowLogicTooltip(true)}
-                  onMouseLeave={() => setShowLogicTooltip(false)}
-                  className="hover:bg-white/30 p-1 rounded transition"
-                >
-                  <Info className="w-4 h-4 text-slate-600" />
-                </button>
-                {showLogicTooltip && (
-                  <div className="absolute left-0 top-full mt-2 w-72 bg-slate-800 text-white text-xs rounded-lg p-3 shadow-xl z-50">
-                    <div className="font-semibold mb-1">Logic:</div>
-                    <div className="text-slate-200">{logicDescription}</div>
-                    <div className="absolute -top-1 left-4 w-2 h-2 bg-slate-800 transform rotate-45"></div>
-                  </div>
-                )}
-              </div>
-            )}
-            {hasColumns && (
-              <>
-                {isReadyType || allConfigured ? (
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                ) : (
-                  <AlertCircle className="w-5 h-5 text-red-600" />
-                )}
-              </>
-            )}
-          </div>
-          {hasColumns && (
-            <span className={`text-xs font-semibold px-2 py-1 rounded ${classes.chip}`}>
-              {isReadyType || allConfigured ? 'READY' : 'NEEDS CONFIG'}
-            </span>
+      <div className={`${classes.headerBg} px-4 py-3 border-b-2 ${classes.border} space-y-1`}>
+        <div className="flex items-center space-x-2 min-w-0">
+          <h3 className={`font-bold ${classes.text} text-lg truncate`}>{title}</h3>
+          {logicDescription && (
+            <div className="relative">
+              <button
+                onMouseEnter={() => setShowLogicTooltip(true)}
+                onMouseLeave={() => setShowLogicTooltip(false)}
+                className="hover:bg-white/30 p-1 rounded transition"
+              >
+                <Info className="w-4 h-4 text-slate-600" />
+              </button>
+              {showLogicTooltip && (
+                <div className="absolute left-0 top-full mt-2 w-72 bg-slate-800 text-white text-xs rounded-lg p-3 shadow-xl z-50">
+                  <div className="font-semibold mb-1">Logic:</div>
+                  <div className="text-slate-200">{logicDescription}</div>
+                  <div className="absolute -top-1 left-4 w-2 h-2 bg-slate-800 transform rotate-45"></div>
+                </div>
+              )}
+            </div>
           )}
         </div>
+        {hasColumns && (
+          <div className="flex items-center space-x-2">
+            {isReadyType || allConfigured ? (
+              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+            ) : (
+              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+            )}
+            <span className={`text-xs font-semibold px-2 py-1 rounded whitespace-nowrap ${classes.chip}`}>
+              {isReadyType || allConfigured ? 'READY' : 'NEEDS CONFIG'}
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="p-4 flex-1 flex flex-col">
