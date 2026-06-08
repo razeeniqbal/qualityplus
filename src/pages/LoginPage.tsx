@@ -1,28 +1,43 @@
-﻿import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useUser } from '../contexts/UserContext';
-import { apiClient } from '../lib/api-client';
-import type { AppUser } from '../types/database';
+
+type Mode = 'signin' | 'signup';
 
 export default function LoginPage() {
-  const { login, isLoggingIn, loginError } = useUser();
-  const [users, setUsers] = useState<AppUser[]>([]);
-  const [loadingUsers, setLoadingUsers] = useState(true);
-  const [selectedId, setSelectedId] = useState('');
+  const { login, signUp, isLoggingIn, loginError } = useUser();
+  const [mode, setMode] = useState<Mode>('signin');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [infoMessage, setInfoMessage] = useState<string | null>(null);
 
-  useEffect(() => {
-    apiClient.getAllUsers()
-      .then((data) => setUsers((data || []) as AppUser[]))
-      .catch(() => {/* show empty state */})
-      .finally(() => setLoadingUsers(false));
-  }, []);
-
-  async function handleSubmit() {
-    const user = users.find(u => u.id === selectedId);
-    if (!user || isLoggingIn) return;
-    await login(user.display_name);
+  function switchMode(next: Mode) {
+    setMode(next);
+    setInfoMessage(null);
   }
 
-  const selectedUser = users.find(u => u.id === selectedId) ?? null;
+  async function handleSubmit() {
+    if (isLoggingIn) return;
+    setInfoMessage(null);
+
+    if (mode === 'signin') {
+      if (!email.trim() || !password) return;
+      await login(email.trim(), password);
+    } else {
+      if (!email.trim() || !password || !displayName.trim()) return;
+      const { needsEmailConfirmation } = await signUp(email.trim(), password, displayName.trim());
+      if (needsEmailConfirmation) {
+        setInfoMessage('Account created. Check your inbox to confirm your email, then sign in.');
+      }
+      // If no confirmation is needed, signUp already created a session and
+      // onAuthStateChange will redirect to the dashboard automatically.
+    }
+  }
+
+  const canSubmit =
+    mode === 'signin'
+      ? !!email.trim() && !!password
+      : !!email.trim() && !!password && !!displayName.trim();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center px-4">
@@ -39,71 +54,45 @@ export default function LoginPage() {
 
           {/* Form */}
           <div className="px-8 py-8">
-            <p className="text-slate-700 font-semibold text-base mb-1">Select your account</p>
+            <p className="text-slate-700 font-semibold text-base mb-1">
+              {mode === 'signin' ? 'Sign in to your account' : 'Create an account'}
+            </p>
             <p className="text-slate-400 text-sm mb-6">
-              Choose your name to continue. New accounts are created by an admin.
+              {mode === 'signin'
+                ? 'Enter your email and password to continue.'
+                : 'Pick a display name and set a password to get started.'}
             </p>
 
-            {/* Loading state */}
-            {loadingUsers && (
-              <div className="flex items-center justify-center py-6">
-                <div className="w-5 h-5 border-2 border-[#28B98F] border-t-transparent rounded-full animate-spin" />
-              </div>
-            )}
-
-            {/* No users registered yet */}
-            {!loadingUsers && users.length === 0 && (
-              <div className="text-center py-6 text-slate-400 bg-slate-50 rounded-xl border border-slate-200 mb-4">
-                <p className="text-sm font-medium">No accounts registered yet</p>
-                <p className="text-xs mt-1">An admin needs to register users first</p>
-              </div>
-            )}
-
-            {/* User select dropdown */}
-            {!loadingUsers && users.length > 0 && (
-              <>
-                <div className="relative mb-4">
-                  <select
-                    value={selectedId}
-                    onChange={(e) => setSelectedId(e.target.value)}
-                    disabled={isLoggingIn}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none transition appearance-none bg-white text-slate-700 disabled:opacity-50 cursor-pointer"
-                  >
-                    <option value="">— Select your name —</option>
-                    {users.map(u => (
-                      <option key={u.id} value={u.id}>
-                        {u.display_name}{u.role === 'admin' ? ' (admin)' : ''}
-                      </option>
-                    ))}
-                  </select>
-                  {/* Dropdown chevron */}
-                  <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Selected user preview */}
-                {selectedUser && (
-                  <div className="flex items-center space-x-3 px-3 py-2.5 bg-[#f0faf8] border border-[#d4f0ea] rounded-xl mb-4">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                      selectedUser.role === 'admin'
-                        ? 'bg-gradient-to-br from-purple-500 to-purple-600'
-                        : 'bg-gradient-to-br from-[#28B98F] to-[#03AD9A]'
-                    }`}>
-                      <span className="text-white text-sm font-bold">
-                        {selectedUser.display_name.charAt(0).toUpperCase()}
-                      </span>
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-slate-700">{selectedUser.display_name}</p>
-                      <p className="text-xs text-slate-400 capitalize">{selectedUser.role}</p>
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
+            <div className="space-y-3 mb-4">
+              {mode === 'signup' && (
+                <input
+                  type="text"
+                  placeholder="Display name"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  disabled={isLoggingIn}
+                  className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none transition disabled:opacity-50"
+                />
+              )}
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                disabled={isLoggingIn}
+                className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none transition disabled:opacity-50"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                disabled={isLoggingIn}
+                className="w-full px-4 py-3 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#03AD9A] focus:border-transparent outline-none transition disabled:opacity-50"
+              />
+            </div>
 
             {loginError && (
               <p className="text-red-500 text-xs mb-4 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
@@ -111,25 +100,57 @@ export default function LoginPage() {
               </p>
             )}
 
+            {infoMessage && (
+              <p className="text-emerald-600 text-xs mb-4 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-2">
+                {infoMessage}
+              </p>
+            )}
+
             <button
               onClick={handleSubmit}
-              disabled={!selectedId || isLoggingIn || loadingUsers}
+              disabled={!canSubmit || isLoggingIn}
               className="w-full py-3 bg-gradient-to-r from-[#008192] to-[#064B77] text-white font-semibold rounded-xl hover:from-[#064B77] hover:to-[#1D275A] transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
             >
               {isLoggingIn ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Connecting...</span>
+                  <span>{mode === 'signin' ? 'Signing in...' : 'Creating account...'}</span>
                 </>
               ) : (
-                <span>Enter App</span>
+                <span>{mode === 'signin' ? 'Sign In' : 'Create Account'}</span>
               )}
             </button>
+
+            <p className="text-center text-sm text-slate-500 mt-5">
+              {mode === 'signin' ? (
+                <>
+                  Don't have an account?{' '}
+                  <button
+                    type="button"
+                    onClick={() => switchMode('signup')}
+                    className="text-[#008192] font-semibold hover:text-[#064B77] transition"
+                  >
+                    Create one
+                  </button>
+                </>
+              ) : (
+                <>
+                  Already have an account?{' '}
+                  <button
+                    type="button"
+                    onClick={() => switchMode('signin')}
+                    className="text-[#008192] font-semibold hover:text-[#064B77] transition"
+                  >
+                    Sign in
+                  </button>
+                </>
+              )}
+            </p>
           </div>
         </div>
 
         <p className="text-center text-xs text-slate-400 mt-6">
-          Contact your admin if your name is not listed.
+          Contact your admin if you need help accessing your account.
         </p>
       </div>
     </div>

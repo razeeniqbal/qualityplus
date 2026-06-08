@@ -174,7 +174,15 @@ function AppShell() {
 }
 
 export default function App() {
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+        <div className="w-8 h-8 border-2 border-[#28B98F] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   if (!user) return <LoginPage />;
 

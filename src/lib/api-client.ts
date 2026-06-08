@@ -991,6 +991,36 @@ class ApiClient {
     }>;
   }
 
+  async getAppUserByAuthId(authUserId: string) {
+    const { data, error } = await supabase
+      .from('app_users')
+      .select('*')
+      .eq('auth_user_id', authUserId)
+      .maybeSingle();
+
+    if (error) {
+      logger.error('Failed to get app user by auth id', new Error(error.message), { authUserId });
+      throw new Error(error.message);
+    }
+    return data;
+  }
+
+  async linkAuthUser(appUserId: string, authUserId: string) {
+    const { data, error } = await supabase
+      .from('app_users')
+      .update({ auth_user_id: authUserId })
+      .eq('id', appUserId)
+      .select()
+      .single();
+
+    if (error) {
+      logger.error('Failed to link auth user', new Error(error.message), { appUserId, authUserId });
+      throw new Error(error.message);
+    }
+    logger.info('Linked auth user', { appUserId, authUserId });
+    return data;
+  }
+
   // Helper: parse CSV line handling quoted values
   private parseCSVLine(line: string): string[] {
     const result: string[] = [];
